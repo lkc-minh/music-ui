@@ -1,0 +1,96 @@
+:root {
+    --cl-text: #f4f6f8e0;
+    --cl-btn: #f4f6f880;
+    --cl-bg: #18222d;
+    --cl-bg-light: #f4f6f80d;
+    --cl-bg-active: #f4f6f805;
+    --cl-border-btn: #f4f6f81a;
+
+    --cl-bg-menu: #17202b;
+    --cl-bg-menu-hover: rgba(244, 246, 248, 0.05);
+
+    --cl-hover: #2daaed;
+    --cl-border: #28313c;
+    --width-sidebar: 200px;
+}
+.light-theme {
+    --cl-text: #1c1e20e0;
+    --cl-btn: #1c1e2080;
+    --cl-bg: #fafafa;
+    --cl-bg-light: #1c1e200d;
+    --cl-bg-active: #1c1e2005;
+    --cl-hover: #2daaed;
+    --cl-border: #1c1e200d;
+    --active: #1c1e200d;
+    --cl-bg-menu: #fafafa;
+    --cl-border-btn: #1c1e201a;
+}
+
+// import fonts
+@font-face {
+    font-family: NhacCuaTui;
+    src: url(../../assets/fonts/NhacCuaTui-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: NhacCuaTui;
+    src: url(../../assets/fonts/NhacCuaTui-Medium.ttf);
+    font-weight: 500;
+}
+@font-face {
+    font-family: NhacCuaTui;
+    src: url(../../assets/fonts/NhacCuaTui-Bold.ttf);
+    font-weight: 700;
+}
+@font-face {
+    font-family: NCTicons;
+    src: url(../../assets/fonts/NCTicons.ttf);
+    font-weight: 700;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "NhacCuaTui", sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    text-rendering: optimizespeed;
+    background-color: var(--cl-bg);
+    color: var(--cl-text);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+input {
+    outline: none;
+}
+
+//
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        scale: 0;
+    }
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}
