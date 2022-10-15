@@ -1,0 +1,80 @@
+.Sidebar {
+    width: 200px;
+    height: fit-content;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    &__header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 16px;
+
+        &-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            img {
+                width: 48px;
+                object-fit: cover;
+            }
+        }
+
+        &-link {
+            color: var(--cl-btn);
+            padding: 3px 13px 2px 12px;
+            border: 1px solid var(--cl-border-btn);
+            border-radius: 12px;
+            text-transform: uppercase;
+
+            &:hover {
+                border: 1px solid var(--cl-hover);
+                color: var(--cl-hover);
+            }
+        }
+    }
+
+    &__account {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 15px;
+        height: 56px;
+        background-color: var(--cl-bg-lighter);
+
+        &-content {
+            display: flex;
+            align-items: center;
+
+            span {
+                font-weight: 500;
+                &:hover {
+                    cursor: pointer;
+                    color: var(--cl-hover);
+                }
+            }
+
+            div {
+                margin: 0px 4px;
+            }
+        }
+
+        &-setting {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 100%;
+
+            & > .icon {
+                font-size: 14px;
+                &:hover {
+                    color: var(--cl-hover);
+                }
+            }
+        }
+    }
+}

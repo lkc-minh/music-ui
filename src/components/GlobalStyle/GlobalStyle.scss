@@ -2,11 +2,11 @@
     --cl-text: #f4f6f8e0;
     --cl-btn: #f4f6f880;
     --cl-bg: #18222d;
-    --cl-bg-light: #f4f6f80d;
+    --cl-bg-lighter: #f4f6f80d;
     --cl-bg-active: #f4f6f805;
     --cl-border-btn: #f4f6f81a;
 
-    --cl-bg-menu: #17202b;
+    --cl-bg-menu: #18222d;
     --cl-bg-menu-hover: rgba(244, 246, 248, 0.05);
 
     --cl-hover: #2daaed;
@@ -17,7 +17,7 @@
     --cl-text: #1c1e20e0;
     --cl-btn: #1c1e2080;
     --cl-bg: #fafafa;
-    --cl-bg-light: #1c1e200d;
+    --cl-bg-lighter: #1c1e200d;
     --cl-bg-active: #1c1e2005;
     --cl-hover: #2daaed;
     --cl-border: #1c1e200d;
@@ -83,14 +83,3 @@ input {
 }
 
 //
-
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-        scale: 0;
-    }
-    100% {
-        opacity: 1;
-        scale: 1;
-    }
-}

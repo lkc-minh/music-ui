@@ -1,0 +1,71 @@
+.Popper {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    scale: 0;
+    background-color: var(--cl-bg-menu);
+    transform-origin: top left;
+    box-shadow: 0 4px 8px #00000033;
+    min-width: 170px;
+    @keyframes scale {
+        0% {
+            opacity: 0;
+            scale: 0;
+        }
+        100% {
+            opacity: 1;
+            scale: 1;
+        }
+    }
+
+    &.show {
+        animation: scale 150ms ease forwards;
+    }
+
+    &__item {
+        height: 40px;
+        padding: 7px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+
+        span {
+            margin-left: 6px;
+        }
+        .icon {
+            color: var(--cl-btn);
+        }
+
+        &-sub {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            scale: 0;
+            opacity: 0;
+            min-width: 170px;
+            background-color: var(--cl-bg-menu);
+            transform-origin: top left;
+            box-shadow: 0 4px 8px #00000033;
+
+            div {
+                height: 40px;
+                padding: 7px 8px;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    background-color: var(--cl-bg-lighter);
+                }
+            }
+        }
+
+        &:hover {
+            background-color: var(--cl-bg-lighter);
+            .Popper__item-sub {
+                animation: scale 150ms ease-in-out forwards;
+            }
+        }
+    }
+}
