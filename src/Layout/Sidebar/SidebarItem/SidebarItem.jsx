@@ -82,7 +82,7 @@ function SidebarItem() {
             {sidebarItem.map((item) => {
                 if (item.sub)
                     return (
-                        <div>
+                        <div key={item.title}>
                             <div
                                 className={
                                     titleActive === item.title
@@ -126,10 +126,12 @@ function SidebarItem() {
                             </div>
                         </div>
                     );
+
                 return (
                     <NavLink
                         to={item.url}
                         className="SidebarItem__container"
+                        key={item.title}
                         end
                         onClick={() => setTitleActive(null)}
                     >
