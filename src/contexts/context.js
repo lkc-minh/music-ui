@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer, useState } from "react";
 import useLocalStorage from "~/hooks/useLocalStorage";
 import reducer from "./reducer";
 
@@ -9,6 +9,7 @@ const initialState = { theme: "light-theme" };
 const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [theme, setTheme] = useLocalStorage("theme", "light-theme");
+    const [showSubSidebar, setShowSubSidebar] = useState({});
 
     useEffect(() => {
         document.documentElement.className = theme;
@@ -20,6 +21,8 @@ const AppProvider = ({ children }) => {
                 ...state,
                 theme,
                 setTheme,
+                showSubSidebar,
+                setShowSubSidebar,
             }}
         >
             {children}

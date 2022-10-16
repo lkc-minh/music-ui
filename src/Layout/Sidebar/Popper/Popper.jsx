@@ -7,39 +7,40 @@ import { useGlobalContext } from "~/contexts/context";
 const settingsPopper = [
     {
         icon: <TbMessageLanguage className="icon" />,
-        title: "Ngôn ngữ",
-        subPopper: ["Tiếng Anh", "Tiếng Việt"],
+        title: "Language",
+        subPopper: ["Vietnamese", "English"],
     },
     {
         icon: <BsHeadset className="icon" />,
-        title: "Hỗ trợ",
+        title: "Support",
     },
     {
         icon: <BsMoonStarsFill className="icon" />,
-        title: "Chủ đề",
-        subPopper: ["Nền sáng", "Nền tối"],
+        title: "Theme",
+        subPopper: ["Light mode", "Dark theme"],
     },
 ];
 
 function Popper({ showPopper, setShowPopper }) {
     const { setTheme } = useGlobalContext();
+
     const handleClick = (item) => {
         setShowPopper(false);
         switch (item) {
-            case "Nền sáng":
+            case "Light mode":
                 setTheme("light-theme");
                 break;
 
-            case "Nền tối":
+            case "Dark theme":
                 setTheme("dark-theme");
 
                 break;
 
-            case "Tiếng Anh":
+            case "English":
                 console.log(item);
                 break;
 
-            case "Tiếng Việt":
+            case "Vietnamese":
                 console.log(item);
                 break;
 

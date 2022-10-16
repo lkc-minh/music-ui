@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Layout from "./components/Layout/Layout";
+import Layout from "./Layout/Layout";
 import routes from "./config/routes";
 import Discover from "./pages/Discover/Discover";
 import Home from "./pages/Home/Home";
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
                 element: <Discover />,
             },
             {
-                path: routes.discover,
+                path: routes.topics,
                 element: <Topics />,
             },
         ],

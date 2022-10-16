@@ -8,6 +8,9 @@
     transform-origin: top left;
     box-shadow: 0 4px 8px #00000033;
     min-width: 170px;
+    border-radius: 4px;
+    z-index: 100;
+
     @keyframes scale {
         0% {
             opacity: 0;
@@ -30,7 +33,10 @@
         align-items: center;
         justify-content: space-between;
         position: relative;
-
+        &-wrapper {
+            display: flex;
+            align-items: center;
+        }
         span {
             margin-left: 6px;
         }
@@ -48,6 +54,7 @@
             background-color: var(--cl-bg-menu);
             transform-origin: top left;
             box-shadow: 0 4px 8px #00000033;
+            border-radius: 4px;
 
             div {
                 height: 40px;

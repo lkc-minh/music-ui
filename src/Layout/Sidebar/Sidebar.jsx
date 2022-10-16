@@ -6,6 +6,7 @@ import "./Sidebar.scss";
 import Popper from "./Popper/Popper";
 import { useRef, useState } from "react";
 import useOnClickOutside from "~/hooks/useOnClickOutside";
+import SidebarItem from "./SidebarItem/SidebarItem";
 
 function Sidebar() {
     const [showPopper, setShowPopper] = useState(false);
@@ -24,15 +25,15 @@ function Sidebar() {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    nâng cấp
+                    upgrade
                 </a>
             </div>
 
             <div className="Sidebar__account">
                 <div className="Sidebar__account-content">
-                    <span>Đăng nhập</span>
+                    <span>Sign in</span>
                     <div>|</div>
-                    <span>Đăng ký</span>
+                    <span>Sign up</span>
                 </div>
                 <div ref={popperRef} className="Sidebar__account-setting">
                     <AiOutlineSetting
@@ -42,6 +43,8 @@ function Sidebar() {
                     <Popper showPopper={showPopper} setShowPopper={setShowPopper} />
                 </div>
             </div>
+
+            <SidebarItem />
         </div>
     );
 }

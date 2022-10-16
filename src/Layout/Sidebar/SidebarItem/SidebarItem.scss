@@ -1,0 +1,107 @@
+.SidebarItem {
+    padding: 1.6rem 0;
+    margin-bottom: 5rem;
+
+    & > div {
+        overflow: hidden;
+    }
+
+    &__container {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        padding-right: 16px;
+        cursor: pointer;
+        margin-bottom: 4px;
+
+        &-bar {
+            width: 2px;
+            height: 0%;
+            background-color: #2daaed;
+            margin-right: 16px;
+            transition: 0.3s;
+        }
+
+        &:hover {
+            .SidebarItem__container-bar {
+                height: 100%;
+            }
+        }
+
+        &.active {
+            background-color: var(--cl-bg-lighter);
+            .SidebarItem__container-bar {
+                height: 100%;
+            }
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            .SidebarItem__icon {
+                font-size: 18px;
+            }
+
+            p {
+                flex: 1;
+                margin-left: 14px;
+                margin-top: 1px;
+            }
+
+            .icon-sub {
+                color: var(--cl-btn);
+                transition: transform 0.5s ease-out 0.1s;
+
+                &.rotate {
+                    transform: rotate(180deg);
+                    transition: transform 0.25s ease-in;
+                }
+            }
+        }
+    }
+    &__sub {
+        display: flex;
+        flex-direction: column;
+        max-height: 0;
+        transition: max-height 0.4s ease-out;
+        position: relative;
+
+        .circleActive {
+            position: absolute;
+            transform: translateY(8px);
+            right: 70%;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #2daaed;
+            scale: 0;
+            transition: 0.1s;
+        }
+
+        &.show {
+            max-height: 1000px;
+            transition: max-height 0.6s ease-in;
+        }
+
+        &-link {
+            height: 32px;
+            padding-left: 66px;
+            color: var(--cl-btn);
+
+            &:hover {
+                .circleActive {
+                    scale: 1;
+                }
+            }
+
+            &.active {
+                .circleActive {
+                    scale: 1;
+                }
+            }
+        }
+    }
+}

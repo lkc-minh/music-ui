@@ -4,8 +4,8 @@ const routes = {
     songs: "/songs/:id",
     videos: "/videos",
     singers: "/singers",
-    playlist: "/playlist",
-    top100: "/top100",
+    playlist: "/playlist/:id",
+    top100: "/top100/:id",
     discover: "/discover",
     topics: "/topics",
 };
