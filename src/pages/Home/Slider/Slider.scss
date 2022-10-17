@@ -15,6 +15,7 @@
 
 .Slider {
     position: relative;
+    padding-top: 20px;
 
     &:hover {
         .prev-btn,
@@ -23,10 +24,11 @@
         }
     }
     &__img {
-        width: calc(100% - 20px);
+        width: calc(100% - 30px);
         display: block;
         object-fit: cover;
         margin: 0 auto;
+        border-radius: 6px;
     }
 
     .prev-btn,
@@ -51,10 +53,10 @@
     }
 
     .prev-btn {
-        left: 16px;
+        left: 28px;
     }
     .next-btn {
-        right: 16px;
+        right: 28px;
     }
 
     .Slider__icon-slider {

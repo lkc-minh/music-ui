@@ -1,8 +1,6 @@
-import nhaccuatuiApi from "nhaccuatui-api";
-import { useEffect, useState } from "react";
 import "./Slider.scss";
 // Import Swiper React components
-import { Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
@@ -12,19 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-export default function Slider() {
-    const [slide, setSlide] = useState([]);
-    console.log(slide);
-    console.log({ nhaccuatuiApi });
-    useEffect(() => {
-        const fetchApi = async () => {
-            const res = await nhaccuatuiApi.getHome();
-            console.log({ res });
-            setSlide(res.showcase);
-        };
-
-        fetchApi();
-    }, []);
+export default function Slider({ data }) {
     return (
         <div className="Slider">
             <Swiper
@@ -38,10 +24,14 @@ export default function Slider() {
                     prevEl: ".prev-btn",
                     nextEl: ".next-btn",
                 }}
-                modules={[Pagination, Navigation]}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                }}
+                modules={[Pagination, Navigation, Autoplay]}
                 className="mySwiper"
             >
-                {slide.map((item) => (
+                {data.map((item) => (
                     <SwiperSlide key={item.key}>
                         <Link to={`/songs/` + item.key}>
                             <img

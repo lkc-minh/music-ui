@@ -1,0 +1,138 @@
+.Footer {
+    border-top: 1px solid var(--cl-border);
+    margin-top: 80px;
+    color: var(--cl-btn);
+
+    &__top {
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 32px;
+        margin-right: 32px;
+
+        border-bottom: 1px solid var(--cl-border);
+
+        &-left {
+            a {
+                padding: 0 10px;
+
+                &:hover {
+                    color: var(--cl-hover);
+                }
+            }
+
+            a + a {
+                border-left: 2px solid var(--cl-bg-lighter);
+            }
+        }
+
+        &-right {
+            display: flex;
+            align-items: center;
+
+            &-social {
+                display: flex;
+                align-items: center;
+                font-size: 28px;
+                margin-right: 12px;
+                a {
+                    padding: 4px;
+                    &:hover:first-child {
+                        color: #4267b2;
+                    }
+
+                    &:hover:last-child {
+                        color: #d92e7f;
+                    }
+                }
+            }
+
+            &-app {
+                display: flex;
+                align-items: center;
+                a {
+                    margin-right: 8px;
+                    img {
+                        height: 24px;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+
+    &__center {
+        margin: 1.6rem 3.2rem 0 3.2rem;
+
+        .tick {
+            &::before {
+                content: "";
+                display: block;
+                width: 0.4rem;
+                height: 0.4rem;
+                background-color: var(--cl-btn);
+                border-radius: 50%;
+                float: left;
+                margin: 0.7rem 0.8rem 0 0;
+            }
+        }
+
+        &-head {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &-info {
+                display: flex;
+
+                img {
+                    object-fit: cover;
+                    margin-right: 24px;
+                }
+
+                article {
+                    h4 {
+                        color: var(--cl-text);
+                    }
+                }
+            }
+            &-img {
+                display: flex;
+                align-items: center;
+
+                img {
+                    margin-left: 16px;
+                }
+            }
+        }
+
+        &-info {
+            p {
+                padding-top: 8px;
+            }
+        }
+    }
+
+    &__bottom {
+        padding: 0 3.2rem;
+        margin-top: 1.6rem;
+        height: 5.6rem;
+        background-color: var(--cl-bg-active);
+        display: flex;
+        align-items: center;
+
+        .icon-footer {
+            font-size: 1.8rem;
+            margin-right: 0.8rem;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            margin-right: 32px;
+            cursor: pointer;
+        }
+    }
+}
