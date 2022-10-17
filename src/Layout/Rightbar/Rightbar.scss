@@ -1,5 +1,5 @@
 .Rightbar {
-    width: 320px;
+    width: var(--width-rightbar);
     height: fit-content;
     position: sticky;
     top: 0;

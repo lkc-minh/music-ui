@@ -12,6 +12,7 @@
     --cl-hover: #2daaed;
     --cl-border: #28313c;
     --width-sidebar: 200px;
+    --width-rightbar: 320px;
 }
 .light-theme {
     --cl-text: #1c1e20e0;
@@ -63,7 +64,7 @@ html {
 body {
     font-size: 1.3rem;
     line-height: 1.5;
-    text-rendering: optimizespeed;
+    // text-rendering: optimizespeed;
     background-color: var(--cl-bg);
     color: var(--cl-text);
 }

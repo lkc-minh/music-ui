@@ -9,7 +9,7 @@ function Layout() {
     return (
         <div className="Layout">
             <Sidebar />
-            <div className="content">
+            <div className="Layout__content">
                 <Outlet />
                 <Footer />
             </div>
