@@ -7,9 +7,14 @@ import Popper from "./Popper/Popper";
 import { useRef, useState } from "react";
 import useOnClickOutside from "~/hooks/useOnClickOutside";
 import SidebarItem from "./SidebarItem/SidebarItem";
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 function Sidebar() {
     const [showPopper, setShowPopper] = useState(false);
+    const [isOpenSignIn, setIsOpenSignIn] = useState(false);
+    const [isOpenSignUp, setIsOpenSignUp] = useState(false);
+
     const popperRef = useRef();
     useOnClickOutside(popperRef, () => setShowPopper(false));
 
@@ -31,9 +36,11 @@ function Sidebar() {
 
             <div className="Sidebar__account">
                 <div className="Sidebar__account-content">
-                    <span>Sign in</span>
+                    <span onClick={() => setIsOpenSignIn(true)}>Sign in</span>
+
                     <div>|</div>
-                    <span>Sign up</span>
+
+                    <span onClick={() => setIsOpenSignUp(true)}>Sign up</span>
                 </div>
                 <div ref={popperRef} className="Sidebar__account-setting">
                     <AiOutlineSetting
@@ -43,6 +50,13 @@ function Sidebar() {
                     <Popper showPopper={showPopper} setShowPopper={setShowPopper} />
                 </div>
             </div>
+
+            <Login
+                isOpen={isOpenSignIn}
+                setIsOpen={setIsOpenSignIn}
+                setIsOpenSignUp={setIsOpenSignUp}
+            />
+            <Register isOpen={isOpenSignUp} setIsOpen={setIsOpenSignUp} />
 
             <SidebarItem />
         </div>

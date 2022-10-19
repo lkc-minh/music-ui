@@ -11,17 +11,6 @@
     border-radius: 4px;
     z-index: 100;
 
-    @keyframes scale {
-        0% {
-            opacity: 0;
-            scale: 0;
-        }
-        100% {
-            opacity: 1;
-            scale: 1;
-        }
-    }
-
     &.show {
         animation: scale 150ms ease forwards;
     }

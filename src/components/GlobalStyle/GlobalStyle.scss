@@ -11,6 +11,7 @@
 
     --cl-hover: #2daaed;
     --cl-border: #28313c;
+    --cl-icon: #f4f6f833;
     --width-sidebar: 200px;
     --width-rightbar: 320px;
 }
@@ -25,6 +26,7 @@
     --active: #1c1e200d;
     --cl-bg-menu: #fafafa;
     --cl-border-btn: #1c1e201a;
+    --cl-icon: #1c1e2033;
 }
 
 // import fonts
@@ -84,6 +86,17 @@ input {
 }
 
 //
+
+@keyframes scale {
+    0% {
+        opacity: 0;
+        scale: 0;
+    }
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}
 
 @media only screen and (max-width: 1260px) {
     :root {
