@@ -12,8 +12,10 @@
     --cl-hover: #2daaed;
     --cl-border: #28313c;
     --cl-icon: #f4f6f833;
+    --cl-bg-new: #f4f6f805;
     --width-sidebar: 200px;
     --width-rightbar: 320px;
+    --animation-skeleton: skeleton 0.5s infinite ease alternate;
 }
 .light-theme {
     --cl-text: #1c1e20e0;
@@ -27,6 +29,7 @@
     --cl-bg-menu: #fafafa;
     --cl-border-btn: #1c1e201a;
     --cl-icon: #1c1e2033;
+    --cl-bg-new: #1c1e2005;
 }
 
 // import fonts
@@ -98,8 +101,19 @@ input {
     }
 }
 
-@media only screen and (max-width: 1260px) {
+@keyframes skeleton {
+    to {
+        opacity: 0.5;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
     :root {
         --width-rightbar: 0px;
+    }
+}
+.link {
+    &:hover {
+        color: var(--cl-hover) !important;
     }
 }

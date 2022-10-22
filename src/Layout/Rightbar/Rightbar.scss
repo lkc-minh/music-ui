@@ -72,19 +72,17 @@
             }
             &-artists {
                 color: var(--cl-btn);
-                padding-right: 4px;
-
-                &:last-child {
-                    span {
-                        display: none;
-                    }
-                }
 
                 &:hover {
                     color: var(--cl-hover);
                 }
             }
-
+            &-artists + &-artists {
+                &::before {
+                    content: ",";
+                    margin-right: 2px;
+                }
+            }
             a {
                 margin: 8px 0 6px 0;
 
@@ -99,7 +97,7 @@
     }
 }
 
-@media only screen and (max-width: 1260px) {
+@media only screen and (max-width: 1300px) {
     .Rightbar {
         display: none;
     }

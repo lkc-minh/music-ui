@@ -6,7 +6,7 @@ import "./Rightbar.scss";
 function Rightbar() {
     const { ranking } = useGlobalContext();
     const songTop1 = ranking[0];
-    console.log({ songTop1 });
+
     return (
         <div className="Rightbar">
             <div className="Rightbar__top">
@@ -36,7 +36,6 @@ function Rightbar() {
                                     title={artist.name}
                                 >
                                     {artist.name}
-                                    <span>,</span>
                                 </Link>
                             ))}
                         </div>

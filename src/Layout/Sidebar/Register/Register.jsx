@@ -1,5 +1,4 @@
 import Tippy from "@tippyjs/react";
-import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsInfoCircle, BsKeyboard } from "react-icons/bs";
@@ -43,8 +42,6 @@ const inputRegister = [
 ];
 
 function Register({ isOpen, setIsOpen }) {
-    const [focus, setFocus] = useState(null);
-
     return (
         <Modal open={isOpen} setOpen={setIsOpen}>
             <div className="Register">
@@ -57,21 +54,9 @@ function Register({ isOpen, setIsOpen }) {
                 <div className="Register__content">
                     <form action="" className="Register__content-form">
                         {inputRegister.map((item) => (
-                            <div
-                                className={
-                                    focus === item.name
-                                        ? "Register__content-form-item focus"
-                                        : "Register__content-form-item"
-                                }
-                                key={item.name}
-                            >
+                            <div className="Register__content-form-item" key={item.name}>
                                 {item.icon}
-                                <input
-                                    onFocus={() => setFocus(item.name)}
-                                    onBlur={() => setFocus(null)}
-                                    type={item.type}
-                                    placeholder={item.placeholder}
-                                />
+                                <input type={item.type} placeholder={item.placeholder} />
                                 <Tippy content={item.info}>
                                     <div>
                                         <BsInfoCircle className="Register-info-icon" />

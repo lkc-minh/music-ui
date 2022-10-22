@@ -51,14 +51,13 @@ function Sidebar() {
                 </div>
             </div>
 
+            <SidebarItem />
             <Login
                 isOpen={isOpenSignIn}
                 setIsOpen={setIsOpenSignIn}
                 setIsOpenSignUp={setIsOpenSignUp}
             />
             <Register isOpen={isOpenSignUp} setIsOpen={setIsOpenSignUp} />
-
-            <SidebarItem />
         </div>
     );
 }

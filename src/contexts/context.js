@@ -1,17 +1,17 @@
 import nhaccuatuiApi from "nhaccuatui-api";
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import useLocalStorage from "~/hooks/useLocalStorage";
-import reducer from "./reducer";
+// import reducer from "./reducer";
 
 const AppContext = createContext();
 
-const initialState = { theme: "light-theme" };
+// const initialState = { theme: "light-theme" };
 
 const AppProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    // const [state, dispatch] = useReducer(reducer, initialState);
     const [theme, setTheme] = useLocalStorage("theme", "light-theme");
-    const [showSubSidebar, setShowSubSidebar] = useState({});
-    const [ranking, setRanking] = useState([]);
+    const [showSubSidebar, setShowSubSidebar] = useState({ "What Listen Today": true });
+    const [ranking, setRanking] = useState({});
 
     useEffect(() => {
         document.documentElement.className = theme;
@@ -19,17 +19,20 @@ const AppProvider = ({ children }) => {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await nhaccuatuiApi.getHome();
-            console.log({ res });
-            setRanking(res.ranking.song);
+            try {
+                const data = await nhaccuatuiApi.getHome();
+                setRanking(data.ranking.song);
+            } catch (error) {
+                console.log(error);
+            }
         };
-
         fetchApi();
     }, []);
+
     return (
         <AppContext.Provider
             value={{
-                ...state,
+                // ...state,
                 theme,
                 setTheme,
                 showSubSidebar,

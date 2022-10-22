@@ -16,6 +16,7 @@
         justify-content: center;
         position: relative;
         border-bottom: 1px solid var(--cl-bg-lighter);
+        padding: 20px;
 
         h3 {
             font-size: 1.6rem;
@@ -57,9 +58,11 @@
                 background-color: #00000005;
                 border-radius: 4px;
                 border: 1px solid var(--cl-bg-lighter);
-                &.focus {
+
+                &:focus-within {
                     border: 1px solid var(--cl-hover);
                 }
+
                 input {
                     flex: 1;
                     background-color: transparent;
@@ -138,7 +141,7 @@
                 button {
                     background-color: transparent;
                     font-size: 24px;
-                    background-color: #f4f6f80d;
+                    background-color: var(--cl-bg-lighter);
                     border: beige;
 
                     border-radius: 5rem;

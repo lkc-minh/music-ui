@@ -1,0 +1,112 @@
+@mixin mobile {
+    @media screen and (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media screen and (max-width: 1290px) {
+        @content;
+    }
+}
+
+@mixin pc {
+    @media screen and (max-width: 1550px) {
+        @content;
+    }
+}
+
+.HomeSkeleton {
+    height: 100%;
+    width: 100%;
+    padding: 24px 32px 0px 32px;
+    animation: var(--animation-skeleton);
+
+    &__showcase {
+        width: 100%;
+        height: 550px;
+        background-color: var(--cl-bg-lighter);
+        border-radius: 8px;
+
+        @include pc {
+            height: 330px;
+        }
+    }
+
+    &__topEvent {
+        margin-top: 44px;
+        width: calc(100% + 16px);
+        display: flex;
+        flex-wrap: wrap;
+
+        &-item {
+            padding: 8px;
+
+            &-img {
+                height: 207px;
+                width: 207px;
+                @include pc {
+                    width: 155px;
+                    height: 155px;
+                }
+                background-color: var(--cl-bg-lighter);
+                border-radius: 4px;
+            }
+            &-title {
+                width: 80%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+
+            &-singer {
+                width: 60%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+        }
+    }
+
+    &__video {
+        margin-top: 44px;
+        display: flex;
+        &-item {
+            padding: 8px;
+
+            &-img {
+                width: 430px;
+                height: 240px;
+                // @include pc {
+                //     width: 155px;
+                //     height: 155px;
+                // }
+                background-color: var(--cl-bg-lighter);
+                border-radius: 4px;
+            }
+            &-title {
+                width: 80%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+
+            &-singer {
+                width: 60%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+        }
+    }
+}

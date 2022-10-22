@@ -1,4 +1,4 @@
-import "./Slider.scss";
+import "./Showcase.scss";
 // Import Swiper React components
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,9 +10,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-export default function Slider({ data }) {
+export default function Showcase({ data }) {
     return (
-        <div className="Slider">
+        <div className="Showcase">
             <Swiper
                 slidesPerView={1}
                 spaceBetween={30}
@@ -36,7 +36,7 @@ export default function Slider({ data }) {
                         <Link to={`/songs/` + item.key}>
                             <img
                                 title={item.title}
-                                className="Slider__img"
+                                className="Showcase__img"
                                 src={item.thumbnail}
                                 alt=""
                             />
@@ -44,10 +44,10 @@ export default function Slider({ data }) {
                     </SwiperSlide>
                 ))}
                 <div className="prev-btn">
-                    <BsChevronLeft className="Slider__icon-slider" />
+                    <BsChevronLeft className="Showcase__icon-slider" />
                 </div>
                 <div className="next-btn">
-                    <BsChevronRight className="Slider__icon-slider" />
+                    <BsChevronRight className="Showcase__icon-slider" />
                 </div>
             </Swiper>
         </div>

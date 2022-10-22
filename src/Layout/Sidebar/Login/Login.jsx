@@ -22,8 +22,6 @@ const inputLogin = [
 ];
 
 function Login({ isOpen, setIsOpen, setIsOpenSignUp }) {
-    const [focus, setFocus] = useState(null);
-
     return (
         <Modal open={isOpen} setOpen={setIsOpen}>
             <div className="Login">
@@ -36,21 +34,9 @@ function Login({ isOpen, setIsOpen, setIsOpenSignUp }) {
                 <div className="Login__content">
                     <form action="" className="Login__content-form">
                         {inputLogin.map((item) => (
-                            <div
-                                className={
-                                    focus === item.name
-                                        ? "Login__content-form-item focus"
-                                        : "Login__content-form-item"
-                                }
-                                key={item.name}
-                            >
+                            <div className="Login__content-form-item" key={item.name}>
                                 {item.icon}
-                                <input
-                                    onFocus={() => setFocus(item.name)}
-                                    onBlur={() => setFocus(null)}
-                                    type={item.type}
-                                    placeholder={item.placeholder}
-                                />
+                                <input type={item.type} placeholder={item.placeholder} />
                             </div>
                         ))}
 
