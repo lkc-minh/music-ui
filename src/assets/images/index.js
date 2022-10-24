@@ -7,6 +7,7 @@ const images = {
     congThuong: require("../images/Cong_Thuong.svg").default,
     DMCA: require("../images/DMCA.svg").default,
     playerDefault: require("../images/default_player.jpg"),
-};
+    defaultArtist: require("../images/default_artist.png"),
+}
 
-export default images;
+export default images

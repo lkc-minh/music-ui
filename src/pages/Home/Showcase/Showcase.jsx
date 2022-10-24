@@ -1,14 +1,15 @@
-import "./Showcase.scss";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs"
+import { Link } from "react-router-dom"
+import "./Showcase.scss"
+
 // Import Swiper React components
-import { Autoplay, Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react"
 // Import Swiper styles
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import "swiper/css/scrollbar"
 
 export default function Showcase({ data }) {
     return (
@@ -51,5 +52,5 @@ export default function Showcase({ data }) {
                 </div>
             </Swiper>
         </div>
-    );
+    )
 }

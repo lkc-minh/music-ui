@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import "./SongHome.scss";
-import SongInfo from "./SongInfo/SongInfo";
+import { Link } from "react-router-dom"
+import "./SongHome.scss"
+import SongInfo from "./SongInfo/SongInfo"
 
 function SongHome({ data }) {
     return (
@@ -12,7 +12,7 @@ function SongHome({ data }) {
                 ))}
             </div>
         </div>
-    );
+    )
 }
 
-export default SongHome;
+export default SongHome

@@ -1,13 +1,13 @@
-import { Navigation } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Card from "~/components/Card/Card";
-import "./TopicEvent.scss";
+import { Navigation } from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react"
+import Card from "~/components/Card/Card"
+import "./TopicEvent.scss"
 
 function TopicEvent({ data }) {
     const newDataEnglish = data.map((item) => ({
         ...item,
         groupName: item.groupName.split("_")[1],
-    }));
+    }))
     return (
         <>
             {newDataEnglish.map((d) => (
@@ -31,7 +31,7 @@ function TopicEvent({ data }) {
                 </div>
             ))}
         </>
-    );
+    )
 }
 
-export default TopicEvent;
+export default TopicEvent

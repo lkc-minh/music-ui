@@ -1,7 +1,7 @@
-import { AiFillPlayCircle } from "react-icons/ai";
-import "./Card.scss";
+import { AiFillPlayCircle } from "react-icons/ai"
+import "./Card.scss"
 
-function Card({ data }) {
+function Card({ data, type }) {
     return (
         <div className="Card">
             <div className="Card__img">
@@ -10,9 +10,9 @@ function Card({ data }) {
                     <AiFillPlayCircle className="Card__img-overlay-icon" />
                 </div>
             </div>
-            <h4>{data.title}</h4>
+            {type !== "top100" && <h4>{data.title}</h4>}
         </div>
-    );
+    )
 }
 
-export default Card;
+export default Card

@@ -117,3 +117,16 @@ input {
         color: var(--cl-hover) !important;
     }
 }
+
+// responsive
+@mixin mobile {
+    @media (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 960px) {
+        @content;
+    }
+}

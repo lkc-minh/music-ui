@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
-import { AiOutlineSetting } from "react-icons/ai";
+import { AiFillCompass, AiTwotoneHome, AiOutlineSetting } from "react-icons/ai";
+import { BsFillBarChartFill } from "react-icons/bs";
+import { CiSearch } from "react-icons/ci";
+import { FaHandHoldingHeart, FaHeadphones } from "react-icons/fa";
 
 import images from "~/assets/images";
 import "./Sidebar.scss";
@@ -9,6 +12,84 @@ import useOnClickOutside from "~/hooks/useOnClickOutside";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+
+const sidebarItem = [
+    {
+        id: 1,
+        icon: (
+            <CiSearch
+                className="SidebarItem__icon"
+                style={{ color: "#2EC626" }}
+            />
+        ),
+        title: "Search",
+        url: "/search",
+    },
+    {
+        id: 2,
+        icon: (
+            <AiTwotoneHome
+                className="SidebarItem__icon"
+                style={{ color: "#29A9F2" }}
+            />
+        ),
+        title: "Home",
+        url: "/",
+    },
+    {
+        id: 3,
+        icon: (
+            <AiFillCompass
+                className="SidebarItem__icon"
+                style={{ color: "#FFC139" }}
+            />
+        ),
+        title: "Discovery",
+        sub: [
+            { title: "Song", url: "/songs/newsongs" },
+            { title: "Playlist", url: "/playlist/newplaylist" },
+            { title: "Video", url: "/videos" },
+            { title: "Artist", url: "/singers" },
+        ],
+    },
+    {
+        id: 4,
+        icon: (
+            <FaHeadphones
+                className="SidebarItem__icon"
+                style={{ color: "#A03DE8" }}
+            />
+        ),
+        title: "What Listen Today",
+        sub: [
+            { title: "Topic", url: "/topics" },
+            { title: "Collection", url: "/playlist/tags" },
+            { title: "Top 100", url: "/top100/top100" },
+        ],
+    },
+    {
+        id: 5,
+        icon: (
+            <BsFillBarChartFill
+                className="SidebarItem__icon"
+                style={{ color: "#FA8046" }}
+            />
+        ),
+        title: "NCT Chart",
+        url: "/songs/weekly",
+    },
+    {
+        id: 6,
+        icon: (
+            <FaHandHoldingHeart
+                className="SidebarItem__icon"
+                style={{ color: "#1BA9B0" }}
+            />
+        ),
+        title: "Music 4U",
+        url: "/discover",
+    },
+];
 
 function Sidebar() {
     const [showPopper, setShowPopper] = useState(false);
@@ -47,11 +128,14 @@ function Sidebar() {
                         className="icon"
                         onClick={() => setShowPopper(!showPopper)}
                     />
-                    <Popper showPopper={showPopper} setShowPopper={setShowPopper} />
+                    <Popper
+                        showPopper={showPopper}
+                        setShowPopper={setShowPopper}
+                    />
                 </div>
             </div>
 
-            <SidebarItem />
+            <SidebarItem sidebarItem={sidebarItem} />
             <Login
                 isOpen={isOpenSignIn}
                 setIsOpen={setIsOpenSignIn}

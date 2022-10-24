@@ -1,0 +1,11 @@
+.Top100 {
+    margin: 40px 32px 0;
+    h2 {
+        font-size: 24px;
+    }
+    &__container {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+    }
+}

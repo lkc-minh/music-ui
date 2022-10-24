@@ -1,38 +1,39 @@
-import nhaccuatuiApi from "nhaccuatui-api";
-import { useEffect, useState } from "react";
+import nhaccuatuiApi from "nhaccuatui-api"
+import { useEffect, useState } from "react"
 
-import "./Home.scss";
-import HomeSkeleton from "./HomeSkeleton/HomeSkeleton";
-import HotTopic from "./HotTopic/HotTopic";
-import NewRelease from "./NewRelease/NewRelease";
-import Showcase from "./Showcase/Showcase";
-import SongHome from "./SongHome/SongHome";
-import TopicEvent from "./TopicEvent/TopicEvent";
+import "./Home.scss"
+import HomeSkeleton from "./HomeSkeleton/HomeSkeleton"
+import NewRelease from "./NewRelease/NewRelease"
+import Showcase from "./Showcase/Showcase"
+import SongHome from "./SongHome/SongHome"
+import Top100 from "./Top100/Top100"
+import TopicEvent from "./TopicEvent/TopicEvent"
 
 function Home() {
-    const [showcase, setShowcase] = useState([]);
-    const [topicEvent, setTopicEvent] = useState([]);
-    const [newReleases, setNewReleases] = useState([]);
-    const [song, setSong] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+    const [showcase, setShowcase] = useState([])
+    const [topicEvent, setTopicEvent] = useState([])
+    const [newReleases, setNewReleases] = useState([])
+    const [song, setSong] = useState([])
+    const [top100, setTop100] = useState([])
 
     useEffect(() => {
         const fetchApi = async () => {
-            setIsLoading(true);
+            setIsLoading(true)
             try {
-                const data = await nhaccuatuiApi.getHome();
-
-                setShowcase(data.showcase);
-                setTopicEvent(data.topicEvent);
-                setNewReleases(data.newRelease.song);
-                setSong(data.song);
+                const data = await nhaccuatuiApi.getHome()
+                setShowcase(data.showcase)
+                setTopicEvent(data.topicEvent)
+                setNewReleases(data.newRelease.song)
+                setSong(data.song)
+                setTop100(data.top100)
             } catch (error) {
-                console.log(error);
+                console.log(error)
             }
-            setIsLoading(false);
-        };
-        fetchApi();
-    }, []);
+            setIsLoading(false)
+        }
+        fetchApi()
+    }, [])
     return (
         <div className="Home">
             {isLoading ? (
@@ -43,11 +44,11 @@ function Home() {
                     <TopicEvent data={topicEvent} />
                     <NewRelease data={newReleases} />
                     <SongHome data={song} />
-                    <HotTopic />
+                    <Top100 data={top100} />
                 </>
             )}
         </div>
-    );
+    )
 }
 
-export default Home;
+export default Home

@@ -43,19 +43,18 @@
                     display: flex;
                     align-items: center;
                     margin-top: 8px;
-                    img {
-                        position: relative;
-                        width: 24px !important;
-                        height: 24px;
-                        border: 1px solid #ffffff;
-                        border-radius: 50%;
-                        margin-left: 0;
-                        z-index: 1;
+                    &-img {
                         margin-right: 8px;
-                    }
-
-                    a {
-                        color: var(--cl-btn);
+                        padding-left: 8px;
+                        img {
+                            width: 24px !important;
+                            height: 24px;
+                            border: 1px solid #ffffff;
+                            border-radius: 50%;
+                            margin-left: 0;
+                            z-index: 1;
+                            margin-left: -10px;
+                        }
                     }
                 }
 

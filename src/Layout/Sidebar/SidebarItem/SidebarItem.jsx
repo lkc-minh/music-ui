@@ -1,80 +1,21 @@
-import { useState } from "react";
-import { AiFillCompass, AiTwotoneHome } from "react-icons/ai";
-import { BsFillBarChartFill } from "react-icons/bs";
-import { CiSearch } from "react-icons/ci";
-import { FaHandHoldingHeart, FaHeadphones } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+
 import { TfiAngleDown } from "react-icons/tfi";
 import { NavLink } from "react-router-dom";
 
 import { useGlobalContext } from "~/contexts/context";
+import useLocalStorage from "~/hooks/useLocalStorage";
 import "./SidebarItem.scss";
 
-const sidebarItem = [
-    {
-        icon: <CiSearch className="SidebarItem__icon" style={{ color: "#2EC626" }} />,
-        title: "Search",
-        url: "/search",
-    },
-    {
-        icon: (
-            <AiTwotoneHome className="SidebarItem__icon" style={{ color: "#29A9F2" }} />
-        ),
-        title: "Home",
-        url: "/",
-    },
-    {
-        icon: (
-            <AiFillCompass className="SidebarItem__icon" style={{ color: "#FFC139" }} />
-        ),
-        title: "Discovery",
-        sub: [
-            { title: "Song", url: "/songs/newsongs" },
-            { title: "Playlist", url: "/playlist/newplaylist" },
-            { title: "Video", url: "/videos" },
-            { title: "Artist", url: "/singers" },
-        ],
-    },
-    {
-        icon: <FaHeadphones className="SidebarItem__icon" style={{ color: "#A03DE8" }} />,
-        title: "What Listen Today",
-        sub: [
-            { title: "Topic", url: "/topics" },
-            { title: "Collection", url: "/playlist/tags" },
-            { title: "Top 100", url: "/top100/top100" },
-        ],
-    },
-    {
-        icon: (
-            <BsFillBarChartFill
-                className="SidebarItem__icon"
-                style={{ color: "#FA8046" }}
-            />
-        ),
-        title: "NCT Chart",
-        url: "/songs/weekly",
-    },
-    {
-        icon: (
-            <FaHandHoldingHeart
-                className="SidebarItem__icon"
-                style={{ color: "#1BA9B0" }}
-            />
-        ),
-        title: "Music 4U",
-        url: "/discover",
-    },
-];
-
-function SidebarItem() {
-    const [titleActive, setTitleActive] = useState("");
+function SidebarItem({ sidebarItem }) {
+    const [titleActive, setTitleActive] = useLocalStorage("titleActive", "");
     const { showSubSidebar, setShowSubSidebar } = useGlobalContext();
 
     const handleClick = (title) => {
-        setShowSubSidebar((prev) => ({ ...prev, [title]: !showSubSidebar[title] }));
-    };
-
-    const handleActive = (title) => {
-        setTitleActive(title);
+        setShowSubSidebar((prev) => ({
+            ...prev,
+            [title]: !showSubSidebar[title],
+        }));
     };
 
     return (
@@ -114,10 +55,12 @@ function SidebarItem() {
                                 {item.sub.map((i) => (
                                     <NavLink
                                         to={i.url}
-                                        className="SidebarItem__sub-link"
+                                        className={`SidebarItem__sub-link ${item.id}`}
                                         key={i.title}
                                         end
-                                        onClick={() => handleActive(item.title)}
+                                        onClick={() =>
+                                            setTitleActive(item.title)
+                                        }
                                     >
                                         <div className="circleActive"></div>
                                         {i.title}
@@ -133,7 +76,7 @@ function SidebarItem() {
                         className="SidebarItem__container"
                         key={item.title}
                         end
-                        onClick={() => setTitleActive(null)}
+                        onClick={() => setTitleActive(item.title)}
                     >
                         <div className="SidebarItem__container-bar"></div>
                         <div className="SidebarItem__container-item">
