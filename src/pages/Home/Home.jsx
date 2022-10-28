@@ -1,39 +1,40 @@
-import nhaccuatuiApi from "nhaccuatui-api"
-import { useEffect, useState } from "react"
+import NhacCuaTui from "nhaccuatui-api-full";
+import { useEffect, useState } from "react";
 
-import "./Home.scss"
-import HomeSkeleton from "./HomeSkeleton/HomeSkeleton"
-import NewRelease from "./NewRelease/NewRelease"
-import Showcase from "./Showcase/Showcase"
-import SongHome from "./SongHome/SongHome"
-import Top100 from "./Top100/Top100"
-import TopicEvent from "./TopicEvent/TopicEvent"
+import "./Home.scss";
+import HomeSkeleton from "./HomeSkeleton/HomeSkeleton";
+import NewRelease from "./NewRelease/NewRelease";
+import Showcase from "./Showcase/Showcase";
+import SongHome from "./SongHome/SongHome";
+import Top100 from "./Top100/Top100";
+import TopicEvent from "./TopicEvent/TopicEvent";
 
 function Home() {
-    const [isLoading, setIsLoading] = useState(false)
-    const [showcase, setShowcase] = useState([])
-    const [topicEvent, setTopicEvent] = useState([])
-    const [newReleases, setNewReleases] = useState([])
-    const [song, setSong] = useState([])
-    const [top100, setTop100] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
+    const [showcase, setShowcase] = useState([]);
+    const [topicEvent, setTopicEvent] = useState([]);
+    const [newReleases, setNewReleases] = useState([]);
+    const [song, setSong] = useState([]);
+    const [top100, setTop100] = useState([]);
 
     useEffect(() => {
         const fetchApi = async () => {
-            setIsLoading(true)
+            setIsLoading(true);
             try {
-                const data = await nhaccuatuiApi.getHome()
-                setShowcase(data.showcase)
-                setTopicEvent(data.topicEvent)
-                setNewReleases(data.newRelease.song)
-                setSong(data.song)
-                setTop100(data.top100)
+                const data = await NhacCuaTui.getHome();
+                // console.log({ data });
+                setShowcase(data?.showcase);
+                setTopicEvent(data?.topicEvent);
+                setNewReleases(data?.newRelease.song);
+                setSong(data?.song);
+                setTop100(data?.top100);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-            setIsLoading(false)
-        }
-        fetchApi()
-    }, [])
+            setIsLoading(false);
+        };
+        fetchApi();
+    }, []);
     return (
         <div className="Home">
             {isLoading ? (
@@ -48,7 +49,7 @@ function Home() {
                 </>
             )}
         </div>
-    )
+    );
 }
 
-export default Home
+export default Home;

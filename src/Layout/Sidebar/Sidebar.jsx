@@ -49,7 +49,7 @@ const sidebarItem = [
             { title: "Song", url: "/songs/newsongs" },
             { title: "Playlist", url: "/playlist/newplaylist" },
             { title: "Video", url: "/videos" },
-            { title: "Artist", url: "/singers" },
+            { title: "Artist", url: "/artist/abc" },
         ],
     },
     {

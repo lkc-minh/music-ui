@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import "./SongInfo.scss"
+import { Link } from "react-router-dom";
+import "./SongInfo.scss";
 
 function SongInfo({ song }) {
     return (
@@ -9,9 +9,13 @@ function SongInfo({ song }) {
                     <img src={song.thumbnail} alt={song.title} />
                 </div>
                 <div className="SongInfo__container-info">
-                    <span className="SongInfo__container-info-title link">
+                    <Link
+                        to={"/songs/" + song.key}
+                        className="SongInfo__container-info-title link"
+                    >
                         {song.title}
-                    </span>
+                    </Link>
+
                     <div className="SongInfo__container-info-artists">
                         {song.artists.map((art, index) => (
                             <span key={art.name}>
@@ -23,7 +27,7 @@ function SongInfo({ song }) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default SongInfo
+export default SongInfo;

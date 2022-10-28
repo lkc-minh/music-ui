@@ -1,0 +1,189 @@
+.Playlist {
+    padding: 24px 32px 0px 32px;
+    &__info {
+        display: flex;
+        gap: 24px;
+        color: var(--cl-btn);
+
+        &-img {
+            border-radius: 8px;
+            overflow: hidden;
+            flex: 2;
+            margin-top: 16px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &-main {
+            flex: 9;
+            .title {
+                font-size: 14px;
+                b {
+                    color: var(--cl-text);
+                    font-size: 16px;
+                }
+            }
+
+            .artist {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 8px;
+
+                img {
+                    width: 24px;
+                    height: 24px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            .date {
+                margin-top: 18px;
+            }
+
+            .description {
+                font-size: 14px;
+                margin-top: 24px;
+            }
+
+            .tags {
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                margin-top: 12px;
+                flex-wrap: wrap;
+
+                li {
+                    list-style: none;
+                    position: relative;
+                    padding: 6px 12px 5px;
+                    background-color: var(--cl-bg-lighter);
+                    margin-left: 18px;
+                    margin-bottom: 4px;
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                    color: var(--cl-btn);
+                    display: inline-block;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        right: -10px;
+                        bottom: 0;
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid var(--cl-bg-lighter);
+                        border-top: 15px solid transparent;
+                        border-bottom: 15px solid transparent;
+                        border-top-left-radius: 3px;
+                        border-bottom-left-radius: 3px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__createBy {
+        height: 64px;
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: var(--cl-bg-active);
+
+        img {
+            width: 38px;
+            height: 38px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-left: 24px;
+        }
+
+        &-info {
+            .name {
+                color: var(--cl-hover);
+                font-size: 14px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    &__SongList {
+        h1 {
+            margin-top: 44px;
+            margin-bottom: 16px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .Playlist__head {
+            display: flex;
+            background-color: var(--cl-bg-active);
+            height: 32px;
+            align-items: center;
+            &-title {
+                flex: 4;
+                padding-left: 16px;
+            }
+
+            &-artist {
+                flex: 4;
+            }
+
+            &-listens {
+                flex: 1;
+            }
+
+            &-duration {
+                flex: 1;
+            }
+            span {
+                font-weight: 700;
+            }
+        }
+
+        .Playlist__song {
+            display: flex;
+            background-color: var(--cl-bg-active);
+            height: 40px;
+            align-items: center;
+            margin-top: 2px;
+            &-title {
+                flex: 4;
+                padding-left: 16px;
+                font-size: 14px;
+                cursor: pointer;
+
+                &.active {
+                    color: var(--cl-hover);
+                }
+
+                &:hover {
+                    color: var(--cl-hover);
+                }
+            }
+
+            &-artists {
+                flex: 4;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            &-listens {
+                flex: 1;
+            }
+
+            &-duration {
+                flex: 1;
+                span {
+                    margin-left: 16px;
+                }
+            }
+        }
+    }
+}

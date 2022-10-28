@@ -6,8 +6,8 @@ import Discover from "./pages/Discover/Discover";
 import Home from "./pages/Home/Home";
 import Playlist from "./pages/Playlist/Playlist";
 import Search from "./pages/Search/Search";
-import Singles from "./pages/Singles/Singles";
-import Songs from "./pages/Songs/Songs";
+import Artist from "./pages/Artist/Artist";
+import SongPage from "./pages/SongPage/SongPage";
 import Top100 from "./pages/Top100/Top100";
 import Topics from "./pages/Topics/Topics";
 import Videos from "./pages/Videos/Videos";
@@ -27,15 +27,15 @@ const router = createBrowserRouter([
             },
             {
                 path: routes.songs,
-                element: <Songs />,
+                element: <SongPage />,
             },
             {
                 path: routes.videos,
                 element: <Videos />,
             },
             {
-                path: routes.singers,
-                element: <Singles />,
+                path: routes.artist,
+                element: <Artist />,
             },
             {
                 path: routes.playlist,

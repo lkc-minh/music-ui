@@ -1,16 +1,16 @@
-import { Navigation } from "swiper"
-import { Swiper, SwiperSlide } from "swiper/react"
-import Card from "~/components/Card/Card"
-import "./TopicEvent.scss"
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Card from "~/components/Card/Card";
+import "./TopicEvent.scss";
 
 function TopicEvent({ data }) {
-    const newDataEnglish = data.map((item) => ({
+    const newDataEnglish = data?.map((item) => ({
         ...item,
         groupName: item.groupName.split("_")[1],
-    }))
+    }));
     return (
         <>
-            {newDataEnglish.map((d) => (
+            {newDataEnglish?.map((d) => (
                 <div className="TopicEvent" key={d.groupName}>
                     <h3>{d.groupName}</h3>
 
@@ -22,7 +22,7 @@ function TopicEvent({ data }) {
                         modules={[Navigation]}
                         className="mySwiper"
                     >
-                        {d.listPlaylist.map((item) => (
+                        {d?.listPlaylist?.map((item) => (
                             <SwiperSlide key={item.title}>
                                 <Card data={item} />
                             </SwiperSlide>
@@ -31,7 +31,7 @@ function TopicEvent({ data }) {
                 </div>
             ))}
         </>
-    )
+    );
 }
 
-export default TopicEvent
+export default TopicEvent;

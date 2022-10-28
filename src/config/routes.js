@@ -3,7 +3,7 @@ const routes = {
     search: "/search",
     songs: "/songs/:id",
     videos: "/videos",
-    singers: "/singers",
+    artist: "/artist/:id",
     playlist: "/playlist/:id",
     top100: "/top100/:id",
     discover: "/discover",

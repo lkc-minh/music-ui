@@ -1,49 +1,49 @@
-.Rightbar {
-    width: var(--width-rightbar);
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    // overflow: scroll;
+.RightbarDefault {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     &__top {
         margin: 0 40px;
-        &-container {
+        &-img {
             margin-top: 24px;
-            margin-top: 16px;
-            padding: 12px;
-            width: fit-content;
-            border-radius: 4px;
-            background-color: var(--cl-bg-active);
-            // box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
-
             img {
                 margin-right: auto;
                 display: block;
+                width: 100%;
+                height: auto;
                 width: 240px;
                 height: 240px;
                 border-radius: 0.4rem;
-                margin-bottom: 16px;
+                box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
             }
+        }
 
-            .title {
-                font-size: 14px;
-                color: var(--cl-text);
-                font-weight: 500;
-                margin: 0 16px;
-                display: flex;
-                align-items: center;
-                justify-self: center;
-            }
+        p {
+            text-align: center;
+            width: 100%;
+            margin-top: 4rem;
+            color: var(--cl-btn);
+        }
 
-            .artists {
-                display: flex;
-                margin: 0 16px;
-                flex-wrap: wrap;
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            height: 3.2rem;
+            margin-top: 2.4rem;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1rem 3.7rem;
+            border-radius: 1.6rem;
+            border: 1px solid var(--cl-border-btn);
+            color: var(--cl-btn);
+            background-color: transparent;
+
+            &:hover {
+                border: 1px solid var(--cl-hover);
+                color: var(--cl-hover);
             }
         }
     }
@@ -89,11 +89,5 @@
                 }
             }
         }
-    }
-}
-
-@media only screen and (max-width: 1300px) {
-    .Rightbar {
-        display: none;
     }
 }

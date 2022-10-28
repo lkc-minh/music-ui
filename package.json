@@ -10,6 +10,7 @@
         "axios": "^1.1.2",
         "moment": "^2.29.4",
         "nhaccuatui-api": "^1.0.0",
+        "nhaccuatui-api-full": "^1.1.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-google-recaptcha": "^2.1.0",
