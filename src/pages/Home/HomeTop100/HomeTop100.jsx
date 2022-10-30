@@ -4,7 +4,6 @@ import Card from "~/components/Card/Card";
 import "./HomeTop100.scss";
 
 function HomeTop100({ data }) {
-    console.log(data);
     return (
         <div className="HomeTop100">
             <Link>
@@ -12,7 +11,7 @@ function HomeTop100({ data }) {
             </Link>
             <div className="HomeTop100__container">
                 <Swiper slidesPerView={6} spaceBetween={30}>
-                    {data.map((item) => (
+                    {data?.map((item) => (
                         <SwiperSlide key={item.key}>
                             <Card data={item} type="top100" />
                         </SwiperSlide>

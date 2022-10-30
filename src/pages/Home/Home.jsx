@@ -25,7 +25,7 @@ function Home() {
                 // console.log({ data });
                 setShowcase(data?.showcase);
                 setTopicEvent(data?.topicEvent);
-                setNewReleases(data?.newRelease.song);
+                setNewReleases(data?.newRelease?.song);
                 setSong(data?.song);
                 setTop100(data?.top100);
             } catch (error) {

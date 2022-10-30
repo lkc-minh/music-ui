@@ -12,7 +12,7 @@ function Rightbar() {
     const [song, setSong] = useState();
     const [songUrl, setSongUrl] = useState(null);
     const { ranking, songKey, isPlaying, setIsPlaying } = useGlobalContext();
-    const songTop1 = ranking[0];
+    const songTop1 = ranking?.[0];
 
     // console.log({ songKey });
     console.log({ song });
@@ -34,7 +34,7 @@ function Rightbar() {
             try {
                 const res = await NhacCuaTui.getSong(songKey);
                 setSong(res?.song);
-                setSongUrl(res?.song?.streamUrls[0]?.streamUrl);
+                setSongUrl(res?.song?.streamUrls?.[0]?.streamUrl);
             } catch (error) {
                 console.log(error);
             }

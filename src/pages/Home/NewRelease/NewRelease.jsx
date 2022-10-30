@@ -23,7 +23,7 @@ function NewRelease({ data }) {
                 }}
                 className="mySwiper"
             >
-                {data.map((song) => (
+                {data?.map((song) => (
                     <SwiperSlide key={song.title}>
                         <div className="NewRelease__item">
                             <div className="NewRelease__item-showcase">
