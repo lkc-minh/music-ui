@@ -11,7 +11,7 @@ import images from "~/assets/images";
 function Rightbar() {
     const [song, setSong] = useState();
     const [songUrl, setSongUrl] = useState(null);
-    const { ranking, songKey, isPlay, setIsPlay } = useGlobalContext();
+    const { ranking, songKey, isPlaying, setIsPlaying } = useGlobalContext();
     const songTop1 = ranking[0];
 
     // console.log({ songKey });
@@ -21,18 +21,20 @@ function Rightbar() {
 
     useEffect(() => {
         if (ref.current) {
-            if (isPlay) {
+            if (isPlaying) {
                 ref.current.play();
+            } else {
+                ref.current.pause();
             }
         }
-    }, [songUrl, isPlay]);
+    }, [songUrl, isPlaying]);
 
     useEffect(() => {
         (async () => {
             try {
                 const res = await NhacCuaTui.getSong(songKey);
-                setSong(res.song);
-                setSongUrl(res.song.streamUrls[0].streamUrl);
+                setSong(res?.song);
+                setSongUrl(res?.song?.streamUrls[0]?.streamUrl);
             } catch (error) {
                 console.log(error);
             }
@@ -63,9 +65,8 @@ function Rightbar() {
                             <div className="artists">
                                 {song.artists.map((artist, index, artists) => (
                                     <div key={artist.artistId}>
-                                        {/* {index > 0 && ", "} */}
                                         <Link
-                                            to={"/artist/" + artist.artistId}
+                                            to={"/artist/" + artist.shortLink}
                                             className="link"
                                         >
                                             {artist.name}
@@ -84,7 +85,8 @@ function Rightbar() {
                         </div>
                     </div>
 
-                    <button onClick={() => setIsPlay(true)}>play</button>
+                    <button onClick={() => setIsPlaying(true)}>play</button>
+                    <button onClick={() => setIsPlaying(false)}>pause</button>
 
                     <div className="Rightbar__bottom">
                         <progress max={100} value={70}>

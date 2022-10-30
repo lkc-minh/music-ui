@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 export default function Showcase({ data }) {
-    console.log({ data });
+    console.log("showcase: ", data);
     return (
         <div className="Showcase">
             <Swiper
@@ -33,18 +33,27 @@ export default function Showcase({ data }) {
                 modules={[Pagination, Navigation, Autoplay]}
                 className="mySwiper"
             >
-                {data?.map((item) => (
-                    <SwiperSlide key={item.key}>
-                        <Link to={`/songs/` + item.key}>
-                            <img
-                                title={item.title}
-                                className="Showcase__img"
-                                src={item.thumbnail}
-                                alt=""
-                            />
-                        </Link>
-                    </SwiperSlide>
-                ))}
+                {data?.map((item) => {
+                    const key = item?.url.split(".")[3];
+                    return (
+                        <SwiperSlide key={item.key}>
+                            <Link
+                                to={
+                                    item?.url.includes("playlist")
+                                        ? "/playlist/" + key
+                                        : `/songs/` + key
+                                }
+                            >
+                                <img
+                                    title={item.title}
+                                    className="Showcase__img"
+                                    src={item.thumbnail}
+                                    alt=""
+                                />
+                            </Link>
+                        </SwiperSlide>
+                    );
+                })}
                 <div className="prev-btn">
                     <BsChevronLeft className="Showcase__icon-slider" />
                 </div>

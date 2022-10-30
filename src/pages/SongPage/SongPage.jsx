@@ -1,47 +1,63 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import NhacCuaTui from "nhaccuatui-api-full";
-import "./SongPage.scss";
-import images from "~/assets/images";
 import { AiFillPlayCircle } from "react-icons/ai";
 import Tippy from "@tippyjs/react";
-import { useRef } from "react";
+
+import "./SongPage.scss";
+import images from "~/assets/images";
 import { useGlobalContext } from "~/contexts/context";
+import Lyric from "./Lyric/Lyric";
 
 function SongPage() {
     const [song, setSong] = useState({});
     const [lyric, setLyric] = useState("");
-    const [loadMore, setLoadMore] = useState(false);
-    const { id } = useParams();
-    const { getSongKey } = useGlobalContext();
 
-    const lyricRef = useRef();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { id } = useParams();
+    const { setSongKey, setIsPlaying } = useGlobalContext();
+
     useEffect(() => {
         (async () => {
+            setIsLoading(true);
             try {
                 const res = await NhacCuaTui.getSong(id);
                 console.log({ res });
                 setSong(res.song);
                 const resLyric = await NhacCuaTui.getLyric(id);
                 setLyric(resLyric.lyric);
-                // console.log({ resLyric });
-            } catch (error) {}
+                console.log({ resLyric });
+            } catch (error) {
+                console.log(error);
+            }
+            setIsLoading(false);
         })();
     }, [id]);
 
-    useEffect(() => {
-        if (lyric?.lyric !== "") lyricRef.current.innerHTML = lyric?.lyric;
-    }, [lyric]);
+    const handlePlaySong = (key) => {
+        setSongKey(key);
+        setIsPlaying(true);
+    };
+
+    if (isLoading) return <h2>Loading....</h2>;
 
     return (
         <div className="SongPage">
             <div className="SongPage__info">
                 <div className="SongPage__info-left">
-                    <img src={song?.thumbnail} alt="" />
+                    <img
+                        src={
+                            song?.thumbnail
+                                ? song?.thumbnail
+                                : images.playerDefault
+                        }
+                        alt=""
+                    />
                     <Tippy content="Play" placement="bottom" arrow={false}>
                         <div
                             className="SongPage__info-left-play"
-                            onClick={() => getSongKey(song.key)}
+                            onClick={() => handlePlaySong(song.key)}
                         >
                             <AiFillPlayCircle />
                         </div>
@@ -71,7 +87,7 @@ function SongPage() {
                                 <p key={artist.artistId}>
                                     {index > 0 && ", "}
                                     <Link
-                                        to={"/artist/" + artist.artistId}
+                                        to={"/artist/" + artist.shortLink}
                                         className="link"
                                     >
                                         {artist.name}
@@ -111,29 +127,7 @@ function SongPage() {
                 </div>
             </div>
 
-            {lyric?.lyric !== "" && (
-                <div className="SongPage__lyric">
-                    <div className="SongPage__lyric-top">
-                        <h3>Lyric</h3>
-                        <span>Edited by: {lyric?.userNameUpload}</span>
-                        <hr />
-                    </div>
-
-                    <div
-                        className={
-                            loadMore
-                                ? "SongPage__lyric-content readMore"
-                                : "SongPage__lyric-content"
-                        }
-                        ref={lyricRef}
-                    >
-                        <p ref={lyricRef}></p>
-                    </div>
-                    <button onClick={() => setLoadMore(!loadMore)}>
-                        {loadMore ? "Close" : "Load more"}
-                    </button>
-                </div>
-            )}
+            {lyric?.lyric !== "" && lyric?.lyric && <Lyric lyric={lyric} />}
         </div>
     );
 }

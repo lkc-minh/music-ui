@@ -13,7 +13,7 @@ function Playlist() {
 
     const { id } = useParams();
 
-    const { getSongKey } = useGlobalContext();
+    const { setSongKey, setIsPlaying } = useGlobalContext();
 
     console.log({ playlist });
     useEffect(() => {
@@ -32,8 +32,9 @@ function Playlist() {
     }, [id]);
 
     const handleSong = (key) => {
-        getSongKey(key);
+        setSongKey(key);
         setActiveKey(key);
+        setIsPlaying(true);
     };
 
     if (isLoading) return <div>loading...</div>;
@@ -115,7 +116,7 @@ function Playlist() {
                                 <div key={artist.artistId}>
                                     {index > 0 && ", "}
                                     <Link
-                                        to={"/artist/" + artist.artistId}
+                                        to={"/artist/" + artist.shortLink}
                                         className="link"
                                     >
                                         {artist.name}

@@ -10,12 +10,9 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
     // const [state, dispatch] = useReducer(reducer, initialState);
     const [theme, setTheme] = useLocalStorage("theme", "light-theme");
-    const [showSubSidebar, setShowSubSidebar] = useState({
-        "What Listen Today": true,
-    });
     const [ranking, setRanking] = useState({});
-    const [songKey, getSongKey] = useLocalStorage("players", null);
-    const [isPlay, setIsPlay] = useState(false);
+    const [songKey, setSongKey] = useLocalStorage("players", null);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         document.documentElement.className = theme;
@@ -25,7 +22,7 @@ const AppProvider = ({ children }) => {
         const fetchApi = async () => {
             try {
                 const data = await NhacCuaTui.getHome();
-                setRanking(data.ranking.song);
+                setRanking(data?.ranking?.song);
             } catch (error) {
                 console.log(error);
             }
@@ -39,13 +36,11 @@ const AppProvider = ({ children }) => {
                 // ...state,
                 theme,
                 setTheme,
-                showSubSidebar,
-                setShowSubSidebar,
-                getSongKey,
+                setSongKey,
                 songKey,
                 ranking,
-                setIsPlay,
-                isPlay,
+                setIsPlaying,
+                isPlaying,
             }}
         >
             {children}

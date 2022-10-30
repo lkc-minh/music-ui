@@ -61,7 +61,7 @@ function NewRelease({ data }) {
                                                 <Link
                                                     to={
                                                         "/artist/" +
-                                                        art.artistId
+                                                        art.shortLink
                                                     }
                                                     className="link"
                                                 >

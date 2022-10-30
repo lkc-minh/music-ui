@@ -1,12 +1,12 @@
 import NhacCuaTui from "nhaccuatui-api-full";
 import { useEffect, useState } from "react";
+import SongInfo from "~/components/SongInfo/SongInfo";
 
 import "./Home.scss";
 import HomeSkeleton from "./HomeSkeleton/HomeSkeleton";
 import NewRelease from "./NewRelease/NewRelease";
 import Showcase from "./Showcase/Showcase";
-import SongHome from "./SongHome/SongHome";
-import Top100 from "./Top100/Top100";
+import HomeTop100 from "./HomeTop100/HomeTop100";
 import TopicEvent from "./TopicEvent/TopicEvent";
 
 function Home() {
@@ -44,8 +44,8 @@ function Home() {
                     <Showcase data={showcase} />
                     <TopicEvent data={topicEvent} />
                     <NewRelease data={newReleases} />
-                    <SongHome data={song} />
-                    <Top100 data={top100} />
+                    <SongInfo songs={song} />
+                    <HomeTop100 data={top100} />
                 </>
             )}
         </div>

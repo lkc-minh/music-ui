@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-
+import { useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
 import { NavLink } from "react-router-dom";
 
-import { useGlobalContext } from "~/contexts/context";
 import useLocalStorage from "~/hooks/useLocalStorage";
 import "./SidebarItem.scss";
 
 function SidebarItem({ sidebarItem }) {
+    const [showSubSidebar, setShowSubSidebar] = useState({
+        "What Listen Today": true,
+    });
     const [titleActive, setTitleActive] = useLocalStorage("titleActive", "");
-    const { showSubSidebar, setShowSubSidebar } = useGlobalContext();
 
     const handleClick = (title) => {
         setShowSubSidebar((prev) => ({

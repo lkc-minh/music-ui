@@ -1,0 +1,56 @@
+.SongInfo {
+    h2 {
+        margin-bottom: 24px;
+        margin-left: 30px;
+        font-size: 22px;
+    }
+
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 16px 32px 0px;
+        &-item {
+            display: flex;
+            background-color: var(--cl-bg-active);
+            border-radius: 4px;
+            height: 72px;
+            width: 49%;
+            margin: 4px 0;
+            align-items: center;
+
+            &:hover {
+                background-color: var(--cl-bg-lighter);
+            }
+            &-img {
+                padding: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 4px;
+                img {
+                    width: 54px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                }
+            }
+
+            &-info {
+                display: flex;
+                flex-direction: column;
+
+                &-title {
+                    font-weight: 500;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+
+                &-artists {
+                    color: var(--cl-btn);
+                }
+            }
+        }
+    }
+}
