@@ -22,11 +22,10 @@ function PlaylistInfo({ playlist }) {
                                         : images.defaultSong
                                 }
                                 alt={pl.title}
-                                onError={(e) =>
-                                    (e.target.onerror === null)(
-                                        (e.target.src = images.defaultSong)
-                                    )
-                                }
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null;
+                                    currentTarget.src = images.defaultArtist;
+                                }}
                             />
                             <div className="PlaylistInfo-img-over">
                                 <AiFillPlayCircle className="PlaylistInfo-img-over-ic" />

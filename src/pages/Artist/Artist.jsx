@@ -17,6 +17,7 @@ function Artist() {
             setArtistInfo(res);
         })();
     }, [id]);
+
     return (
         <div className="Artist">
             {id === "null" ? (
@@ -31,17 +32,17 @@ function Artist() {
                                     ? artistInfo?.artist?.coverImageURL
                                     : images.defaultArtist
                             }
-                            onError={({ currentTarget }) => {
-                                currentTarget.onerror = null; // prevents looping
-                                currentTarget.src = images.defaultArtist;
-                            }}
-                            // onError={(e) =>
-                            //     (e.target.src = images.defaultArtist)
-                            // }
                             alt=""
                         />
                         <div className="Artist__banner-info">
-                            <img src={artistInfo?.artist?.imageUrl} alt="" />
+                            <img
+                                src={artistInfo?.artist?.imageUrl}
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null;
+                                    currentTarget.src = images.defaultArtist;
+                                }}
+                                alt={artistInfo?.artist?.name}
+                            />
                             <span>{artistInfo?.artist?.name}</span>
                         </div>
                     </div>

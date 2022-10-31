@@ -24,9 +24,10 @@ function SongInfo({ songs }) {
                                         : images.defaultSong
                                 }
                                 alt={song.title}
-                                onError={
-                                    "this.src='https://stc-id.nixcdn.com/v12/static/media/default_song_no_cover.a876da66.png'"
-                                }
+                                onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null;
+                                    currentTarget.src = images.defaultArtist;
+                                }}
                                 // onError={({ currentTarget }) => {
                                 //     currentTarget.onerror = null; // prevents looping
                                 //     currentTarget.src = images.defaultSong;

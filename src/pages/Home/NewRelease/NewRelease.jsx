@@ -8,7 +8,6 @@ import images from "~/assets/images";
 import "./NewRelease.scss";
 
 function NewRelease({ data }) {
-    console.log({ data });
     return (
         <div className="NewRelease">
             <Link className="NewRelease__title link">New Releases</Link>

@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import MaybeHit from "../MaybeHit/MaybeHit";
+import NhacCuaTui from "nhaccuatui-api-full";
 import "./SearchDefault.scss";
 
 function SearchDefault({
-    topKeyList,
     histories,
     setHistories,
     handleDelHistory,
-    songMaybeHot,
     handleClickSearchValue,
 }) {
+    const [songMaybeHit, setSongMaybeHit] = useState({});
+    const [topKeyList, setTopKeyList] = useState([]);
+
+    console.log({ topKeyList });
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const res = await NhacCuaTui.getTopKeyword();
+                const resSongMaybeHot = await NhacCuaTui.getHome();
+                setSongMaybeHit(resSongMaybeHot?.newRelease?.song[0]);
+                setTopKeyList(res?.topkeyword);
+            } catch (error) {}
+        })();
+    }, []);
+
     return (
         <div className="SearchDefault">
             <div className="SearchDefault__container">
@@ -48,8 +63,8 @@ function SearchDefault({
                                     <span>{history.name}</span>
                                     <RiDeleteBin6Line
                                         className="Search-del-icon"
-                                        onClick={() =>
-                                            handleDelHistory(history.id)
+                                        onClick={(e) =>
+                                            handleDelHistory(history.id, e)
                                         }
                                     />
                                 </p>
@@ -61,7 +76,7 @@ function SearchDefault({
                 <div className="SearchDefault__container-item">
                     <h2>Maybe Hit</h2>
                     <div className="SearchDefault__songHot">
-                        <MaybeHit song={songMaybeHot} />
+                        <MaybeHit song={songMaybeHit} />
                     </div>
                 </div>
             </div>

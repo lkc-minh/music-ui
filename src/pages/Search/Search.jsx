@@ -7,84 +7,89 @@ import { v4 as uuidv4 } from "uuid";
 import useDebounce from "~/hooks/useDebounce";
 
 import useLocalStorage from "~/hooks/useLocalStorage";
+import useOnClickOutside from "~/hooks/useOnClickOutside";
 import "./Search.scss";
 import SearchDefault from "./SearchDefault/SearchDefault";
 import SearchResult from "./SearchResult/SearchResult";
+import SearchResultDeb from "./SearchResultDeb/SearchResultDeb";
 
 function Search() {
     const [histories, setHistories] = useLocalStorage("histories", []);
-    const [topKeyList, setTopKeyList] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [searchResult, setSearchResult] = useState({});
-    const [songMaybeHot, setSongMaybeHot] = useState({});
+    const [searchResultDeb, setSearchResultDeb] = useState({});
+    const [showResult, setShowResult] = useState(false);
     let [searchParams, setSearchParams] = useSearchParams("");
 
     const inputRef = useRef();
+    const formRef = useRef();
     const param = searchParams.get("q");
 
     const debouncedValue = useDebounce(searchValue, 500);
+    const isEmptyObj = Object.keys(searchResultDeb).length === 0;
 
     useEffect(() => {
-        if (!debouncedValue?.trim()) {
-            setSearchResult({});
-            return;
-        }
-
         const fetchApi = async () => {
-            setIsLoading(true);
-            const result = await NhacCuaTui.searchByKeyword(debouncedValue);
+            if (!param) {
+                setSearchResult({});
+                return;
+            }
+            const result = await NhacCuaTui.searchByKeyword(param);
             setSearchResult(result.search);
-            setIsLoading(false);
+            setSearchValue(param);
+        };
+        fetchApi();
+    }, [param]);
+
+    useEffect(() => {
+        const fetchApi = async () => {
+            if (!debouncedValue) {
+                setSearchResultDeb({});
+                return;
+            }
+            const result = await NhacCuaTui.searchByKeyword(debouncedValue);
+            result?.search && setSearchResultDeb(result?.search);
         };
         fetchApi();
     }, [debouncedValue]);
 
     useEffect(() => {
-        (async () => {
-            setIsLoading(true);
-            try {
-                const res = await NhacCuaTui.getTopKeyword();
-                const resSongMaybeHot = await NhacCuaTui.getHome();
-                setSongMaybeHot(resSongMaybeHot?.newRelease?.song[0]);
-                setTopKeyList(res?.topkeyword);
-            } catch (error) {}
-            setIsLoading(false);
-        })();
-    }, []);
-
-    useEffect(() => {
-        setSearchValue(param);
-    }, [param]);
-
-    const handleChangeSearch = (e) => {
-        setSearchValue(e.target.value);
-    };
-
-    const handleDeleteText = () => {
-        setSearchValue("");
-        inputRef.current.focus();
-    };
-
-    const handleSubmitSearch = (e) => {
-        e.preventDefault();
-        setHistories((prev) => [{ id: uuidv4(), name: searchValue }, ...prev]);
-        setSearchParams({ q: searchValue });
         if (histories.length > 5)
             setHistories((prev) => {
                 prev.pop();
                 return prev;
             });
+    }, [histories, setHistories]);
+
+    const handleClear = () => {
+        setSearchValue("");
+        inputRef.current.focus();
+        setSearchParams({});
+        setShowResult(false);
     };
 
-    const handleDelHistory = (id) => {
+    const handleSubmitSearch = (e) => {
+        e.preventDefault();
+
+        const value = e.target.querySelector("input").value.trim();
+        if (!value) return;
+
+        setHistories((prev) => [{ id: uuidv4(), name: searchValue }, ...prev]);
+        setSearchParams({ q: value });
+    };
+
+    const handleDelHistory = (id, e) => {
+        e.stopPropagation();
         setHistories((prev) => prev.filter((history) => history.id !== id));
     };
 
-    const handleClickSearchValue = (key) => {
+    const handleClickSearchValue = (key, e) => {
         setSearchValue(key);
         setSearchParams({ q: key });
+        setHistories((prev) => [{ id: uuidv4(), name: key }, ...prev]);
     };
+
+    useOnClickOutside(formRef, () => setShowResult(false));
 
     return (
         <div className="Search">
@@ -92,6 +97,7 @@ function Search() {
                 <form
                     className="Search__top-search"
                     onSubmit={handleSubmitSearch}
+                    ref={formRef}
                 >
                     <CiSearch className="icon-search" />
                     <input
@@ -99,23 +105,25 @@ function Search() {
                         type="text"
                         placeholder="Search ..."
                         value={searchValue}
-                        onChange={handleChangeSearch}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        onFocus={() => setShowResult(true)}
                     />
                     {searchValue && (
                         <TfiClose
                             className="icon-close"
-                            onClick={handleDeleteText}
+                            onClick={handleClear}
                         />
+                    )}
+                    {showResult && !isEmptyObj && (
+                        <SearchResultDeb searchResult={searchResultDeb} />
                     )}
                 </form>
             </div>
             {param ? (
-                <SearchResult searchResult={searchResult} />
+                <SearchResult searchResult={searchResult} param={param} />
             ) : (
                 <SearchDefault
                     handleDelHistory={handleDelHistory}
-                    topKeyList={topKeyList}
-                    songMaybeHot={songMaybeHot}
                     histories={histories}
                     setHistories={setHistories}
                     setSearchValue={setSearchResult}

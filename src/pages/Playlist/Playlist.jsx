@@ -2,6 +2,7 @@ import NhacCuaTui from "nhaccuatui-api-full";
 import { useEffect, useState } from "react";
 import { BsHeadphones } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
+import images from "~/assets/images";
 import { useGlobalContext } from "~/contexts/context";
 
 import "./Playlist.scss";
@@ -50,20 +51,36 @@ function Playlist() {
                         Playlist: <b>{playlist.title}</b>
                     </div>
                     <div className="artist">
-                        {playlist.artists.map((artist) => (
-                            <img
-                                src={artist.imageUrl}
-                                key={artist.artistId}
-                                alt=""
-                            />
-                        ))}
+                        <div className="artist-imgs">
+                            {playlist.artists.map((artist) => (
+                                <img
+                                    src={
+                                        artist.imageUrl
+                                            ? artist.imageUrl
+                                            : images.defaultArtist
+                                    }
+                                    key={artist.artistId}
+                                    alt=""
+                                    onError={(e) => {
+                                        e.target.src = images.defaultArtist;
+                                    }}
+                                />
+                            ))}
+                        </div>
 
-                        {playlist.artists.map((artist, index) => (
-                            <div key={artist.artistId}>
-                                {index > 0 && ", "}
-                                <span className="link">{artist.name}</span>
-                            </div>
-                        ))}
+                        <div className="artist-name">
+                            {playlist.artists.map((artist, index) => (
+                                <div key={artist.artistId}>
+                                    {index > 0 && ", "}
+                                    <Link
+                                        to={"/artist/" + artist.shortLink}
+                                        className="link"
+                                    >
+                                        {artist.name}
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                     <div className="date">{playlist.dateModify}</div>
                     <div className="description">

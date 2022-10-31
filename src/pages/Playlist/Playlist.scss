@@ -33,11 +33,17 @@
                 gap: 8px;
                 margin-top: 8px;
 
-                img {
-                    width: 24px;
-                    height: 24px;
-                    object-fit: cover;
-                    border-radius: 50%;
+                &-imgs {
+                    img {
+                        width: 24px;
+                        height: 24px;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                }
+
+                &-name {
+                    display: flex;
                 }
             }
 

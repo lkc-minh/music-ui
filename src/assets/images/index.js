@@ -10,6 +10,7 @@ const images = {
     defaultArtist: require("../images/default_artist.png"),
     defaultSong: require("../images/default_song_no_cover.png"),
     defaultPlaylist: require("../images/default_song_no_cover.png"),
+    iconNoData: require("../images/Icon_thongbao.png"),
 };
 
 export default images;

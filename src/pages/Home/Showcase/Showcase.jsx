@@ -12,7 +12,6 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 export default function Showcase({ data }) {
-    console.log("showcase: ", data);
     return (
         <div className="Showcase">
             <Swiper

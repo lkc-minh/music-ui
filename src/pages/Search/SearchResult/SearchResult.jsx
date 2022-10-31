@@ -1,8 +1,9 @@
+import images from "~/assets/images";
 import PlaylistInfo from "~/components/PlaylistInfo/PlaylistInfo";
 import SongInfo from "~/components/SongInfo/SongInfo";
 import "./SearchResult.scss";
 
-function SearchResult({ searchResult }) {
+function SearchResult({ searchResult, param }) {
     console.log({ searchResult });
     return (
         <div className="SearchResult">
@@ -20,7 +21,17 @@ function SearchResult({ searchResult }) {
 
             {searchResult?.song?.song.length === 0 &&
                 searchResult?.playlist?.playlist.length === 0 && (
-                    <div>No have data</div>
+                    <div className="SearchResult__item">
+                        <img
+                            className="SearchResult__item-img"
+                            src={images.iconNoData}
+                            alt=""
+                        />
+                        <p className="SearchResult__item-text">
+                            No results for {param}. Please check the spelling of
+                            keyword
+                        </p>
+                    </div>
                 )}
         </div>
     );

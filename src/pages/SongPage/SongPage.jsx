@@ -83,6 +83,11 @@ function SongPage() {
                                     }
                                     key={artist.artistId}
                                     alt=""
+                                    onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null;
+                                        currentTarget.src =
+                                            images.defaultArtist;
+                                    }}
                                 />
                             ))}
                         </div>
