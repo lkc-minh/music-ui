@@ -1,0 +1,84 @@
+.PlaylistInfo {
+    padding: 40px 32px 0 32px;
+
+    h2 {
+        font-size: 2.2ren;
+        font-weight: bold;
+    }
+    &__container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        // gap: 16px;
+        &-item {
+            flex-grow: 0;
+            max-width: 16.666667%;
+            flex-basis: 16.666667%;
+            margin-top: 20px;
+            padding: 8px;
+            .PlaylistInfo-img {
+                border-radius: 4px;
+                position: relative;
+                overflow: hidden;
+                display: block;
+                img {
+                    min-width: 160px;
+                    max-width: 160px;
+                    width: 100%;
+                    height: 100%;
+                    max-width: 100%;
+                    transition: scale 300ms linear;
+                }
+
+                &-over {
+                    position: absolute;
+                    background-color: #00000080;
+                    opacity: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    transition: opacity 300ms linear;
+                    will-change: opacity;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 40px;
+                    cursor: pointer;
+
+                    &-ic {
+                    }
+                }
+                &:hover {
+                    .PlaylistInfo-img-over {
+                        opacity: 1;
+                    }
+                    img {
+                        scale: 1.1;
+                        transition: scale 300ms linear;
+                    }
+                }
+            }
+
+            .PlaylistInfo-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+                margin-top: 8px;
+                font-size: 14px;
+                line-height: 20px;
+                display: inline-block;
+            }
+
+            .PlaylistInfo-artists {
+                color: var(--cl-btn);
+                display: flex;
+                flex-wrap: wrap;
+                .PlaylistInfo-artist {
+                    a {
+                    }
+                }
+            }
+        }
+    }
+}

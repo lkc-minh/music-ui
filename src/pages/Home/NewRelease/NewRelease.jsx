@@ -44,14 +44,20 @@ function NewRelease({ data }) {
                                                 <img
                                                     key={art.name}
                                                     src={
-                                                        art.imageUrl ===
-                                                            "https://avatar-ex-swe.nixcdn.com/singer/avatar/2016/08/09/1/b/e/7/1470738154924_300.jpg" ||
-                                                        !art.imageUrl
-                                                            ? images.defaultArtist
-                                                            : art.imageUrl
+                                                        art.imageUrl
+                                                            ? art.imageUrl
+                                                            : images.defaultArtist
                                                     }
                                                     alt={art.name}
-                                                    width={25}
+                                                    onError={(e) =>
+                                                        (
+                                                            e.target.onerror ===
+                                                            null
+                                                        )(
+                                                            (e.target.src =
+                                                                images.defaultArtist)
+                                                        )
+                                                    }
                                                 />
                                             ))}
                                         </div>

@@ -52,7 +52,12 @@ function SongPage() {
                                 ? song?.thumbnail
                                 : images.playerDefault
                         }
-                        alt=""
+                        alt={song?.title}
+                        onError={(e) =>
+                            (e.target.onerror === null)(
+                                (e.target.src = images.playerDefault)
+                            )
+                        }
                     />
                     <Tippy content="Play" placement="bottom" arrow={false}>
                         <div

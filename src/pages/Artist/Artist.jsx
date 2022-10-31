@@ -1,6 +1,7 @@
 import NhacCuaTui from "nhaccuatui-api-full";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import images from "~/assets/images";
 import SongInfo from "~/components/SongInfo/SongInfo";
 import "./Artist.scss";
 import ArtistRecentSongs from "./ArtistRecentSongs/ArtistRecentSongs";
@@ -23,7 +24,22 @@ function Artist() {
             ) : (
                 <>
                     <div className="Artist__banner">
-                        <img src={artistInfo?.artist?.coverImageURL} alt="" />
+                        <img
+                            defaultValue={images.defaultArtist}
+                            src={
+                                artistInfo?.artist?.coverImageURL
+                                    ? artistInfo?.artist?.coverImageURL
+                                    : images.defaultArtist
+                            }
+                            onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src = images.defaultArtist;
+                            }}
+                            // onError={(e) =>
+                            //     (e.target.src = images.defaultArtist)
+                            // }
+                            alt=""
+                        />
                         <div className="Artist__banner-info">
                             <img src={artistInfo?.artist?.imageUrl} alt="" />
                             <span>{artistInfo?.artist?.name}</span>

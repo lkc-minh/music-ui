@@ -8,6 +8,8 @@ const images = {
     DMCA: require("../images/DMCA.svg").default,
     playerDefault: require("../images/default_player.jpg"),
     defaultArtist: require("../images/default_artist.png"),
-}
+    defaultSong: require("../images/default_song_no_cover.png"),
+    defaultPlaylist: require("../images/default_song_no_cover.png"),
+};
 
-export default images
+export default images;

@@ -21,9 +21,16 @@ function SongInfo({ songs }) {
                                 src={
                                     song.thumbnail
                                         ? song.thumbnail
-                                        : images.playerDefault
+                                        : images.defaultSong
                                 }
                                 alt={song.title}
+                                onError={
+                                    "this.src='https://stc-id.nixcdn.com/v12/static/media/default_song_no_cover.a876da66.png'"
+                                }
+                                // onError={({ currentTarget }) => {
+                                //     currentTarget.onerror = null; // prevents looping
+                                //     currentTarget.src = images.defaultSong;
+                                // }}
                             />
                         </div>
                         <div className="SongInfo__container-item-info">
