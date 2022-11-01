@@ -29,7 +29,11 @@ function Card({ data, type }) {
                     {data?.artists?.map((artist, index, artists) => (
                         <div key={artist?.artistId}>
                             <Link
-                                to={"/artist/" + artist?.shortLink}
+                                to={
+                                    artist.shortLink
+                                        ? "/artist/" + artist.shortLink
+                                        : "/search?q=" + artist.name
+                                }
                                 className="link"
                             >
                                 {artist.name}

@@ -65,8 +65,11 @@ function NewRelease({ data }) {
                                                 {index > 0 ? ", " : ""}
                                                 <Link
                                                     to={
-                                                        "/artist/" +
                                                         art.shortLink
+                                                            ? "/artist/" +
+                                                              art.shortLink
+                                                            : "/search?q=" +
+                                                              art.name
                                                     }
                                                     className="link"
                                                 >

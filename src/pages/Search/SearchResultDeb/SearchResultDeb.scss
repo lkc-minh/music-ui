@@ -18,17 +18,9 @@
         overflow-y: auto;
 
         &::-webkit-scrollbar {
-            scrollbar-color: rgba(244, 246, 248, 0.2) transparent;
-            background-color: lightgray;
-            width: 4px;
+            display: none;
         }
 
-        &:hover {
-            -webkit-scrollbar-width: thin;
-            -moz-scrollbar-width: thin;
-            -ms-scrollbar-width: thin;
-            scrollbar-width: thin;
-        }
         .SearchResultDeb-item {
             h2 {
                 padding: 13px 0 13px 24px;

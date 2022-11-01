@@ -40,7 +40,11 @@ function MaybeHit({ song }) {
                             <span key={art.name}>
                                 {index > 0 ? ", " : ""}
                                 <Link
-                                    to={"/artist/" + art.shortLink}
+                                    to={
+                                        art.shortLink
+                                            ? "/artist/" + art.shortLink
+                                            : "/search?q=" + art.name
+                                    }
                                     className="link"
                                 >
                                     {art.name}

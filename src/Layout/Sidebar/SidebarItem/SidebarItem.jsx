@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 
-import useLocalStorage from "~/hooks/useLocalStorage";
 import "./SidebarItem.scss";
 
 function SidebarItem({ sidebarItem }) {
     const [showSubSidebar, setShowSubSidebar] = useState({
         "What Listen Today": true,
     });
-    const [titleActive, setTitleActive] = useLocalStorage("titleActive", "");
+    const { pathname } = useLocation();
 
     const handleClick = (title) => {
         setShowSubSidebar((prev) => ({
@@ -26,7 +25,9 @@ function SidebarItem({ sidebarItem }) {
                         <div key={item.title}>
                             <div
                                 className={
-                                    titleActive === item.title
+                                    item.sub
+                                        .map((i) => i.url)
+                                        .includes(pathname)
                                         ? "SidebarItem__container active"
                                         : "SidebarItem__container"
                                 }
@@ -55,12 +56,9 @@ function SidebarItem({ sidebarItem }) {
                                 {item.sub.map((i) => (
                                     <NavLink
                                         to={i.url}
-                                        className={`SidebarItem__sub-link ${item.id}`}
+                                        className={`SidebarItem__sub-link`}
                                         key={i.title}
                                         end
-                                        onClick={() =>
-                                            setTitleActive(item.title)
-                                        }
                                     >
                                         <div className="circleActive"></div>
                                         {i.title}
@@ -76,7 +74,6 @@ function SidebarItem({ sidebarItem }) {
                         className="SidebarItem__container"
                         key={item.title}
                         end
-                        onClick={() => setTitleActive(item.title)}
                     >
                         <div className="SidebarItem__container-bar"></div>
                         <div className="SidebarItem__container-item">

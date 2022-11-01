@@ -4,7 +4,7 @@
     left: 50%;
     transform: translateX(-50%);
     scale: 0;
-    background-color: var(--cl-bg-menu);
+    background-color: var(--cl-bg);
     transform-origin: top left;
     box-shadow: 0 4px 8px #00000033;
     min-width: 170px;
@@ -40,7 +40,7 @@
             scale: 0;
             opacity: 0;
             min-width: 170px;
-            background-color: var(--cl-bg-menu);
+            background-color: var(--cl-bg);
             transform-origin: top left;
             box-shadow: 0 4px 8px #00000033;
             border-radius: 4px;

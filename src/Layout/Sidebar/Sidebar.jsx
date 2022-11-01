@@ -46,9 +46,9 @@ const sidebarItem = [
         ),
         title: "Discovery",
         sub: [
-            { title: "Song", url: "/songs/newsongs" },
-            { title: "Playlist", url: "/playlist/newplaylist" },
-            { title: "Artist", url: "/artist/abc" },
+            { title: "Song", url: "/songs/Mgbb1byycZvy" },
+            { title: "Playlist", url: "/playlist/iY1AnIsXedqE" },
+            { title: "Artist", url: "/artist/va" },
         ],
     },
     {
@@ -62,7 +62,7 @@ const sidebarItem = [
         title: "What Listen Today",
         sub: [
             { title: "Topic", url: "/topics" },
-            { title: "Collection", url: "/playlist/tags" },
+            { title: "Collection", url: "/playlist/bxkenI7MAoFv" },
             { title: "Top 100", url: "/top100/top100" },
         ],
     },

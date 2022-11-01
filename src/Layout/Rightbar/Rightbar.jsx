@@ -1,12 +1,14 @@
+import NhacCuaTui from "nhaccuatui-api-full";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NhacCuaTui from "nhaccuatui-api-full";
 
-import { useGlobalContext } from "~/contexts/context";
-import "./Rightbar.scss";
-import RightbarDefault from "./RightbarDefault/RightbarDefault";
+import "rc-slider/assets/index.css";
 import { useRef } from "react";
 import images from "~/assets/images";
+import { useGlobalContext } from "~/contexts/context";
+import Controller from "./Controller/Controller";
+import "./Rightbar.scss";
+import RightbarDefault from "./RightbarDefault/RightbarDefault";
 
 function Rightbar() {
     const [song, setSong] = useState();
@@ -14,17 +16,16 @@ function Rightbar() {
     const { ranking, songKey, isPlaying, setIsPlaying } = useGlobalContext();
     const songTop1 = ranking?.[0];
 
-    // console.log({ songKey });
     console.log({ song });
     console.log({ songUrl });
-    const ref = useRef(new Audio(songUrl));
+    const refAudio = useRef(new Audio(songUrl));
 
     useEffect(() => {
-        if (ref.current) {
+        if (refAudio.current) {
             if (isPlaying) {
-                ref.current.play();
+                refAudio.current.play();
             } else {
-                ref.current.pause();
+                refAudio.current.pause();
             }
         }
     }, [songUrl, isPlaying]);
@@ -40,42 +41,44 @@ function Rightbar() {
             }
         })();
     }, [songKey]);
+
+    const handlePlay = () => {
+        setIsPlaying(!isPlaying);
+    };
+
     return (
         <div className="Rightbar">
             {song ? (
                 <>
-                    <audio preload="auto" ref={ref} src={songUrl} />
+                    <audio preload="auto" ref={refAudio} src={songUrl} />
 
                     <div className="Rightbar__top">
                         <div className="Rightbar__top-container">
                             <img
                                 src={
-                                    song.thumbnail
-                                        ? song.thumbnail
-                                        : images.playerDefault
+                                    song.thumbnail ? song.thumbnail : images.playerDefault
                                 }
                                 alt={song.title}
                             />
-                            <Link
-                                to={"/songs/" + song.key}
-                                className="title link"
-                            >
+                            <Link to={"/songs/" + song.key} className="title link">
                                 {song.title}
                             </Link>
                             <div className="artists">
                                 {song.artists.map((artist, index, artists) => (
                                     <div key={artist.artistId}>
                                         <Link
-                                            to={"/artist/" + artist.shortLink}
+                                            to={
+                                                artist.shortLink
+                                                    ? "/artist/" + artist.shortLink
+                                                    : "/search?q=" + artist.name
+                                            }
                                             className="link"
                                         >
                                             {artist.name}
                                         </Link>
                                         {artists.length > 1 &&
                                             index < artists.length - 1 && (
-                                                <span
-                                                    style={{ marginRight: 4 }}
-                                                >
+                                                <span style={{ marginRight: 4 }}>
                                                     {","}
                                                 </span>
                                             )}
@@ -85,13 +88,14 @@ function Rightbar() {
                         </div>
                     </div>
 
-                    <button onClick={() => setIsPlaying(true)}>play</button>
-                    <button onClick={() => setIsPlaying(false)}>pause</button>
-
                     <div className="Rightbar__bottom">
-                        <progress max={100} value={70}>
-                            70%
-                        </progress>
+                        <Controller
+                            song={song}
+                            handlePlay={handlePlay}
+                            isPlaying={isPlaying}
+                            refAudio={refAudio}
+                            setIsPlaying={setIsPlaying}
+                        />
                     </div>
                 </>
             ) : (

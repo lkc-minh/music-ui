@@ -73,7 +73,11 @@ function Playlist() {
                                 <div key={artist.artistId}>
                                     {index > 0 && ", "}
                                     <Link
-                                        to={"/artist/" + artist.shortLink}
+                                        to={
+                                            artist.shortLink
+                                                ? "/artist/" + artist.shortLink
+                                                : "/search?q=" + artist.name
+                                        }
                                         className="link"
                                     >
                                         {artist.name}
@@ -133,7 +137,11 @@ function Playlist() {
                                 <div key={artist.artistId}>
                                     {index > 0 && ", "}
                                     <Link
-                                        to={"/artist/" + artist.shortLink}
+                                        to={
+                                            artist.shortLink
+                                                ? "/artist/" + artist.shortLink
+                                                : "/search?q=" + artist.name
+                                        }
                                         className="link"
                                     >
                                         {artist.name}

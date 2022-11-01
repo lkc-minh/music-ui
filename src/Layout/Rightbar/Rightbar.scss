@@ -49,46 +49,9 @@
     }
 
     &__bottom {
-        display: flex;
-        border-top: 1px solid var(--cl-border-btn);
-        padding: 2.5rem 2.4rem 3.1rem;
-
-        &-img {
-            img {
-                width: 64px;
-                object-fit: cover;
-            }
-            margin-right: 16px;
-        }
-
-        &-info {
-            p {
-                color: var(--cl-btn);
-            }
-            &-artists {
-                color: var(--cl-btn);
-
-                &:hover {
-                    color: var(--cl-hover);
-                }
-            }
-            &-artists + &-artists {
-                &::before {
-                    content: ",";
-                    margin-right: 2px;
-                }
-            }
-            a {
-                margin: 8px 0 6px 0;
-
-                h2 {
-                    font-size: 1.4rem;
-                    &:hover {
-                        color: var(--cl-hover);
-                    }
-                }
-            }
-        }
+        width: 272px;
+        margin: 0 auto;
+        padding-top: 20px;
     }
 }
 

@@ -31,6 +31,7 @@ function RightbarDefault({ song }) {
                                 className="RightbarDefault__bottom-info-artists"
                                 key={artist.name}
                                 title={artist.name}
+                                to={"/artist/" + artist.shortLink}
                             >
                                 {artist.name}
                             </Link>

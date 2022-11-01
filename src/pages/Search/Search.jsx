@@ -63,9 +63,9 @@ function Search() {
 
     const handleClear = () => {
         setSearchValue("");
-        inputRef.current.focus();
         setSearchParams({});
         setShowResult(false);
+        inputRef.current.focus();
     };
 
     const handleSubmitSearch = (e) => {
@@ -76,6 +76,7 @@ function Search() {
 
         setHistories((prev) => [{ id: uuidv4(), name: searchValue }, ...prev]);
         setSearchParams({ q: value });
+        setShowResult(false);
     };
 
     const handleDelHistory = (id, e) => {

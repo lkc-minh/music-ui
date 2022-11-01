@@ -54,6 +54,7 @@
             .icon-sub {
                 color: var(--cl-btn);
                 transition: transform 0.5s ease-out 0.1s;
+                transform-origin: center;
 
                 &.rotate {
                     transform: rotate(180deg);

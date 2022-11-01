@@ -46,7 +46,11 @@ function PlaylistInfo({ playlist }) {
                                 >
                                     <Link
                                         className="link PlaylistInfo-artist-name"
-                                        to={"/artist/" + artist.shortLink}
+                                        to={
+                                            artist.shortLink
+                                                ? "/artist/" + artist.shortLink
+                                                : "/search?q=" + artist.name
+                                        }
                                     >
                                         {artist.name}
                                     </Link>
