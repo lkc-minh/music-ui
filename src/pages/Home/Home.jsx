@@ -4,10 +4,11 @@ import SongInfo from "~/components/SongInfo/SongInfo";
 
 import "./Home.scss";
 import HomeSkeleton from "./HomeSkeleton/HomeSkeleton";
+import HomeTop100 from "./HomeTop100/HomeTop100";
 import NewRelease from "./NewRelease/NewRelease";
 import Showcase from "./Showcase/Showcase";
-import HomeTop100 from "./HomeTop100/HomeTop100";
 import TopicEvent from "./TopicEvent/TopicEvent";
+
 import { toast } from "react-toastify";
 
 function Home() {
@@ -27,12 +28,14 @@ function Home() {
             setIsLoading(true);
             try {
                 const data = await NhacCuaTui.getHome();
+
                 if (data.error) {
                     toast.error(data.error.message);
                     setIsLoading(false);
                     return;
                 }
                 // console.log({ data });
+
                 setShowcase(data?.showcase);
                 setTopicEvent(data?.topicEvent);
                 setNewReleases(data?.newRelease?.song);
