@@ -1,16 +1,18 @@
 import moment from "moment";
+import { Fragment } from "react";
 import { HiOutlineCalendar } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import images from "~/assets/images";
+import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
 import "./NewRelease.scss";
 
 function NewRelease({ data }) {
     return (
         <div className="NewRelease">
-            <Link className="NewRelease__title link">New Releases</Link>
+            <div className="NewRelease__title ">New Releases</div>
             <Swiper
                 modules={[Pagination, Autoplay]}
                 pagination={{
@@ -31,60 +33,20 @@ function NewRelease({ data }) {
                                 </div>
                                 <div className="NewRelease-info">
                                     <Link
-                                        to={"/songs/" + song.key}
+                                        to={"/song/" + song.key}
                                         className="NewRelease-info-title link"
                                     >
                                         {song.title}
                                     </Link>
 
                                     <div className="NewRelease-info-artists">
-                                        <div className="NewRelease-info-artists-img">
-                                            {song.artists.map((art) => (
-                                                <img
-                                                    key={art.name}
-                                                    src={
-                                                        art.imageUrl
-                                                            ? art.imageUrl
-                                                            : images.defaultArtist
-                                                    }
-                                                    alt={art.name}
-                                                    onError={(e) =>
-                                                        (
-                                                            e.target.onerror ===
-                                                            null
-                                                        )(
-                                                            (e.target.src =
-                                                                images.defaultArtist)
-                                                        )
-                                                    }
-                                                />
-                                            ))}
-                                        </div>
-                                        {song.artists.map((art, index) => (
-                                            <span key={art.name}>
-                                                {index > 0 ? ", " : ""}
-                                                <Link
-                                                    to={
-                                                        art.shortLink
-                                                            ? "/artist/" +
-                                                              art.shortLink
-                                                            : "/search?q=" +
-                                                              art.name
-                                                    }
-                                                    className="link"
-                                                >
-                                                    {art.name}
-                                                </Link>
-                                            </span>
-                                        ))}
+                                        <ArtistsRender isImg artists={song.artists} />
                                     </div>
 
                                     <div className="NewRelease-info-date">
                                         <HiOutlineCalendar />
                                         <span>Released date: </span>
-                                        {moment(song.dateRelease).format(
-                                            "DD/MM/YYYY"
-                                        )}
+                                        {moment(song.dateRelease).format("DD/MM/YYYY")}
                                     </div>
                                     <div className="NewRelease-info-hr"></div>
                                 </div>

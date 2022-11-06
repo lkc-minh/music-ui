@@ -5,39 +5,37 @@
     top: 0;
     right: 0;
     bottom: 0;
-    // overflow: scroll;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     &__top {
-        margin: 0 40px;
+        // padding: 0 40px;
+        width: 100%;
+        height: calc(100vh - 200px);
         &-container {
-            margin-top: 24px;
-            margin-top: 16px;
             padding: 12px;
-            width: fit-content;
+            margin: 16px;
             border-radius: 4px;
             background-color: var(--cl-bg-active);
-            // box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
+            box-shadow: 0 8px 16px #00000033;
 
             img {
-                margin-right: auto;
                 display: block;
                 width: 240px;
                 height: 240px;
                 border-radius: 0.4rem;
-                margin-bottom: 16px;
+                margin: 16px auto;
             }
 
             .title {
+                display: block;
                 font-size: 14px;
                 color: var(--cl-text);
                 font-weight: 500;
                 margin: 0 16px;
-                display: flex;
-                align-items: center;
-                justify-self: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .artists {
@@ -47,16 +45,25 @@
             }
         }
     }
+    &__playlist-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--cl-btn);
+        margin-top: 16px;
+    }
 
     &__bottom {
         width: 272px;
-        margin: 0 auto;
+        height: 200px;
+        margin: auto;
         padding-top: 20px;
+        background-color: var(--cl-bg);
     }
 }
 
-@media only screen and (max-width: 1300px) {
-    .Rightbar {
-        display: none;
-    }
-}
+// @media only screen and (max-width: 1300px) {
+//     .Rightbar {
+//         display: none;
+//     }
+// }

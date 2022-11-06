@@ -50,7 +50,7 @@ function SearchResultDeb({ searchResult }) {
                         <h2>Song</h2>
                         {songs.map((song) => (
                             <Link
-                                to={"/songs/" + [song.key]}
+                                to={"/song/" + [song.key]}
                                 className="SearchResultDeb-info-item"
                                 key={song.key}
                             >

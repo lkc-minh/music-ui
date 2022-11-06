@@ -53,7 +53,8 @@
         }
     }
 
-    h4 {
+    &__title {
+        display: block;
         margin-top: 8px;
         font-size: 14px;
         line-height: 20px;

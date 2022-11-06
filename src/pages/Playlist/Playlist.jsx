@@ -1,8 +1,12 @@
+import Tippy from "@tippyjs/react";
 import NhacCuaTui from "nhaccuatui-api-full";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { AiFillPlayCircle } from "react-icons/ai";
 import { BsHeadphones } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import images from "~/assets/images";
+import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
 import { useGlobalContext } from "~/contexts/context";
 
 import "./Playlist.scss";
@@ -10,11 +14,11 @@ import "./Playlist.scss";
 function Playlist() {
     const [playlist, setPlaylist] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [activeKey, setActiveKey] = useState(null);
 
     const { id } = useParams();
+    const { setPlaylistPlaying, currentSong, setCurrentIndex } = useGlobalContext();
 
-    const { setSongKey, setIsPlaying } = useGlobalContext();
+    console.log(" currentSong?.key: ", currentSong?.key);
 
     console.log({ playlist });
     useEffect(() => {
@@ -22,7 +26,11 @@ function Playlist() {
             setIsLoading(true);
             try {
                 const data = await NhacCuaTui.getPlaylistDetail(id);
-                if (!data) return;
+                if (data.error) {
+                    toast.error(data.error.message);
+                    setIsLoading(false);
+                    return;
+                }
                 data.playlist ? setPlaylist(data.playlist) : setPlaylist(null);
             } catch (error) {
                 console.log(error);
@@ -32,10 +40,9 @@ function Playlist() {
         fetch();
     }, [id]);
 
-    const handleSong = (key) => {
-        setSongKey(key);
-        setActiveKey(key);
-        setIsPlaying(true);
+    const handleSong = (index) => {
+        setCurrentIndex(index);
+        setPlaylistPlaying(playlist);
     };
 
     if (isLoading) return <div>loading...</div>;
@@ -45,52 +52,30 @@ function Playlist() {
             <div className="Playlist__info">
                 <div className="Playlist__info-img">
                     <img src={playlist.thumbnail} alt="" />
+                    <Tippy content="Play All" placement="bottom" arrow={false}>
+                        <div
+                            className="Playlist__info-img-play"
+                            onClick={() => {
+                                setPlaylistPlaying(playlist);
+                                setCurrentIndex(0);
+                            }}
+                        >
+                            <AiFillPlayCircle />
+                        </div>
+                    </Tippy>
                 </div>
                 <div className="Playlist__info-main">
                     <div className="title">
                         Playlist: <b>{playlist.title}</b>
                     </div>
                     <div className="artist">
-                        <div className="artist-imgs">
-                            {playlist.artists.map((artist) => (
-                                <img
-                                    src={
-                                        artist.imageUrl
-                                            ? artist.imageUrl
-                                            : images.defaultArtist
-                                    }
-                                    key={artist.artistId}
-                                    alt=""
-                                    onError={(e) => {
-                                        e.target.src = images.defaultArtist;
-                                    }}
-                                />
-                            ))}
-                        </div>
-
-                        <div className="artist-name">
-                            {playlist.artists.map((artist, index) => (
-                                <div key={artist.artistId}>
-                                    {index > 0 && ", "}
-                                    <Link
-                                        to={
-                                            artist.shortLink
-                                                ? "/artist/" + artist.shortLink
-                                                : "/search?q=" + artist.name
-                                        }
-                                        className="link"
-                                    >
-                                        {artist.name}
-                                    </Link>
-                                </div>
-                            ))}
-                        </div>
+                        <ArtistsRender isImg artists={playlist.artists} />
                     </div>
                     <div className="date">{playlist.dateModify}</div>
                     <div className="description">
-                        Hãy cùng điểm danh những nữ ca sĩ cá tính, tài năng và
-                        quyến rũ của V-Pop tạo được nhiều dấu ấn nhất trong lòng
-                        khán giả qua những sản phẩm chất lượng nhất.
+                        Hãy cùng điểm danh những nữ ca sĩ cá tính, tài năng và quyến rũ của V-Pop
+                        tạo được nhiều dấu ấn nhất trong lòng khán giả qua những sản phẩm chất lượng
+                        nhất.
                     </div>
                     <div className="tags">
                         <span>Tags: </span>
@@ -119,23 +104,23 @@ function Playlist() {
                     <span className="Playlist__head-listens">LISTENS</span>
                     <span className="Playlist__head-duration">DURATION</span>
                 </div>
-                {playlist.songs.map((song) => (
+                {playlist.songs.map((song, index) => (
                     <div className="Playlist__song" key={song.key}>
                         <span
                             className={
-                                activeKey === song.key
+                                currentSong?.key === song.key
                                     ? "Playlist__song-title active"
                                     : "Playlist__song-title"
                             }
-                            onClick={() => handleSong(song.key)}
+                            onClick={() => handleSong(index)}
                         >
                             {song.title}
                         </span>
 
                         <div className="Playlist__song-artists">
                             {song.artists.map((artist, index) => (
-                                <div key={artist.artistId}>
-                                    {index > 0 && ", "}
+                                <Fragment key={artist.artistId}>
+                                    {index > 0 && <span style={{ marginRight: 4 }}>,</span>}
                                     <Link
                                         to={
                                             artist.shortLink
@@ -146,11 +131,11 @@ function Playlist() {
                                     >
                                         {artist.name}
                                     </Link>
-                                </div>
+                                </Fragment>
                             ))}
                         </div>
                         <div className="Playlist__song-listens">
-                            <BsHeadphones /> {Math.floor(Math.random() * 100)}M
+                            <BsHeadphones /> {Math.ceil(Math.random() * 99)}M
                         </div>
                         <div className="Playlist__song-duration">
                             <span>{song.duration}</span>

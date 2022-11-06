@@ -1,0 +1,71 @@
+.RankingSongs {
+    margin-top: 16px;
+    width: 100%;
+
+    &-song {
+        display: flex;
+        height: 56px;
+        margin: 0 32px 2px;
+        -webkit-transition: height 250ms ease;
+        transition: height 250ms ease;
+        will-change: height;
+        overflow: hidden;
+
+        &.detail {
+            height: 144px;
+            .RankingSongs-info-right {
+                transform: rotate(180deg);
+                top: -4px;
+            }
+        }
+        .RankingSongs-position {
+            width: 32px !important;
+            height: 32px;
+            line-height: 32px;
+            background-color: var(--cl-bg-active);
+            text-align: center;
+            margin-top: 12px;
+            margin-right: 8px;
+            font-size: 13px;
+            color: var(--cl-btn);
+            border-radius: 50%;
+        }
+        .RankingSongs-info {
+            justify-content: space-between;
+            display: flex;
+            flex: 1;
+            position: relative;
+            background-color: var(--cl-bg-active);
+
+            &-left {
+                margin: 8px 24px 16px 16px;
+                flex: 1;
+
+                display: flex;
+                flex-direction: column;
+                &-wrapper {
+                    display: flex;
+                    gap: 16px;
+                }
+            }
+
+            &-img {
+                img {
+                    border-radius: 2px;
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                }
+            }
+
+            &-right {
+                position: absolute;
+                top: 0px;
+                right: 6px;
+                padding: 20px;
+                transition: transform 250ms ease;
+                color: var(--cl-btn);
+            }
+        }
+    }
+}

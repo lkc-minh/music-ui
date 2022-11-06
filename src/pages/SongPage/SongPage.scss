@@ -47,28 +47,6 @@
                 gap: 12px;
                 margin-top: 8px;
                 margin-bottom: 14px;
-                padding-left: 8px;
-                &-img {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    img {
-                        width: 24px;
-                        height: 24px;
-                        object-fit: cover;
-                        border-radius: 50%;
-                        margin-left: -8px;
-                        border: 1px solid white;
-                    }
-                }
-
-                &-name {
-                    display: flex;
-                    p {
-                        span {
-                        }
-                    }
-                }
             }
 
             .updateBy {

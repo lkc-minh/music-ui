@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import "./SidebarItem.scss";
 
@@ -25,9 +25,7 @@ function SidebarItem({ sidebarItem }) {
                         <div key={item.title}>
                             <div
                                 className={
-                                    item.sub
-                                        .map((i) => i.url)
-                                        .includes(pathname)
+                                    item.sub.map((i) => i.url).includes(pathname)
                                         ? "SidebarItem__container active"
                                         : "SidebarItem__container"
                                 }
@@ -69,12 +67,7 @@ function SidebarItem({ sidebarItem }) {
                     );
 
                 return (
-                    <NavLink
-                        to={item.url}
-                        className="SidebarItem__container"
-                        key={item.title}
-                        end
-                    >
+                    <NavLink to={item.url} className="SidebarItem__container" key={item.title} end>
                         <div className="SidebarItem__container-bar"></div>
                         <div className="SidebarItem__container-item">
                             {item.icon}

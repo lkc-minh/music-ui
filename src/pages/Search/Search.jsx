@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { TfiClose } from "react-icons/tfi";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import useDebounce from "~/hooks/useDebounce";
 
@@ -29,12 +30,20 @@ function Search() {
     const isEmptyObj = Object.keys(searchResultDeb).length === 0;
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         const fetchApi = async () => {
             if (!param) {
                 setSearchResult({});
                 return;
             }
             const result = await NhacCuaTui.searchByKeyword(param);
+            if (result.error) {
+                toast.error(result.error.message);
+                return;
+            }
             setSearchResult(result.search);
             setSearchValue(param);
         };
@@ -95,11 +104,7 @@ function Search() {
     return (
         <div className="Search">
             <div className="Search__top">
-                <form
-                    className="Search__top-search"
-                    onSubmit={handleSubmitSearch}
-                    ref={formRef}
-                >
+                <form className="Search__top-search" onSubmit={handleSubmitSearch} ref={formRef}>
                     <CiSearch className="icon-search" />
                     <input
                         ref={inputRef}
@@ -109,12 +114,7 @@ function Search() {
                         onChange={(e) => setSearchValue(e.target.value)}
                         onFocus={() => setShowResult(true)}
                     />
-                    {searchValue && (
-                        <TfiClose
-                            className="icon-close"
-                            onClick={handleClear}
-                        />
-                    )}
+                    {searchValue && <TfiClose className="icon-close" onClick={handleClear} />}
                     {showResult && !isEmptyObj && (
                         <SearchResultDeb searchResult={searchResultDeb} />
                     )}

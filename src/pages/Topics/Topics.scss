@@ -1,0 +1,85 @@
+.Topics {
+    &__cover {
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        p {
+            margin: 24px 32px 10px;
+            font-size: 14px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+
+            &.loadMore {
+                -webkit-line-clamp: 100;
+            }
+        }
+
+        &-btn {
+            margin: 0 32px;
+
+            button {
+                background-color: transparent;
+                color: var(--cl-btn);
+            }
+        }
+    }
+
+    &__title {
+        margin: 42px 32px 24px;
+
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+    }
+
+    &__container {
+        margin: -8px 24px;
+        display: flex;
+        flex-wrap: wrap;
+        .Topics-item {
+            flex-grow: 0;
+            max-width: 16.666667%;
+            flex-basis: 16.666667%;
+            padding: 8px;
+            overflow: hidden;
+
+            a {
+                &:hover {
+                    img {
+                        scale: 1.1;
+                    }
+                    .Topics-item-overlay {
+                        opacity: 1;
+                    }
+                }
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 300ms ease;
+                }
+            }
+            &-overlay {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                transition: opacity 300ms ease-out;
+                will-change: opacity;
+            }
+        }
+    }
+}

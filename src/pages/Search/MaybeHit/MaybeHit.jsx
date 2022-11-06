@@ -1,7 +1,9 @@
 import moment from "moment";
+import { Fragment } from "react";
 import { HiOutlineCalendar } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import images from "~/assets/images";
+import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
 import "./MaybeHit.scss";
 
 function MaybeHit({ song }) {
@@ -12,15 +14,13 @@ function MaybeHit({ song }) {
                     <img src={song?.thumbnail} alt="" />
                 </div>
                 <div className="MaybeHit-info">
-                    <Link
-                        to={"/songs/" + song?.key}
-                        className="MaybeHit-info-title link"
-                    >
+                    <Link to={"/song/" + song?.key} className="MaybeHit-info-title link">
                         {song?.title}
                     </Link>
 
                     <div className="MaybeHit-info-artists">
-                        <div className="MaybeHit-info-artists-img">
+                        <ArtistsRender isImg artists={song?.artists} />
+                        {/* <div className="MaybeHit-info-artists-img">
                             {song?.artists?.map((art) => (
                                 <img
                                     key={art.name}
@@ -37,8 +37,8 @@ function MaybeHit({ song }) {
                             ))}
                         </div>
                         {song?.artists?.map((art, index) => (
-                            <span key={art.name}>
-                                {index > 0 ? ", " : ""}
+                            <Fragment key={art.name}>
+                                {index > 0 && <span style={{ marginRight: 4 }}>,</span>}
                                 <Link
                                     to={
                                         art.shortLink
@@ -49,8 +49,8 @@ function MaybeHit({ song }) {
                                 >
                                     {art.name}
                                 </Link>
-                            </span>
-                        ))}
+                            </Fragment>
+                        ))} */}
                     </div>
 
                     <div className="MaybeHit-info-date">

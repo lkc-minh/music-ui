@@ -40,7 +40,7 @@ export default function Showcase({ data }) {
                                 to={
                                     item?.url.includes("playlist")
                                         ? "/playlist/" + key
-                                        : `/songs/` + key
+                                        : `/song/` + key
                                 }
                             >
                                 <img

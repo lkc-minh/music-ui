@@ -1,0 +1,122 @@
+.ListPlaying {
+    padding-top: 26px;
+    animation: animationName 0.25s linear;
+    overflow: hidden;
+    width: 100%;
+    height: calc(100vh - 202px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    @keyframes animationName {
+        from {
+            opacity: 0;
+            transform: translateY(200px);
+            height: calc(100vh - 402px);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+            height: calc(100vh - 202px);
+        }
+    }
+    &::-webkit-scrollbar {
+        width: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--cl-icon);
+    }
+    &__playing {
+        padding: 0px 24px;
+        &-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h3 {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--cl-btn);
+            }
+        }
+
+        &-song {
+            display: flex;
+            gap: 8px;
+            padding: 16px 0;
+            width: 100%;
+
+            .song-img {
+                position: relative;
+                img {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                }
+                .song-status {
+                    position: absolute;
+                    bottom: 4px;
+                    right: 4px;
+                    font-size: 10px;
+                }
+            }
+            .song-info {
+                overflow: hidden;
+                h4 {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .song-artists {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    color: var(--cl-btn);
+                }
+            }
+        }
+    }
+
+    &__list {
+        padding-top: 24px;
+        &-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--cl-btn);
+            padding-bottom: 8px;
+            padding-left: 24px;
+            border-bottom: 1px solid var(--cl-bg-lighter);
+        }
+        &-container {
+            .ListPlaying__list-item {
+                cursor: pointer;
+                padding: 14px 24px;
+                &:hover {
+                    background-color: var(--cl-bg-active);
+                }
+
+                &.playing {
+                    background-color: var(--cl-bg-lighter);
+                }
+
+                .ListPlaying__list-artists {
+                    color: var(--cl-btn);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .ListPlaying__list-song-title {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 100%;
+                    display: block;
+                }
+            }
+        }
+    }
+}

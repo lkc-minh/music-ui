@@ -16,75 +16,45 @@ import Register from "./Register/Register";
 const sidebarItem = [
     {
         id: 1,
-        icon: (
-            <CiSearch
-                className="SidebarItem__icon"
-                style={{ color: "#2EC626" }}
-            />
-        ),
+        icon: <CiSearch className="SidebarItem__icon" style={{ color: "#2EC626" }} />,
         title: "Search",
         url: "/search",
     },
     {
         id: 2,
-        icon: (
-            <AiTwotoneHome
-                className="SidebarItem__icon"
-                style={{ color: "#29A9F2" }}
-            />
-        ),
+        icon: <AiTwotoneHome className="SidebarItem__icon" style={{ color: "#29A9F2" }} />,
         title: "Home",
         url: "/",
     },
     {
         id: 3,
-        icon: (
-            <AiFillCompass
-                className="SidebarItem__icon"
-                style={{ color: "#FFC139" }}
-            />
-        ),
+        icon: <AiFillCompass className="SidebarItem__icon" style={{ color: "#FFC139" }} />,
         title: "Discovery",
         sub: [
-            { title: "Song", url: "/songs/Mgbb1byycZvy" },
+            { title: "Song", url: "/song/Mgbb1byycZvy" },
             { title: "Playlist", url: "/playlist/iY1AnIsXedqE" },
             { title: "Artist", url: "/artist/va" },
         ],
     },
     {
         id: 4,
-        icon: (
-            <FaHeadphones
-                className="SidebarItem__icon"
-                style={{ color: "#A03DE8" }}
-            />
-        ),
+        icon: <FaHeadphones className="SidebarItem__icon" style={{ color: "#A03DE8" }} />,
         title: "What Listen Today",
         sub: [
             { title: "Topic", url: "/topics" },
             { title: "Collection", url: "/playlist/bxkenI7MAoFv" },
-            { title: "Top 100", url: "/top100/top100" },
+            { title: "Top 100", url: "/top100" },
         ],
     },
     {
         id: 5,
-        icon: (
-            <BsFillBarChartFill
-                className="SidebarItem__icon"
-                style={{ color: "#FA8046" }}
-            />
-        ),
+        icon: <BsFillBarChartFill className="SidebarItem__icon" style={{ color: "#FA8046" }} />,
         title: "NCT Chart",
-        url: "/songs/weekly",
+        url: "/ranking",
     },
     {
         id: 6,
-        icon: (
-            <FaHandHoldingHeart
-                className="SidebarItem__icon"
-                style={{ color: "#1BA9B0" }}
-            />
-        ),
+        icon: <FaHandHoldingHeart className="SidebarItem__icon" style={{ color: "#1BA9B0" }} />,
         title: "Music 4U",
         url: "/discover",
     },
@@ -123,14 +93,8 @@ function Sidebar() {
                     <span onClick={() => setIsOpenSignUp(true)}>Sign up</span>
                 </div>
                 <div ref={popperRef} className="Sidebar__account-setting">
-                    <AiOutlineSetting
-                        className="icon"
-                        onClick={() => setShowPopper(!showPopper)}
-                    />
-                    <Popper
-                        showPopper={showPopper}
-                        setShowPopper={setShowPopper}
-                    />
+                    <AiOutlineSetting className="icon" onClick={() => setShowPopper(!showPopper)} />
+                    <Popper showPopper={showPopper} setShowPopper={setShowPopper} />
                 </div>
             </div>
 

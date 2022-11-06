@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 import NhacCuaTui from "nhaccuatui-api-full";
 import { AiFillPlayCircle } from "react-icons/ai";
@@ -8,6 +8,8 @@ import "./SongPage.scss";
 import images from "~/assets/images";
 import { useGlobalContext } from "~/contexts/context";
 import Lyric from "./Lyric/Lyric";
+import { toast } from "react-toastify";
+import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
 
 function SongPage() {
     const [song, setSong] = useState({});
@@ -16,14 +18,18 @@ function SongPage() {
     const [isLoading, setIsLoading] = useState(false);
 
     const { id } = useParams();
-    const { setSongKey, setIsPlaying } = useGlobalContext();
+    const { setPlaylistPlaying, setCurrentIndex } = useGlobalContext();
 
     useEffect(() => {
         (async () => {
             setIsLoading(true);
             try {
                 const res = await NhacCuaTui.getSong(id);
-                console.log({ res });
+                if (res.error) {
+                    toast.error(res.error.message);
+                    setIsLoading(false);
+                    return;
+                }
                 setSong(res.song);
                 const resLyric = await NhacCuaTui.getLyric(id);
                 setLyric(resLyric.lyric);
@@ -35,9 +41,13 @@ function SongPage() {
         })();
     }, [id]);
 
-    const handlePlaySong = (key) => {
-        setSongKey(key);
-        setIsPlaying(true);
+    const handlePlaySong = () => {
+        if (!song) {
+            toast.error("This song not found!!!");
+            return;
+        }
+        setCurrentIndex(0);
+        setPlaylistPlaying({ songs: [song] });
     };
 
     if (isLoading) return <h2>Loading....</h2>;
@@ -47,23 +57,14 @@ function SongPage() {
             <div className="SongPage__info">
                 <div className="SongPage__info-left">
                     <img
-                        src={
-                            song?.thumbnail
-                                ? song?.thumbnail
-                                : images.playerDefault
-                        }
+                        src={song?.thumbnail ? song?.thumbnail : images.playerDefault}
                         alt={song?.title}
                         onError={(e) =>
-                            (e.target.onerror === null)(
-                                (e.target.src = images.playerDefault)
-                            )
+                            (e.target.onerror === null)((e.target.src = images.playerDefault))
                         }
                     />
                     <Tippy content="Play" placement="bottom" arrow={false}>
-                        <div
-                            className="SongPage__info-left-play"
-                            onClick={() => handlePlaySong(song.key)}
-                        >
+                        <div className="SongPage__info-left-play" onClick={handlePlaySong}>
                             <AiFillPlayCircle />
                         </div>
                     </Tippy>
@@ -73,42 +74,7 @@ function SongPage() {
                         Song: <b>{song?.title}</b>
                     </div>
                     <div className="artist">
-                        <div className="artist-img">
-                            {song?.artists?.map((artist) => (
-                                <img
-                                    src={
-                                        artist.imageUrl
-                                            ? artist.imageUrl
-                                            : images.defaultArtist
-                                    }
-                                    key={artist.artistId}
-                                    alt=""
-                                    onError={({ currentTarget }) => {
-                                        currentTarget.onerror = null;
-                                        currentTarget.src =
-                                            images.defaultArtist;
-                                    }}
-                                />
-                            ))}
-                        </div>
-
-                        <div className="artist-name">
-                            {song?.artists?.map((artist, index) => (
-                                <p key={artist.artistId}>
-                                    {index > 0 && ", "}
-                                    <Link
-                                        to={
-                                            artist.shortLink
-                                                ? "/artist/" + artist.shortLink
-                                                : "/search?q=" + artist.name
-                                        }
-                                        className="link"
-                                    >
-                                        {artist.name}
-                                    </Link>
-                                </p>
-                            ))}
-                        </div>
+                        <ArtistsRender isImg artists={song.artists} />
                     </div>
                     <div className="date">2,463,499 listens • 18/08/2022</div>
                     <div className="updateBy">
@@ -118,14 +84,13 @@ function SongPage() {
                         Ca khúc {song?.title} do ca sĩ{" "}
                         {song?.artists?.map((artist, index) => (
                             <span key={artist.artistId}>
-                                {index > 0 && ", "}
+                                {index > 0 && <span style={{ marginRight: 4 }}>,</span>}
                                 <span>{artist.name}</span>
                             </span>
                         ))}{" "}
-                        thể hiện, thuộc thể loại Nhạc Trẻ. Các bạn có thể nghe,
-                        download (tải nhạc) bài hát {song?.title} mp3,
-                        playlist/album, MV/Video {song?.title} miễn phí tại
-                        NhacCuaTui.com.
+                        thể hiện, thuộc thể loại Nhạc Trẻ. Các bạn có thể nghe, download (tải nhạc)
+                        bài hát {song?.title} mp3, playlist/album, MV/Video {song?.title} miễn phí
+                        tại NhacCuaTui.com.
                     </div>
                 </div>
             </div>

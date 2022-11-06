@@ -1,0 +1,27 @@
+.RankingPosition {
+    display: flex;
+    width: 100%;
+    margin-top: 16px;
+    &-item {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        b {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        span {
+            margin-top: 9px;
+        }
+        .oldPosition {
+            color: #ffc40e;
+        }
+        .highestPosition {
+            color: var(--cl-hover);
+        }
+        .totalWeekInRanked {
+            color: #95d96d;
+        }
+    }
+}

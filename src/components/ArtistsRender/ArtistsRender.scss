@@ -1,0 +1,25 @@
+.ArtistsRender {
+    width: fit-content;
+    display: flex;
+
+    gap: 8px;
+
+    &__imgs {
+        padding-left: 8px;
+        img {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1px solid white;
+            margin-left: -8px;
+        }
+    }
+
+    &__name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--cl-btn);
+    }
+}

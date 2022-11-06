@@ -1,3 +1,4 @@
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Card from "~/components/Card/Card";
@@ -10,7 +11,7 @@ function TopicEvent({ data }) {
     }));
     return (
         <>
-            {newDataEnglish?.map((d) => (
+            {newDataEnglish?.map((d, index) => (
                 <div className="TopicEvent" key={d.groupName}>
                     <h3>{d.groupName}</h3>
 
@@ -18,9 +19,12 @@ function TopicEvent({ data }) {
                         slidesPerView={6}
                         spaceBetween={16}
                         slidesPerGroup={6}
-                        navigation
                         modules={[Navigation]}
                         className="mySwiper"
+                        navigation={{
+                            prevEl: ".prev-btn" + index,
+                            nextEl: ".next-btn" + index,
+                        }}
                     >
                         {d?.listPlaylist?.map((item) => (
                             <SwiperSlide key={item.title}>
@@ -28,6 +32,15 @@ function TopicEvent({ data }) {
                             </SwiperSlide>
                         ))}
                     </Swiper>
+
+                    <div className="TopicEvent__btns">
+                        <div className={`prev-btn${index} TopicEvent-prev-btn`}>
+                            <BsChevronLeft />
+                        </div>
+                        <div className={`next-btn${index} TopicEvent-next-btn`}>
+                            <BsChevronRight />
+                        </div>
+                    </div>
                 </div>
             ))}
         </>

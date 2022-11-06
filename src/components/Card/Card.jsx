@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import images from "~/assets/images";
@@ -7,11 +8,7 @@ function Card({ data, type }) {
     return (
         <div className="Card">
             <Link
-                to={
-                    type === "artist"
-                        ? "/songs/" + data.key
-                        : "/playlist/" + data.key
-                }
+                to={type === "artist" ? "/song/" + data.key : "/playlist/" + data.key}
                 className="Card__img"
             >
                 <img
@@ -23,11 +20,15 @@ function Card({ data, type }) {
                     <AiFillPlayCircle className="Card__img-overlay-icon" />
                 </div>
             </Link>
-            {type !== "top100" && <h4>{data.title}</h4>}
+            {type !== "top100" && (
+                <Link className="Card__title link" to={"/song/" + data.key}>
+                    {data.title}
+                </Link>
+            )}
             {type === "artist" && (
                 <div className="Card__artists">
                     {data?.artists?.map((artist, index, artists) => (
-                        <div key={artist?.artistId}>
+                        <Fragment key={artist?.artistId}>
                             <Link
                                 to={
                                     artist.shortLink
@@ -38,13 +39,10 @@ function Card({ data, type }) {
                             >
                                 {artist.name}
                             </Link>
-                            {artists?.length > 1 &&
-                                index < artists?.length - 1 && (
-                                    <span style={{ marginRight: 4 }}>
-                                        {","}
-                                    </span>
-                                )}
-                        </div>
+                            {artists?.length > 1 && index < artists?.length - 1 && (
+                                <span style={{ marginRight: 4 }}>,</span>
+                            )}
+                        </Fragment>
                     ))}
                 </div>
             )}

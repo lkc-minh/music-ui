@@ -8,6 +8,7 @@ import NewRelease from "./NewRelease/NewRelease";
 import Showcase from "./Showcase/Showcase";
 import HomeTop100 from "./HomeTop100/HomeTop100";
 import TopicEvent from "./TopicEvent/TopicEvent";
+import { toast } from "react-toastify";
 
 function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -18,10 +19,19 @@ function Home() {
     const [top100, setTop100] = useState([]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         const fetchApi = async () => {
             setIsLoading(true);
             try {
                 const data = await NhacCuaTui.getHome();
+                if (data.error) {
+                    toast.error(data.error.message);
+                    setIsLoading(false);
+                    return;
+                }
                 // console.log({ data });
                 setShowcase(data?.showcase);
                 setTopicEvent(data?.topicEvent);
@@ -41,11 +51,11 @@ function Home() {
                 <HomeSkeleton />
             ) : (
                 <>
-                    <Showcase data={showcase} />
-                    <TopicEvent data={topicEvent} />
-                    <NewRelease data={newReleases} />
-                    <SongInfo songs={song} />
-                    <HomeTop100 data={top100} />
+                    {showcase && <Showcase data={showcase} />}
+                    {topicEvent && <TopicEvent data={topicEvent} />}
+                    {newReleases && <NewRelease data={newReleases} />}
+                    {song && <SongInfo songs={song} />}
+                    {top100 && <HomeTop100 data={top100} />}
                 </>
             )}
         </div>

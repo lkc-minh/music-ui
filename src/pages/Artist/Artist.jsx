@@ -48,9 +48,7 @@ function Artist() {
                     </div>
                     <div className="Artist__container">
                         <div className="Artist__container-item">
-                            <ArtistRecentSongs
-                                songNearly={artistInfo?.songNearly}
-                            />
+                            <ArtistRecentSongs songNearly={artistInfo?.songNearly} />
                         </div>
                         <div className="Artist__container-item">
                             <SongInfo songs={artistInfo?.song?.song} />

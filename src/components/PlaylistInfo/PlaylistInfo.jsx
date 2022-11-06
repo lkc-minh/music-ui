@@ -1,26 +1,19 @@
+import { Fragment } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import images from "~/assets/images";
 import "./PlaylistInfo.scss";
 
-function PlaylistInfo({ playlist }) {
-    const navigate = useNavigate();
+function PlaylistInfo({ playlist, title = "Playlist" }) {
     return (
         <div className="PlaylistInfo">
-            <h2>Playlist</h2>
+            <h2>{title}</h2>
             <div className="PlaylistInfo__container">
                 {playlist?.map((pl) => (
                     <div className="PlaylistInfo__container-item" key={pl.key}>
-                        <Link
-                            to={"/playlist/" + pl.key}
-                            className="PlaylistInfo-img"
-                        >
+                        <Link to={"/playlist/" + pl.key} className="PlaylistInfo-img">
                             <img
-                                src={
-                                    pl.thumbnail
-                                        ? pl.thumbnail
-                                        : images.defaultSong
-                                }
+                                src={pl.thumbnail ? pl.thumbnail : images.defaultSong}
                                 alt={pl.title}
                                 onError={({ currentTarget }) => {
                                     currentTarget.onerror = null;
@@ -32,18 +25,12 @@ function PlaylistInfo({ playlist }) {
                             </div>
                         </Link>
 
-                        <Link
-                            className="link PlaylistInfo-title"
-                            to={"/playlist/" + pl.key}
-                        >
+                        <Link className="link PlaylistInfo-title" to={"/playlist/" + pl.key}>
                             <span>{pl.title}</span>
                         </Link>
                         <div className="PlaylistInfo-artists">
                             {pl?.artists?.map((artist, index, artists) => (
-                                <div
-                                    className="PlaylistInfo-artist"
-                                    key={artist.artistId}
-                                >
+                                <Fragment key={index}>
                                     <Link
                                         className="link PlaylistInfo-artist-name"
                                         to={
@@ -55,11 +42,9 @@ function PlaylistInfo({ playlist }) {
                                         {artist.name}
                                     </Link>
                                     {index < artists.length - 1 && (
-                                        <span style={{ marginRight: 4 }}>
-                                            ,
-                                        </span>
+                                        <span style={{ marginRight: 4 }}>,</span>
                                     )}
-                                </div>
+                                </Fragment>
                             ))}
                         </div>
                     </div>
