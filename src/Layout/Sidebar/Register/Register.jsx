@@ -1,22 +1,25 @@
 import Tippy from "@tippyjs/react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { createUserWithEmailAndPassword, FacebookAuthProvider, updateProfile } from "firebase/auth";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsInfoCircle, BsKeyboard } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { TfiClose } from "react-icons/tfi";
-import "tippy.js/dist/tippy.css";
-
-import { FaFacebookF } from "react-icons/fa";
 import Modal from "~/components/Modal/Modal";
+import { auth } from "~/firebase";
+
+import { toast } from "react-toastify";
+import "tippy.js/dist/tippy.css";
 import "./Register.scss";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const inputRegister = [
     {
-        type: "text",
-        name: "username",
-        placeholder: "Username",
-        icon: <AiOutlineUser className="Register-icon" />,
-        info: "You can use letters, numbers, underscores and dots. Length from 6-30 characters",
+        type: "email",
+        name: "email",
+        placeholder: "Enter your email address",
+        icon: <FiMail className="Register-icon" />,
+        info: "Fill in the Email you want to use for this account",
     },
     {
         type: "password",
@@ -26,22 +29,98 @@ const inputRegister = [
         info: "Length from 6-30 characters. Do not use accented Vietnamese",
     },
     {
-        type: "password",
-        name: "re-password",
-        placeholder: "Re-enter Password",
-        icon: <BsKeyboard className="Register-icon" />,
-        info: "Enter the same password again above",
-    },
-    {
-        type: "email",
-        name: "email",
-        placeholder: "Enter your email address",
-        icon: <FiMail className="Register-icon" />,
-        info: "Fill in the Email you want to use for this account",
+        type: "text",
+        name: "username",
+        placeholder: "Username",
+        icon: <AiOutlineUser className="Register-icon" />,
+        info: "You can use letters, numbers, underscores and dots. Length from 6-30 characters",
     },
 ];
 
 function Register({ isOpen, setIsOpen }) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const displayName = e.target[2].value;
+        const password = e.target[1].value;
+        const email = e.target[0].value;
+
+        try {
+            const res = await createUserWithEmailAndPassword(auth, email, password);
+            // const storageRef = ref(storage, displayName);
+            updateProfile(auth.currentUser, {
+                displayName: displayName,
+            })
+                .then(() => {
+                    // Profile updated!
+                    // ...
+                    toast.success("updated!");
+                })
+                .catch((error) => {
+                    // An error occurred
+                    // ...
+                    toast.success("error!");
+                });
+
+            toast.success("Sign up successfully");
+            window.location.reload();
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
+
+    const handleLoginGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+            const result = await signInWithPopup(auth, provider);
+
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // ...
+            toast.success("Sign up successfully");
+            setIsOpen(false);
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+            toast.error(error.message);
+        }
+    };
+
+    const handleLoginFb = async () => {
+        const provider = new FacebookAuthProvider();
+        try {
+            const result = await signInWithPopup(auth, provider);
+
+            const user = result.user;
+
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const credential = FacebookAuthProvider.credentialFromResult(result);
+            const accessToken = credential.accessToken;
+
+            // ...
+            // ...
+            toast.success("Sign up successfully");
+            setIsOpen(false);
+        } catch (error) {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = FacebookAuthProvider.credentialFromError(error);
+
+            // ...
+            toast.error(error.message);
+        }
+    };
     return (
         <Modal open={isOpen} setOpen={setIsOpen}>
             <div className="Register">
@@ -52,7 +131,7 @@ function Register({ isOpen, setIsOpen }) {
                     </button>
                 </div>
                 <div className="Register__content">
-                    <form action="" className="Register__content-form">
+                    <form onSubmit={handleSubmit} className="Register__content-form">
                         {inputRegister.map((item) => (
                             <div className="Register__content-form-item" key={item.name}>
                                 {item.icon}
@@ -64,11 +143,6 @@ function Register({ isOpen, setIsOpen }) {
                                 </Tippy>
                             </div>
                         ))}
-
-                        <ReCAPTCHA
-                            className="ReCAPTCHA"
-                            sitekey="6LcoaZIiAAAAANzhJx5MsaftU-hbMRAk8h1f-Z6P"
-                        />
 
                         <div className="Register__content-form-checkbox">
                             <input id="check-term" type="checkbox" />
@@ -97,10 +171,10 @@ function Register({ isOpen, setIsOpen }) {
                                 />
                             </button>{" "}
                             <span>Or</span>
-                            <button>
+                            <button onClick={handleLoginFb}>
                                 <FaFacebookF />
                             </button>
-                            <button>
+                            <button onClick={handleLoginGoogle}>
                                 <img
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABHNCSVQICAgIfAhkiAAAAixJREFUOE+tlL9vUlEUx7/nvopgotCYaBhMSYzON/6YtHhZ3BppdKkORRMXl9bNxQhN/4CuTi1DdWplcEKTXqKDi/DqqonoYLWLPEIoNOUdcx/y+qBgGLzjyff7Oefce84lDDk7SipAzAOUAEF5EuYqAA24+bi29aCNgoEdJROAteqbh2XxoNAWOo/PaNvuSXzQrpLyAGKLiGKj/P1xLsW3yt1qAXig30rG9iC+DkIYvA0m0xKIWAI01S2ItyPsqklt1/pAP9TlAhFuBTI6gpE5qz8WBlpXIJENs5sOQrxE+0XI1qfTlebbc+C2ZWKOxR0V7H+cVg1ohQkLnZ8RNDbOo1ML3Y/r8to45qCGWkVoItzwem9Z9fBMJzoISeacLAR4FNyFKFH7zaGAGaXwzb9zE3All5yRkO6MIff/QMHWmq71JdWcuWrPFvxnNQnHq6iINRDmPx9E8chJosHHcuW5zey/Lnt6qZ4h8GpPw0Sz3vO/bk9VlhtXuu0y15jdlH2v4I9/EKqyHHPJqYAo0YsL99SkN9mXXtxeAWHBz2BgoEX77kY+CJEv76gT3588n2hfuHioRf7ds2jGA8lX6ZhoWWYV+p6eYTaeqsSoMZAggjT60K8HCNWvm/qdffe4/JCNVP2lletpKYRlvocjczTsvibq1xDafZh6//Sk96X0fSOmMtoTBSLyBnTUYeZvzG46eI99oJ7RVEfCWgRzogc1ZhBpBmt7bvPICv0BIUjuZjOL37cAAAAASUVORK5CYII="
                                     alt=""

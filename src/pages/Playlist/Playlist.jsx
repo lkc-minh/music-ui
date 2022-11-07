@@ -5,8 +5,9 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import { BsHeadphones } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import images from "~/assets/images";
 import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
+import Error from "~/components/Error/Error";
+import Skeleton from "~/components/Skeleton/Skeleton";
 import { useGlobalContext } from "~/contexts/context";
 
 import "./Playlist.scss";
@@ -45,8 +46,8 @@ function Playlist() {
         setPlaylistPlaying(playlist);
     };
 
-    if (isLoading) return <div>loading...</div>;
-    if (!playlist) return <div>No playlist to display</div>;
+    if (isLoading) return <Skeleton page="detail" />;
+    if (!playlist) return <Error message="No data to display" />;
     return (
         <div className="Playlist">
             <div className="Playlist__info">

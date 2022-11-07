@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import SongInfo from "~/components/SongInfo/SongInfo";
 
 import "./Home.scss";
-import HomeSkeleton from "./HomeSkeleton/HomeSkeleton";
 import HomeTop100 from "./HomeTop100/HomeTop100";
 import NewRelease from "./NewRelease/NewRelease";
 import Showcase from "./Showcase/Showcase";
 import TopicEvent from "./TopicEvent/TopicEvent";
 
 import { toast } from "react-toastify";
+import Skeleton from "~/components/Skeleton/Skeleton";
 
 function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -51,7 +51,7 @@ function Home() {
     return (
         <div className="Home">
             {isLoading ? (
-                <HomeSkeleton />
+                <Skeleton page={"home"} />
             ) : (
                 <>
                     {showcase && <Showcase data={showcase} />}

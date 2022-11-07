@@ -12,7 +12,7 @@ function TopicEvent({ data }) {
     return (
         <>
             {newDataEnglish?.map((d, index) => (
-                <div className="TopicEvent" key={d.groupName}>
+                <div className="TopicEvent" key={index}>
                     <h3>{d.groupName}</h3>
 
                     <Swiper
@@ -26,8 +26,8 @@ function TopicEvent({ data }) {
                             nextEl: ".next-btn" + index,
                         }}
                     >
-                        {d?.listPlaylist?.map((item) => (
-                            <SwiperSlide key={item.title}>
+                        {d?.listPlaylist?.map((item, index) => (
+                            <SwiperSlide key={index}>
                                 <Card data={item} />
                             </SwiperSlide>
                         ))}

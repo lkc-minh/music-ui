@@ -1,0 +1,370 @@
+.SkHome {
+    height: 100%;
+    width: 100%;
+    padding: 24px 32px 0px 32px;
+    animation: var(--animation-skeleton);
+
+    &-showcase {
+        width: 100%;
+        height: 550px;
+        background-color: var(--cl-bg-lighter);
+        border-radius: 8px;
+    }
+
+    &-topEvent {
+        margin-top: 44px;
+        width: calc(100% + 16px);
+        display: flex;
+        flex-wrap: wrap;
+
+        &-item {
+            padding: 8px;
+
+            &-img {
+                height: 207px;
+                width: 207px;
+                background-color: var(--cl-bg-lighter);
+                border-radius: 4px;
+            }
+            &-title {
+                width: 80%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+
+            &-singer {
+                width: 60%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+        }
+    }
+
+    &-video {
+        margin-top: 44px;
+        display: flex;
+        &-item {
+            padding: 8px;
+
+            &-img {
+                width: 430px;
+                height: 240px;
+                background-color: var(--cl-bg-lighter);
+                border-radius: 4px;
+            }
+            &-title {
+                width: 80%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+
+            &-singer {
+                width: 60%;
+                height: 8px;
+                border-radius: 4px;
+                margin-top: 6px;
+                background-color: var(--cl-bg-lighter);
+            }
+        }
+    }
+}
+
+// SEarch
+
+.SkSearch {
+    padding: 40px 32px;
+    animation: var(--animation-skeleton);
+    &-heading {
+        height: 33px;
+        width: 150px;
+        background-color: var(--cl-bg-lighter);
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+    &__topkey {
+        &-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        &-item {
+            height: 32px;
+            width: 200px;
+            background-color: var(--cl-bg-lighter);
+            border-radius: 4px;
+        }
+    }
+
+    &__history {
+        margin-top: 32px;
+        &-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            gap: 2px;
+        }
+
+        &-item {
+            height: 32px;
+            width: 100%;
+            background-color: var(--cl-bg-lighter);
+            border-radius: 4px;
+        }
+    }
+
+    &__hit {
+        margin-top: 32px;
+        &-wrapper {
+            height: 208px;
+            width: 100%;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+}
+
+// Search Result
+.SkSearchResult {
+    padding: 40px 32px;
+    animation: var(--animation-skeleton);
+    &-heading {
+        height: 33px;
+        width: 150px;
+        background-color: var(--cl-bg-lighter);
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+    &__songs {
+        &-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+
+        &-item {
+            border-radius: 4px;
+            height: 72px;
+            width: 49%;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+
+    &__playlists {
+        margin-top: 32px;
+        &-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        &-img {
+            width: 240px;
+            height: 240px;
+            background-color: var(--cl-bg-lighter);
+            border-radius: 4px;
+        }
+        &-title {
+            width: 80%;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            background-color: var(--cl-bg-lighter);
+        }
+
+        &-singer {
+            width: 60%;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+}
+
+// detail page
+.SkDetail {
+    padding: 24px 32px 0px 32px;
+    animation: var(--animation-skeleton);
+
+    &__top {
+        display: flex;
+        gap: 16px;
+        &-thumbnail {
+            height: 240px;
+            width: 240px;
+            border-radius: 4px;
+            background-color: var(--cl-bg-lighter);
+        }
+
+        &-title {
+            height: 12px;
+            width: 250px;
+            border-radius: 3px;
+            background-color: var(--cl-bg-lighter);
+        }
+        &-artist {
+            height: 12px;
+            width: 100px;
+            border-radius: 3px;
+            background-color: var(--cl-bg-lighter);
+            margin-top: 8px;
+        }
+        &-desc {
+            margin-top: 20px;
+            height: 60px;
+            width: 400px;
+            border-radius: 3px;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+
+    &__bottom {
+        margin-top: 32px;
+        &-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        &-img {
+            width: 240px;
+            height: 240px;
+            background-color: var(--cl-bg-lighter);
+            border-radius: 4px;
+        }
+        &-title {
+            width: 80%;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            background-color: var(--cl-bg-lighter);
+        }
+
+        &-singer {
+            width: 60%;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+}
+
+//@at-root
+.SkRanking {
+    animation: var(--animation-skeleton);
+    &-heading {
+        line-height: 26px;
+        margin: 40px 0 32px 32px;
+        height: 33px;
+        width: 150px;
+        background-color: var(--cl-bg-lighter);
+        border-radius: 4px;
+    }
+
+    &-top1 {
+        height: 208px;
+        width: 100%;
+        background-color: var(--cl-bg-lighter);
+    }
+
+    &__wrapper {
+        margin-top: 32px;
+    }
+
+    &-item {
+        height: 56px;
+        margin: 0 32px 2px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        &-position {
+            height: 32px;
+            width: 32px;
+            background-color: var(--cl-bg-lighter);
+            border-radius: 50%;
+        }
+        &-song {
+            height: 56px;
+            width: 100%;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+}
+
+.SkArtist {
+    padding: 40px 32px;
+    animation: var(--animation-skeleton);
+    &-heading {
+        line-height: 26px;
+        // margin: 40px 0 32px 32px;
+        margin-bottom: 20px;
+        height: 33px;
+        width: 150px;
+        background-color: var(--cl-bg-lighter);
+        border-radius: 4px;
+    }
+    &__banner {
+        background-color: var(--cl-bg-lighter);
+        height: 275px;
+    }
+
+    &__playlists {
+        margin-top: 32px;
+        &-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        &-img {
+            width: 200px;
+            height: 200px;
+            background-color: var(--cl-bg-lighter);
+            border-radius: 4px;
+        }
+        &-title {
+            width: 80%;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            background-color: var(--cl-bg-lighter);
+        }
+
+        &-singer {
+            width: 60%;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+
+    &__songs {
+        margin-top: 32px;
+
+        &-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+
+        &-item {
+            border-radius: 4px;
+            height: 72px;
+            width: 49%;
+            background-color: var(--cl-bg-lighter);
+        }
+    }
+}

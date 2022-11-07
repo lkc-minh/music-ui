@@ -21,6 +21,7 @@ function Search() {
     const [searchResultDeb, setSearchResultDeb] = useState({});
     const [showResult, setShowResult] = useState(false);
     let [searchParams, setSearchParams] = useSearchParams("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const inputRef = useRef();
     const formRef = useRef();
@@ -35,17 +36,21 @@ function Search() {
 
     useEffect(() => {
         const fetchApi = async () => {
+            setIsLoading(true);
             if (!param) {
                 setSearchResult({});
+                setIsLoading(false);
                 return;
             }
             const result = await NhacCuaTui.searchByKeyword(param);
             if (result.error) {
                 toast.error(result.error.message);
+                setIsLoading(false);
                 return;
             }
             setSearchResult(result.search);
             setSearchValue(param);
+            setIsLoading(false);
         };
         fetchApi();
     }, [param]);
@@ -120,8 +125,9 @@ function Search() {
                     )}
                 </form>
             </div>
+
             {param ? (
-                <SearchResult searchResult={searchResult} param={param} />
+                <SearchResult searchResult={searchResult} param={param} isLoading={isLoading} />
             ) : (
                 <SearchDefault
                     handleDelHistory={handleDelHistory}

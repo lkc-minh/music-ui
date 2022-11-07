@@ -3,6 +3,10 @@ import "./Popper.scss";
 import { TbMessageLanguage } from "react-icons/tb";
 import { BsHeadset, BsMoonStarsFill } from "react-icons/bs";
 import { useGlobalContext } from "~/contexts/context";
+import { AiOutlineLogout } from "react-icons/ai";
+import { signOut } from "firebase/auth";
+import { auth } from "~/firebase";
+import { toast } from "react-toastify";
 
 const settingsPopper = [
     {
@@ -21,7 +25,7 @@ const settingsPopper = [
     },
 ];
 
-function Popper({ showPopper, setShowPopper }) {
+function Popper({ showPopper, setShowPopper, currentUser }) {
     const { setTheme } = useGlobalContext();
 
     const handleClick = (item) => {
@@ -87,6 +91,21 @@ function Popper({ showPopper, setShowPopper }) {
                     </li>
                 );
             })}
+            {currentUser && (
+                <li
+                    className="Popper__item"
+                    onClick={() => {
+                        signOut(auth);
+                        setShowPopper(false);
+                        toast.success("SignOut Successfully!");
+                    }}
+                >
+                    <div className="Popper__item-wrapper">
+                        <AiOutlineLogout />
+                        <span>Logout</span>
+                    </div>
+                </li>
+            )}
         </div>
     );
 }

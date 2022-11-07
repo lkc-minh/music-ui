@@ -8,6 +8,7 @@
         "@testing-library/user-event": "^13.2.1",
         "@tippyjs/react": "^4.2.6",
         "axios": "^1.1.2",
+        "firebase": "^9.13.0",
         "moment": "^2.29.4",
         "nhaccuatui-api": "^1.0.0",
         "nhaccuatui-api-full": "^1.1.0",

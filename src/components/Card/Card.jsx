@@ -1,7 +1,7 @@
-import { Fragment } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import images from "~/assets/images";
+import ArtistsRender from "../ArtistsRender/ArtistsRender";
 import "./Card.scss";
 
 function Card({ data, type }) {
@@ -26,25 +26,26 @@ function Card({ data, type }) {
                 </Link>
             )}
             {type === "artist" && (
-                <div className="Card__artists">
-                    {data?.artists?.map((artist, index, artists) => (
-                        <Fragment key={artist?.artistId}>
-                            <Link
-                                to={
-                                    artist.shortLink
-                                        ? "/artist/" + artist.shortLink
-                                        : "/search?q=" + artist.name
-                                }
-                                className="link"
-                            >
-                                {artist.name}
-                            </Link>
-                            {artists?.length > 1 && index < artists?.length - 1 && (
-                                <span style={{ marginRight: 4 }}>,</span>
-                            )}
-                        </Fragment>
-                    ))}
-                </div>
+                // <div className="Card__artists">
+                <ArtistsRender artists={data?.artists} />
+                //     {/* {data?.artists?.map((artist, index, artists) => (
+                //         <Fragment key={artist?.artistId}>
+                //             <Link
+                //                 to={
+                //                     artist.shortLink
+                //                         ? "/artist/" + artist.shortLink
+                //                         : "/search?q=" + artist.name
+                //                 }
+                //                 className="link"
+                //             >
+                //                 {artist.name}
+                //             </Link>
+                //             {artists?.length > 1 && index < artists?.length - 1 && (
+                //                 <span style={{ marginRight: 4 }}>,</span>
+                //             )}
+                //         </Fragment>
+                //     ))} */}
+                // {/* </div> */}
             )}
         </div>
     );

@@ -1,20 +1,20 @@
-import { useEffect, useState, Fragment } from "react";
-import { Link, useParams } from "react-router-dom";
-import NhacCuaTui from "nhaccuatui-api-full";
-import { AiFillPlayCircle } from "react-icons/ai";
 import Tippy from "@tippyjs/react";
+import NhacCuaTui from "nhaccuatui-api-full";
+import { useEffect, useState } from "react";
+import { AiFillPlayCircle } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 
-import "./SongPage.scss";
+import { toast } from "react-toastify";
 import images from "~/assets/images";
+import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
+import Skeleton from "~/components/Skeleton/Skeleton";
 import { useGlobalContext } from "~/contexts/context";
 import Lyric from "./Lyric/Lyric";
-import { toast } from "react-toastify";
-import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
+import "./SongPage.scss";
 
 function SongPage() {
     const [song, setSong] = useState({});
     const [lyric, setLyric] = useState("");
-
     const [isLoading, setIsLoading] = useState(false);
 
     const { id } = useParams();
@@ -23,20 +23,27 @@ function SongPage() {
     useEffect(() => {
         (async () => {
             setIsLoading(true);
-            try {
-                const res = await NhacCuaTui.getSong(id);
-                if (res.error) {
-                    toast.error(res.error.message);
-                    setIsLoading(false);
-                    return;
-                }
-                setSong(res.song);
-                const resLyric = await NhacCuaTui.getLyric(id);
-                setLyric(resLyric.lyric);
-                console.log({ resLyric });
-            } catch (error) {
-                console.log(error);
+            const res = await NhacCuaTui.getSong(id);
+            if (res.error) {
+                toast.error(res.error.message);
+                setIsLoading(false);
+                return;
             }
+            setSong(res.song);
+            setIsLoading(false);
+        })();
+    }, [id]);
+
+    useEffect(() => {
+        (async () => {
+            setIsLoading(true);
+            const res = await NhacCuaTui.getLyric(id);
+            if (res.error) {
+                toast.error(res.error.message);
+                setIsLoading(false);
+                return;
+            }
+            setLyric(res?.lyric);
             setIsLoading(false);
         })();
     }, [id]);
@@ -50,7 +57,7 @@ function SongPage() {
         setPlaylistPlaying({ songs: [song] });
     };
 
-    if (isLoading) return <h2>Loading....</h2>;
+    if (isLoading) return <Skeleton page="detail" />;
 
     return (
         <div className="SongPage">

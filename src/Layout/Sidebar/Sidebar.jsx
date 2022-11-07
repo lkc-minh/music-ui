@@ -12,6 +12,7 @@ import useOnClickOutside from "~/hooks/useOnClickOutside";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
+import { useAuthContext } from "~/contexts/authContext";
 
 const sidebarItem = [
     {
@@ -65,6 +66,9 @@ function Sidebar() {
     const [isOpenSignIn, setIsOpenSignIn] = useState(false);
     const [isOpenSignUp, setIsOpenSignUp] = useState(false);
 
+    const { currentUser } = useAuthContext();
+    console.log({ currentUser });
+
     const popperRef = useRef();
     useOnClickOutside(popperRef, () => setShowPopper(false));
 
@@ -85,16 +89,33 @@ function Sidebar() {
             </div>
 
             <div className="Sidebar__account">
-                <div className="Sidebar__account-content">
-                    <span onClick={() => setIsOpenSignIn(true)}>Sign in</span>
+                {currentUser ? (
+                    <div className="Sidebar__account-content">
+                        <img
+                            src={currentUser.photoURL ? currentUser.photoURL : images.defaultAvatar}
+                            alt=""
+                            width={24}
+                            style={{ marginRight: 8, borderRadius: "50%" }}
+                        />
 
-                    <div>|</div>
+                        <span>{currentUser.displayName ? currentUser.displayName : "no name"}</span>
+                    </div>
+                ) : (
+                    <div className="Sidebar__account-content">
+                        <span onClick={() => setIsOpenSignIn(true)}>Sign in</span>
 
-                    <span onClick={() => setIsOpenSignUp(true)}>Sign up</span>
-                </div>
+                        <div>|</div>
+
+                        <span onClick={() => setIsOpenSignUp(true)}>Sign up</span>
+                    </div>
+                )}
                 <div ref={popperRef} className="Sidebar__account-setting">
                     <AiOutlineSetting className="icon" onClick={() => setShowPopper(!showPopper)} />
-                    <Popper showPopper={showPopper} setShowPopper={setShowPopper} />
+                    <Popper
+                        currentUser={currentUser}
+                        showPopper={showPopper}
+                        setShowPopper={setShowPopper}
+                    />
                 </div>
             </div>
 

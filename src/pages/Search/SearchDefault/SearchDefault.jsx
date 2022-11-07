@@ -3,28 +3,42 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import MaybeHit from "../MaybeHit/MaybeHit";
 import NhacCuaTui from "nhaccuatui-api-full";
 import "./SearchDefault.scss";
+import { toast } from "react-toastify";
+import Skeleton from "~/components/Skeleton/Skeleton";
 
-function SearchDefault({
-    histories,
-    setHistories,
-    handleDelHistory,
-    handleClickSearchValue,
-}) {
+function SearchDefault({ histories, setHistories, handleDelHistory, handleClickSearchValue }) {
     const [songMaybeHit, setSongMaybeHit] = useState({});
     const [topKeyList, setTopKeyList] = useState([]);
-
-    console.log({ topKeyList });
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         (async () => {
-            try {
-                const res = await NhacCuaTui.getTopKeyword();
-                const resSongMaybeHot = await NhacCuaTui.getHome();
-                setSongMaybeHit(resSongMaybeHot?.newRelease?.song[0]);
-                setTopKeyList(res?.topkeyword);
-            } catch (error) {}
+            setIsLoading(true);
+            const res = await NhacCuaTui.getTopKeyword();
+            if (res.error) {
+                toast.error(res.error.message);
+                setIsLoading(false);
+            }
+
+            setTopKeyList(res?.topkeyword);
+            setIsLoading(false);
         })();
     }, []);
+
+    useEffect(() => {
+        (async () => {
+            setIsLoading(true);
+            const res = await NhacCuaTui.getHome();
+
+            if (res.error) {
+                toast.error(res.error.message);
+                setIsLoading(false);
+            }
+            setSongMaybeHit(res?.newRelease?.song[0]);
+            setIsLoading(false);
+        })();
+    }, []);
+    if (isLoading) return <Skeleton page="search" />;
 
     return (
         <div className="SearchDefault">
@@ -33,10 +47,7 @@ function SearchDefault({
                     <h2>Top Keyword</h2>
                     <div className="SearchDefault__container-item-key">
                         {topKeyList?.map((key) => (
-                            <div
-                                key={key.order}
-                                onClick={() => handleClickSearchValue(key.name)}
-                            >
+                            <div key={key.order} onClick={() => handleClickSearchValue(key.name)}>
                                 <span>#{key.order}</span> {key.name}
                             </div>
                         ))}
@@ -56,16 +67,12 @@ function SearchDefault({
                             {histories.map((history) => (
                                 <p
                                     key={history.id}
-                                    onClick={() =>
-                                        handleClickSearchValue(history.name)
-                                    }
+                                    onClick={() => handleClickSearchValue(history.name)}
                                 >
                                     <span>{history.name}</span>
                                     <RiDeleteBin6Line
                                         className="Search-del-icon"
-                                        onClick={(e) =>
-                                            handleDelHistory(history.id, e)
-                                        }
+                                        onClick={(e) => handleDelHistory(history.id, e)}
                                     />
                                 </p>
                             ))}

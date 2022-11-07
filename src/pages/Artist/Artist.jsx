@@ -1,23 +1,34 @@
 import NhacCuaTui from "nhaccuatui-api-full";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import images from "~/assets/images";
+import Skeleton from "~/components/Skeleton/Skeleton";
 import SongInfo from "~/components/SongInfo/SongInfo";
 import "./Artist.scss";
 import ArtistRecentSongs from "./ArtistRecentSongs/ArtistRecentSongs";
 
 function Artist() {
     const [artistInfo, setArtistInfo] = useState();
+    const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
     console.log({ artistInfo });
 
     useEffect(() => {
         (async () => {
+            setIsLoading(true);
             const res = await NhacCuaTui.getArtistDetail(id);
+            if (res.error) {
+                toast.error(res.error.message);
+                setIsLoading(false);
+                return;
+            }
             setArtistInfo(res);
+            setIsLoading(false);
         })();
     }, [id]);
 
+    if (isLoading) return <Skeleton page="artist" />;
     return (
         <div className="Artist">
             {id === "null" ? (
