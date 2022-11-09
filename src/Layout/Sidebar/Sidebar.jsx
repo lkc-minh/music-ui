@@ -13,6 +13,7 @@ import SidebarItem from "./SidebarItem/SidebarItem";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import { useAuthContext } from "~/contexts/authContext";
+import { useGlobalContext } from "~/contexts/context";
 
 const sidebarItem = [
     {
@@ -65,6 +66,7 @@ function Sidebar() {
     const [showPopper, setShowPopper] = useState(false);
     const [isOpenSignIn, setIsOpenSignIn] = useState(false);
     const [isOpenSignUp, setIsOpenSignUp] = useState(false);
+    const { showSidebar, setShowSidebar } = useGlobalContext();
 
     const { currentUser } = useAuthContext();
     console.log({ currentUser });
@@ -72,8 +74,11 @@ function Sidebar() {
     const popperRef = useRef();
     useOnClickOutside(popperRef, () => setShowPopper(false));
 
+    const sidebarRef = useRef();
+    useOnClickOutside(sidebarRef, () => setShowSidebar(false));
+
     return (
-        <div className="Sidebar">
+        <div ref={sidebarRef} className={showSidebar ? "Sidebar expand" : "Sidebar"}>
             <div className="Sidebar__header">
                 <Link to={"/"} className="Sidebar__header-logo">
                     <img src={images.logo} alt="logo" />

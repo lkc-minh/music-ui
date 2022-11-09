@@ -1,12 +1,25 @@
+@import "../../responsive.scss";
+
 .Rightbar {
     width: var(--width-rightbar);
     height: 100vh;
-    position: sticky;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     display: flex;
     flex-direction: column;
+    z-index: 100;
+    background-color: var(--cl-bg);
+
+    @include laptop {
+        right: -100vh;
+        transition: right 350ms ease-out;
+        // display: none;
+        &.expand {
+            right: 0;
+        }
+    }
 
     &__top {
         // padding: 0 40px;

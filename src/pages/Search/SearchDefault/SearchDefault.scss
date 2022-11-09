@@ -1,3 +1,5 @@
+@import "../../../responsive.scss";
+
 .SearchDefault {
     &__container {
         padding: 40px 32px;
@@ -16,6 +18,10 @@
                 flex-wrap: wrap;
                 margin-top: 16px;
                 gap: 18px;
+
+                @include mobile {
+                    gap: 8px;
+                }
                 div {
                     position: relative;
                     padding: 6px 12px 5px;

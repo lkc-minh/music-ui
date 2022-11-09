@@ -1,8 +1,7 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import images from "~/assets/images";
 import { useGlobalContext } from "~/contexts/context";
+import ArtistsRender from "../ArtistsRender/ArtistsRender";
 import "./SongInfo.scss";
 
 function SongInfo({ songs }) {
@@ -42,24 +41,8 @@ function SongInfo({ songs }) {
                                 {song.title}
                             </span>
 
-                            <div className="SongInfo__container-item-info-artists">
-                                {song.artists.map((art, index) => (
-                                    <Fragment key={art.name}>
-                                        {index > 0 ? <span style={{ marginRight: 4 }}>,</span> : ""}
-                                        <Link
-                                            to={
-                                                art.shortLink
-                                                    ? "/artist/" + art.shortLink
-                                                    : "/search?q=" + art.name
-                                            }
-                                            className="link"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            {art.name}
-                                        </Link>
-                                    </Fragment>
-                                ))}
-                            </div>
+                            <ArtistsRender artists={song.artists} />
+                            {/* </div> */}
                         </div>
                     </div>
                 ))}

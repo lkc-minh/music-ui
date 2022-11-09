@@ -9,6 +9,8 @@ const AppProvider = ({ children }) => {
 
     const [currentSong, setCurrentSong] = useState();
     const [currentIndex, setCurrentIndex] = useLocalStorage("currentIndex", 0);
+    const [showSidebar, setShowSidebar] = useState(false);
+    const [showRightbar, setShowRightbar] = useState(false);
 
     useEffect(() => {
         document.documentElement.className = theme;
@@ -25,6 +27,10 @@ const AppProvider = ({ children }) => {
                 setCurrentSong,
                 currentIndex,
                 setCurrentIndex,
+                showSidebar,
+                setShowSidebar,
+                showRightbar,
+                setShowRightbar,
             }}
         >
             {children}

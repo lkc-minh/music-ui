@@ -1,3 +1,5 @@
+@import "../../responsive.scss";
+
 .Top100 {
     padding-top: 24px;
 
@@ -37,11 +39,21 @@
         align-items: center;
         justify-content: space-between;
 
+        @include mobile {
+            flex-direction: column;
+            gap: 20px;
+            height: fit-content;
+            justify-content: center;
+        }
+
         &-left {
             h2 {
                 font-size: 32px;
                 font-weight: bold;
                 color: #f4f6f8e0;
+                @include mobile {
+                    text-align: center;
+                }
             }
 
             p {

@@ -1,7 +1,26 @@
+@import "../responsive.scss";
 .Layout {
+    width: 100%;
     display: flex;
 
     &__content {
+        position: relative;
+        margin-left: 20rem;
+        margin-right: 32rem;
+        width: 100%;
+
+        @include laptop {
+            // width: calc(100% - var(--width-sidebar));
+            border-right: none;
+            margin-right: 0;
+            flex: 1;
+        }
+
+        @include tablet {
+            // width: 100%;
+            margin-left: 0;
+            border-left: none;
+        }
         width: calc(100% - var(--width-sidebar) - var(--width-rightbar));
         border-left: 1px solid var(--cl-border);
         border-right: 1px solid var(--cl-border);

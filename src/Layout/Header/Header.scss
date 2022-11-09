@@ -1,0 +1,39 @@
+@import "../../responsive.scss";
+
+.Header {
+    display: none;
+    @include tablet {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 52px;
+        background-color: var(--cl-bg);
+        z-index: 10;
+        width: 100vw;
+    }
+    color: var(--cl-btn);
+
+    &__left {
+        font-size: 30px;
+        padding-left: 20px;
+    }
+    &__center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        img {
+            width: 62px;
+        }
+    }
+
+    &__right {
+        font-size: 24px;
+        padding-right: 20px;
+        // margin-right: 20px;
+    }
+}

@@ -80,7 +80,7 @@ function Playlist() {
                     </div>
                     <div className="tags">
                         <span>Tags: </span>
-                        {playlist.listTag.map((tag) => (
+                        {playlist.listTag?.map((tag) => (
                             <li key={tag.key} className="link">
                                 {tag.name}
                             </li>
@@ -105,7 +105,7 @@ function Playlist() {
                     <span className="Playlist__head-listens">LISTENS</span>
                     <span className="Playlist__head-duration">DURATION</span>
                 </div>
-                {playlist.songs.map((song, index) => (
+                {playlist.songs?.map((song, index) => (
                     <div className="Playlist__song" key={song.key}>
                         <span
                             className={
@@ -119,7 +119,7 @@ function Playlist() {
                         </span>
 
                         <div className="Playlist__song-artists">
-                            {song.artists.map((artist, index) => (
+                            {song.artists?.map((artist, index) => (
                                 <Fragment key={artist.artistId}>
                                     {index > 0 && <span style={{ marginRight: 4 }}>,</span>}
                                     <Link

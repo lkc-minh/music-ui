@@ -1,3 +1,5 @@
+@import "../../responsive.scss";
+
 .Search {
     &__top {
         height: 64px;
@@ -15,6 +17,10 @@
             border-radius: 4px;
             color: var(--cl-btn);
             position: relative;
+
+            @include tablet {
+                width: 100%;
+            }
 
             .icon-search {
                 width: 40px;

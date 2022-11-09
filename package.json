@@ -12,6 +12,7 @@
         "moment": "^2.29.4",
         "nhaccuatui-api": "^1.0.0",
         "nhaccuatui-api-full": "^1.1.0",
+        "normalize.css": "^8.0.1",
         "rc-slider": "^10.0.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",

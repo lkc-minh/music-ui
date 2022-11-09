@@ -1,11 +1,23 @@
+@import "../../responsive.scss";
+
 .Sidebar {
     width: var(--width-sidebar);
-    height: fit-content;
-    position: sticky;
+    height: 100vh;
+    position: fixed;
     top: 0;
     left: 0;
     flex-shrink: 0;
     z-index: 100;
+    background-color: var(--cl-bg);
+    @include tablet {
+        left: -100vh;
+        transition: left 350ms ease-out;
+        // display: none;
+
+        &.expand {
+            left: 0;
+        }
+    }
 
     &__header {
         height: 64px;

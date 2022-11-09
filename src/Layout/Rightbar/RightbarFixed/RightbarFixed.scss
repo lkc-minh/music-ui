@@ -1,0 +1,30 @@
+@import "../../../responsive.scss";
+
+.RightbarFixed {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    right: 1.7rem;
+    width: 16rem;
+    height: 6.4rem;
+    border-radius: 0.4rem;
+    background-color: var(--cl-bg);
+    box-shadow: 0 4px 8px #00000033;
+    z-index: 8;
+    padding: 10px;
+
+    p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: default;
+    }
+
+    @include laptop {
+        display: block;
+    }
+
+    @include tablet {
+        display: none;
+    }
+}

@@ -1,11 +1,9 @@
 import moment from "moment";
-import { Fragment } from "react";
 import { HiOutlineCalendar } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import images from "~/assets/images";
 import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
 import "./NewRelease.scss";
 
@@ -40,7 +38,7 @@ function NewRelease({ data }) {
                                     </Link>
 
                                     <div className="NewRelease-info-artists">
-                                        <ArtistsRender isImg artists={song.artists} />
+                                        <ArtistsRender isImg imgCenter artists={song.artists} />
                                     </div>
 
                                     <div className="NewRelease-info-date">

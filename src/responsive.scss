@@ -1,0 +1,28 @@
+@mixin mobile {
+    @media (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (max-width: 960px) {
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media (max-width: 1260px) {
+        @content;
+    }
+}
+
+@mixin pc {
+    @media (max-width: 1800px) {
+        @content;
+    }
+}
+
+// sm: "480px",
+//             md: "768px",
+//             lg: "1024px",
+//             xl: "1280px",

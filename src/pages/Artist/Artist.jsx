@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import images from "~/assets/images";
+import Error from "~/components/Error/Error";
 import Skeleton from "~/components/Skeleton/Skeleton";
 import SongInfo from "~/components/SongInfo/SongInfo";
 import "./Artist.scss";
@@ -29,6 +30,7 @@ function Artist() {
     }, [id]);
 
     if (isLoading) return <Skeleton page="artist" />;
+    if (artistInfo) return <Error />;
     return (
         <div className="Artist">
             {id === "null" ? (

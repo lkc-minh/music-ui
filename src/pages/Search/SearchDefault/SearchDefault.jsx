@@ -5,6 +5,7 @@ import NhacCuaTui from "nhaccuatui-api-full";
 import "./SearchDefault.scss";
 import { toast } from "react-toastify";
 import Skeleton from "~/components/Skeleton/Skeleton";
+import Error from "~/components/Error/Error";
 
 function SearchDefault({ histories, setHistories, handleDelHistory, handleClickSearchValue }) {
     const [songMaybeHit, setSongMaybeHit] = useState({});
@@ -38,6 +39,7 @@ function SearchDefault({ histories, setHistories, handleDelHistory, handleClickS
             setIsLoading(false);
         })();
     }, []);
+    if (!topKeyList || !songMaybeHit) return <Error />;
     if (isLoading) return <Skeleton page="search" />;
 
     return (

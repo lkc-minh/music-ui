@@ -10,7 +10,6 @@ import Artist from "./pages/Artist/Artist";
 import SongPage from "./pages/SongPage/SongPage";
 import Top100 from "./pages/Top100/Top100";
 import Topics from "./pages/Topics/Topics";
-import Videos from "./pages/Videos/Videos";
 import { ToastContainer } from "react-toastify";
 import { useGlobalContext } from "./contexts/context";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,10 +32,6 @@ const router = createBrowserRouter([
             {
                 path: routes.song,
                 element: <SongPage />,
-            },
-            {
-                path: routes.videos,
-                element: <Videos />,
             },
             {
                 path: routes.artist,

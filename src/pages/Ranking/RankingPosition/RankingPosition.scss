@@ -1,7 +1,14 @@
+@import "../../../responsive.scss";
+
 .RankingPosition {
     display: flex;
     width: 100%;
     margin-top: 16px;
+
+    @include mobile {
+        flex-direction: column;
+    }
+
     &-item {
         display: flex;
         flex-direction: column;

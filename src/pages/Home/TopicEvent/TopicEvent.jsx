@@ -3,7 +3,7 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Card from "~/components/Card/Card";
 import "./TopicEvent.scss";
-
+import "swiper/scss";
 function TopicEvent({ data }) {
     const newDataEnglish = data?.map((item) => ({
         ...item,
@@ -16,9 +16,26 @@ function TopicEvent({ data }) {
                     <h3>{d.groupName}</h3>
 
                     <Swiper
-                        slidesPerView={6}
-                        spaceBetween={16}
-                        slidesPerGroup={6}
+                        slidesPerView={2}
+                        spaceBetween={4}
+                        slidesPerGroup={2}
+                        breakpoints={{
+                            480: {
+                                slidesPerView: 3,
+                                slidesPerGroup: 3,
+                                spaceBetween: 8,
+                            },
+                            960: {
+                                slidesPerView: 4,
+                                slidesPerGroup: 4,
+                                spaceBetween: 8,
+                            },
+                            1800: {
+                                slidesPerView: 6,
+                                slidesPerGroup: 6,
+                                spaceBetween: 12,
+                            },
+                        }}
                         modules={[Navigation]}
                         className="mySwiper"
                         navigation={{

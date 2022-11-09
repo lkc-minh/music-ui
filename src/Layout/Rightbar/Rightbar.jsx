@@ -11,17 +11,31 @@ import "./Rightbar.scss";
 import RightbarDefault from "./RightbarDefault/RightbarDefault";
 import { toast } from "react-toastify";
 import ArtistsRender from "~/components/ArtistsRender/ArtistsRender";
+import { useRef } from "react";
+import useOnClickOutside from "~/hooks/useOnClickOutside";
+import RightbarFixed from "./RightbarFixed/RightbarFixed";
 
 function Rightbar() {
     const [showPlaylist, setShowPlaylist] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const { playlistPlaying, currentSong, setCurrentSong, currentIndex, setCurrentIndex } =
-        useGlobalContext();
+    const {
+        playlistPlaying,
+        showRightbar,
+        setShowRightbar,
+        currentSong,
+        setCurrentSong,
+        currentIndex,
+        setCurrentIndex,
+    } = useGlobalContext();
 
     console.log({ currentIndex });
     console.log({ playlistPlaying });
     console.log({ currentSong });
+
+    console.log({ showRightbar });
+    const rightbarRef = useRef();
+    useOnClickOutside(rightbarRef, () => setShowRightbar(false));
 
     useEffect(() => {
         (async () => {
@@ -50,69 +64,76 @@ function Rightbar() {
     }, [setCurrentSong, currentIndex, playlistPlaying]);
 
     return (
-        <div className="Rightbar">
-            {currentSong ? (
-                <>
-                    <div className="Rightbar__top">
-                        {showPlaylist ? (
-                            <ListPlaying
+        <>
+            <div className={showRightbar ? "Rightbar expand" : "Rightbar"} ref={rightbarRef}>
+                {currentSong ? (
+                    <>
+                        <div className="Rightbar__top">
+                            {showPlaylist ? (
+                                <ListPlaying
+                                    currentSong={currentSong}
+                                    isPlaying={isPlaying}
+                                    setShowPlaylist={setShowPlaylist}
+                                    songsPlaylist={playlistPlaying?.songs}
+                                    setCurrentIndex={setCurrentIndex}
+                                />
+                            ) : (
+                                <>
+                                    <div className="Rightbar__top-container">
+                                        <img
+                                            src={
+                                                currentSong.thumbnail
+                                                    ? currentSong.thumbnail
+                                                    : images.playerDefault
+                                            }
+                                            alt={currentSong.title}
+                                            onError={({ currentTarget }) => {
+                                                currentTarget.onerror = null;
+                                                currentTarget.src = images.playerDefault;
+                                            }}
+                                        />
+                                        <Link
+                                            to={"/song/" + currentSong.key}
+                                            className="title link"
+                                        >
+                                            {currentSong.title}
+                                        </Link>
+                                        <div className="artists">
+                                            <ArtistsRender artists={currentSong.artists} />
+                                        </div>
+                                    </div>
+                                    {playlistPlaying?.title && (
+                                        <Link
+                                            className="link Rightbar__playlist-title"
+                                            to={"/playlist/" + playlistPlaying.key}
+                                        >
+                                            {playlistPlaying.title}
+                                        </Link>
+                                    )}
+                                </>
+                            )}
+                        </div>
+
+                        <div className="Rightbar__bottom">
+                            <Controller
                                 currentSong={currentSong}
                                 isPlaying={isPlaying}
+                                setIsPlaying={setIsPlaying}
+                                showPlaylist={showPlaylist}
                                 setShowPlaylist={setShowPlaylist}
                                 songsPlaylist={playlistPlaying?.songs}
+                                currentIndex={currentIndex}
                                 setCurrentIndex={setCurrentIndex}
                             />
-                        ) : (
-                            <>
-                                <div className="Rightbar__top-container">
-                                    <img
-                                        src={
-                                            currentSong.thumbnail
-                                                ? currentSong.thumbnail
-                                                : images.playerDefault
-                                        }
-                                        alt={currentSong.title}
-                                        onError={({ currentTarget }) => {
-                                            currentTarget.onerror = null;
-                                            currentTarget.src = images.playerDefault;
-                                        }}
-                                    />
-                                    <Link to={"/song/" + currentSong.key} className="title link">
-                                        {currentSong.title}
-                                    </Link>
-                                    <div className="artists">
-                                        <ArtistsRender artists={currentSong.artists} />
-                                    </div>
-                                </div>
-                                {playlistPlaying?.title && (
-                                    <Link
-                                        className="link Rightbar__playlist-title"
-                                        to={"/playlist/" + playlistPlaying.key}
-                                    >
-                                        {playlistPlaying.title}
-                                    </Link>
-                                )}
-                            </>
-                        )}
-                    </div>
+                        </div>
+                    </>
+                ) : (
+                    <RightbarDefault />
+                )}
+            </div>
 
-                    <div className="Rightbar__bottom">
-                        <Controller
-                            currentSong={currentSong}
-                            isPlaying={isPlaying}
-                            setIsPlaying={setIsPlaying}
-                            showPlaylist={showPlaylist}
-                            setShowPlaylist={setShowPlaylist}
-                            songsPlaylist={playlistPlaying?.songs}
-                            currentIndex={currentIndex}
-                            setCurrentIndex={setCurrentIndex}
-                        />
-                    </div>
-                </>
-            ) : (
-                <RightbarDefault />
-            )}
-        </div>
+            <RightbarFixed currentSong={currentSong} />
+        </>
     );
 }
 

@@ -21,32 +21,14 @@ function Card({ data, type }) {
                 </div>
             </Link>
             {type !== "top100" && (
-                <Link className="Card__title link" to={"/song/" + data.key}>
+                <Link
+                    className="Card__title link"
+                    to={type === "artist" ? "/song/" + data.key : "/playlist/" + data.key}
+                >
                     {data.title}
                 </Link>
             )}
-            {type === "artist" && (
-                // <div className="Card__artists">
-                <ArtistsRender artists={data?.artists} />
-                //     {/* {data?.artists?.map((artist, index, artists) => (
-                //         <Fragment key={artist?.artistId}>
-                //             <Link
-                //                 to={
-                //                     artist.shortLink
-                //                         ? "/artist/" + artist.shortLink
-                //                         : "/search?q=" + artist.name
-                //                 }
-                //                 className="link"
-                //             >
-                //                 {artist.name}
-                //             </Link>
-                //             {artists?.length > 1 && index < artists?.length - 1 && (
-                //                 <span style={{ marginRight: 4 }}>,</span>
-                //             )}
-                //         </Fragment>
-                //     ))} */}
-                // {/* </div> */}
-            )}
+            {type === "artist" && <ArtistsRender artists={data?.artists} />}
         </div>
     );
 }

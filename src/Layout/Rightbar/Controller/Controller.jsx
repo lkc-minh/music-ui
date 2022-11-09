@@ -10,6 +10,8 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { AiOutlineHeart } from "react-icons/ai";
 import useLocalStorage from "~/hooks/useLocalStorage";
+import { useAuthContext } from "~/contexts/authContext";
+import { toast } from "react-toastify";
 
 function Controller({
     currentSong,
@@ -23,6 +25,8 @@ function Controller({
 }) {
     const [currentTime, setCurrentTime] = useState(0);
     const [currentVolume, setCurrentVolume] = useLocalStorage("volume", 99);
+
+    const { currentUser } = useAuthContext();
 
     const audioRef = useRef(new Audio());
 
@@ -90,6 +94,13 @@ function Controller({
             return prev + 1;
         });
 
+    const handleFavoriteSong = () => {
+        if (!currentUser) {
+            toast.warning("Login please!!!");
+            return;
+        }
+    };
+
     return (
         <div className="Controller">
             <audio
@@ -130,7 +141,10 @@ function Controller({
                 >
                     {showPlaylist ? "Now playing" : "Song list"}
                 </div>
-                <div className="Controller__top-heart">
+                <div
+                    className="Controller__top-heart"
+                    onClick={() => handleFavoriteSong(currentSong)}
+                >
                     <AiOutlineHeart />
                 </div>
             </div>

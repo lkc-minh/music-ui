@@ -4,15 +4,15 @@ import "./SearchResultDeb.scss";
 
 function SearchResultDeb({ searchResult }) {
     console.log({ searchResult });
-
+    let playlist;
     if (searchResult.playlist.playlist.length > 5) {
-        var playlist = searchResult.playlist.playlist.slice(0, 5);
+        playlist = searchResult.playlist.playlist.slice(0, 5);
     } else {
         playlist = searchResult.playlist.playlist;
     }
-
+    let songs;
     if (searchResult.song.song.length > 5) {
-        var songs = searchResult.song.song.slice(0, 5);
+        songs = searchResult.song.song.slice(0, 5);
     } else {
         songs = searchResult.song.song;
     }
@@ -20,7 +20,7 @@ function SearchResultDeb({ searchResult }) {
     return (
         <div className="SearchResultDeb">
             <div className="SearchResultDeb__container">
-                {!!searchResult.playlist.playlist.length && (
+                {!!searchResult?.playlist?.playlist?.length && (
                     <div className="SearchResultDeb-item">
                         <h2>Playlist</h2>
                         <div className="SearchResultDeb-info">
@@ -31,11 +31,7 @@ function SearchResultDeb({ searchResult }) {
                                     key={pl.key}
                                 >
                                     <img
-                                        src={
-                                            pl.thumbnail
-                                                ? pl.thumbnail
-                                                : images.defaultPlaylist
-                                        }
+                                        src={pl.thumbnail ? pl.thumbnail : images.defaultPlaylist}
                                         alt={pl.title}
                                     />
                                     <span>{pl.title}</span>
@@ -45,7 +41,7 @@ function SearchResultDeb({ searchResult }) {
                     </div>
                 )}
 
-                {!!searchResult.song.song.length && (
+                {!!searchResult?.song?.song?.length && (
                     <div className="SearchResultDeb-item">
                         <h2>Song</h2>
                         {songs.map((song) => (
@@ -55,11 +51,7 @@ function SearchResultDeb({ searchResult }) {
                                 key={song.key}
                             >
                                 <img
-                                    src={
-                                        song.thumbnail
-                                            ? song.thumbnail
-                                            : images.defaultPlaylist
-                                    }
+                                    src={song.thumbnail ? song.thumbnail : images.defaultPlaylist}
                                     alt={song.title}
                                 />
                                 <span>{song.title}</span>

@@ -1,3 +1,5 @@
+@import "../../responsive.scss";
+
 .Topics {
     &__cover {
         img {
@@ -8,6 +10,9 @@
 
         p {
             margin: 24px 32px 10px;
+            @include tablet {
+                margin: 12px 16px 4px;
+            }
             font-size: 14px;
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -21,6 +26,9 @@
 
         &-btn {
             margin: 0 32px;
+            @include tablet {
+                margin: 0 16px;
+            }
 
             button {
                 background-color: transparent;
@@ -32,6 +40,10 @@
     &__title {
         margin: 42px 32px 24px;
 
+        @include tablet {
+            margin: 20px 16px 12px;
+        }
+
         h2 {
             font-size: 22px;
             font-weight: 700;
@@ -42,12 +54,33 @@
         margin: -8px 24px;
         display: flex;
         flex-wrap: wrap;
+
+        @include tablet {
+            margin: -8px 12px;
+        }
         .Topics-item {
             flex-grow: 0;
             max-width: 16.666667%;
             flex-basis: 16.666667%;
             padding: 8px;
             overflow: hidden;
+
+            @include pc {
+                max-width: 25%;
+                flex-basis: 25%;
+            }
+
+            @include tablet {
+                max-width: 33.3333%;
+                flex-basis: 33.3333%;
+                padding: 4px;
+            }
+
+            @include mobile {
+                max-width: 50%;
+                flex-basis: 50%;
+                padding: 2px;
+            }
 
             a {
                 &:hover {

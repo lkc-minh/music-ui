@@ -2,7 +2,6 @@ const routes = {
     home: "/",
     search: "/search",
     song: "/song/:id",
-    videos: "/videos",
     artist: "/artist/:id",
     playlist: "/playlist/:id",
     top100: "/top100",

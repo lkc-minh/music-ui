@@ -1,5 +1,12 @@
+@import "../../responsive.scss";
+
 .Card {
+    // width: 250px;
     width: 100%;
+
+    // @include pc {
+    //     width: 240px;
+    // }
     &__img {
         position: relative;
         width: 100%;
@@ -14,6 +21,8 @@
         cursor: pointer;
 
         img {
+            width: 100%;
+
             object-fit: cover;
             transition: all 300ms linear;
         }
@@ -69,10 +78,5 @@
         &:hover {
             color: var(--cl-hover);
         }
-    }
-
-    &__artists {
-        display: flex;
-        flex-wrap: wrap;
     }
 }

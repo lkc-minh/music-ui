@@ -1,11 +1,19 @@
+@import "../../../responsive.scss";
+
 .TopicEvent {
     position: relative;
     h3 {
         margin: 32px 32px 0;
         font-size: 22px;
+        @include mobile {
+            margin: 16px 16px 0;
+        }
     }
     .mySwiper {
         margin: 16px 32px 0 32px;
+        @include mobile {
+            margin: 8px 16px 0 16px;
+        }
     }
 
     &__btns {

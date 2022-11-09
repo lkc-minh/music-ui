@@ -1,3 +1,4 @@
+@import "../../responsive.scss";
 .SongInfo {
     width: 100%;
     h2 {
@@ -13,6 +14,10 @@
         align-items: center;
         justify-content: space-between;
 
+        @include mobile {
+            flex-direction: column;
+        }
+
         margin: 16px 32px 0px;
         &-item {
             display: flex;
@@ -23,6 +28,9 @@
             margin: 4px 0;
             align-items: center;
 
+            @include mobile {
+                width: 100%;
+            }
             &:hover {
                 background-color: var(--cl-bg-lighter);
             }
@@ -44,11 +52,18 @@
             &-info {
                 display: flex;
                 flex-direction: column;
+                width: 80%;
+                @include laptop {
+                    width: 66%;
+                }
 
                 &-title {
                     font-weight: 500;
                     font-size: 14px;
                     cursor: pointer;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 &-artists {

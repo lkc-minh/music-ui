@@ -1,3 +1,5 @@
+@import "../../../responsive.scss";
+
 .swiper-pagination-bullet.swiper-pagination-bullet-active {
     width: 18px !important;
     border-radius: 99px;
@@ -50,6 +52,11 @@
         opacity: 0;
         top: 50%;
         transform: translateY(-50%);
+
+        @include tablet {
+            width: 3.4rem;
+            height: 6rem;
+        }
     }
 
     .prev-btn {
