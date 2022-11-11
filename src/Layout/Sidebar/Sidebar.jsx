@@ -58,18 +58,16 @@ const sidebarItem = [
         id: 6,
         icon: <FaHandHoldingHeart className="SidebarItem__icon" style={{ color: "#1BA9B0" }} />,
         title: "Music 4U",
-        url: "/discover",
+        url: "/music4U",
     },
 ];
 
 function Sidebar() {
     const [showPopper, setShowPopper] = useState(false);
-    const [isOpenSignIn, setIsOpenSignIn] = useState(false);
     const [isOpenSignUp, setIsOpenSignUp] = useState(false);
-    const { showSidebar, setShowSidebar } = useGlobalContext();
+    const { showSidebar, setShowSidebar, isOpenSignIn, setIsOpenSignIn } = useGlobalContext();
 
     const { currentUser } = useAuthContext();
-    console.log({ currentUser });
 
     const popperRef = useRef();
     useOnClickOutside(popperRef, () => setShowPopper(false));
@@ -103,7 +101,9 @@ function Sidebar() {
                             style={{ marginRight: 8, borderRadius: "50%" }}
                         />
 
-                        <span>{currentUser.displayName ? currentUser.displayName : "no name"}</span>
+                        <span>
+                            {currentUser.displayName ? currentUser.displayName : "Loading..."}
+                        </span>
                     </div>
                 ) : (
                     <div className="Sidebar__account-content">
@@ -124,13 +124,17 @@ function Sidebar() {
                 </div>
             </div>
 
-            <SidebarItem sidebarItem={sidebarItem} />
+            <SidebarItem sidebarItem={sidebarItem} setShowSidebar={setShowSidebar} />
             <Login
                 isOpen={isOpenSignIn}
                 setIsOpen={setIsOpenSignIn}
                 setIsOpenSignUp={setIsOpenSignUp}
             />
-            <Register isOpen={isOpenSignUp} setIsOpen={setIsOpenSignUp} />
+            <Register
+                isOpen={isOpenSignUp}
+                setIsOpen={setIsOpenSignUp}
+                setIsOpenSignIn={setIsOpenSignIn}
+            />
         </div>
     );
 }

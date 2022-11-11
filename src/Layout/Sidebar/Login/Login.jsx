@@ -4,11 +4,11 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
 } from "firebase/auth";
-import { AiOutlineUser } from "react-icons/ai";
 import { BsKeyboard } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { TfiClose } from "react-icons/tfi";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Modal from "~/components/Modal/Modal";
 import { auth } from "~/firebase";
@@ -30,48 +30,32 @@ const inputLogin = [
 ];
 
 function Login({ isOpen, setIsOpen, setIsOpenSignUp }) {
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const email = e.target[0].value;
         const password = e.target[1].value;
-        // const email = e.target[]
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                // const user = userCredential.user;
-                toast.success("Sign in successfully");
-                setIsOpen(false);
-                // ...
-            })
-            .catch((error) => {
-                // const errorCode = error.code;
-                const errorMessage = error.message;
-                toast.error(errorMessage + " (" + error.code + ")");
-            });
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+
+            toast.success("Sign in successfully");
+            setIsOpen(false);
+            navigate("/");
+        } catch (error) {
+            toast.error(error.message);
+        }
     };
 
     const handleLoginGoogle = async () => {
         const provider = new GoogleAuthProvider();
         try {
-            const result = await signInWithPopup(auth, provider);
-
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            // The signed-in user info.
-            const user = result.user;
-            // ...
-            toast.success("Sign up successfully");
+            await signInWithPopup(auth, provider);
+            toast.success("Sign in successfully");
             setIsOpen(false);
+            navigate("/");
         } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ...
             toast.error(error.message);
         }
     };
@@ -79,28 +63,12 @@ function Login({ isOpen, setIsOpen, setIsOpenSignUp }) {
     const handleLoginFb = async () => {
         const provider = new FacebookAuthProvider();
         try {
-            const result = await signInWithPopup(auth, provider);
+            await signInWithPopup(auth, provider);
 
-            const user = result.user;
-
-            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            const credential = FacebookAuthProvider.credentialFromResult(result);
-            const accessToken = credential.accessToken;
-
-            // ...
-            // ...
-            toast.success("Sign up successfully");
+            toast.success("Sign in successfully");
             setIsOpen(false);
+            navigate("/");
         } catch (error) {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = FacebookAuthProvider.credentialFromError(error);
-
-            // ...
             toast.error(error.message);
         }
     };
@@ -121,11 +89,6 @@ function Login({ isOpen, setIsOpen, setIsOpenSignUp }) {
                                 <input type={item.type} placeholder={item.placeholder} />
                             </div>
                         ))}
-
-                        <div className="Login__content-form-checkbox">
-                            <input id="remember" type="checkbox" />
-                            <label htmlFor="remember">Remember</label>
-                        </div>
 
                         <button type="submit">Sign In</button>
                     </form>

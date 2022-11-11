@@ -16,12 +16,10 @@ function RightbarDefault() {
         const fetchApi = async () => {
             const data = await NhacCuaTui.getHome();
             if (data.error) toast.error(data.error.message);
-            console.log({ data });
             setSongTop1(data?.ranking?.song[0]);
         };
         fetchApi();
     }, []);
-    console.log({ songTop1 });
     if (!songTop1) return;
     return (
         <div className="RightbarDefault">

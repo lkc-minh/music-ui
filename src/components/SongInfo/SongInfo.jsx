@@ -8,7 +8,6 @@ function SongInfo({ songs }) {
     const { setPlaylistPlaying, setCurrentIndex } = useGlobalContext();
 
     const handlePlaySong = (song) => {
-        console.log({ song });
         if (!song) {
             toast.error("This song not found!!!");
             return;

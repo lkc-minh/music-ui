@@ -9,8 +9,6 @@ import "./RankingSongs.scss";
 function RankingSongs({ songs, isRanking }) {
     const [showDetail, setShowDetail] = useState({});
     const { setCurrentIndex, setPlaylistPlaying } = useGlobalContext();
-    console.log({ songs });
-    console.log({ showDetail });
     const handlePlay = (index) => {
         setCurrentIndex(index);
         setPlaylistPlaying({ songs: songs });

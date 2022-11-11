@@ -19,9 +19,6 @@ function Playlist() {
     const { id } = useParams();
     const { setPlaylistPlaying, currentSong, setCurrentIndex } = useGlobalContext();
 
-    console.log(" currentSong?.key: ", currentSong?.key);
-
-    console.log({ playlist });
     useEffect(() => {
         const fetch = async () => {
             setIsLoading(true);
@@ -53,7 +50,7 @@ function Playlist() {
             <div className="Playlist__info">
                 <div className="Playlist__info-img">
                     <img src={playlist.thumbnail} alt="" />
-                    <Tippy content="Play All" placement="bottom" arrow={false}>
+                    <Tippy touch={false} content="Play All" placement="bottom" arrow={false}>
                         <div
                             className="Playlist__info-img-play"
                             onClick={() => {

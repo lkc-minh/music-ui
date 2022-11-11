@@ -5,7 +5,7 @@ const routes = {
     artist: "/artist/:id",
     playlist: "/playlist/:id",
     top100: "/top100",
-    discover: "/discover",
+    music4U: "/music4U",
     topics: "/topics",
     topic: "/topic/:id",
     ranking: "/ranking",

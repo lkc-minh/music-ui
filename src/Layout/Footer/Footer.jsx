@@ -107,12 +107,12 @@ function Footer() {
                 </div>
                 <div className="Footer__center-info">
                     <p className="tick">
-                        Social Network License Number 499/GP-BTTTT issued by Ministry of
-                        Information and Communications on Sep 28th, 2015.
+                        Social Network License Number 499/GP-BTTTT issued by Ministry of Information
+                        and Communications on Sep 28th, 2015.
                     </p>
                     <p className="tick">
-                        Business Registration Certificate Number 0305535715 issued by
-                        Department of Planning and Investment of HCMC on 01/03/2008.
+                        Business Registration Certificate Number 0305535715 issued by Department of
+                        Planning and Investment of HCMC on 01/03/2008.
                     </p>
                 </div>
             </section>

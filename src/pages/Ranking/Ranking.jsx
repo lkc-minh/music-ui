@@ -14,7 +14,6 @@ function Ranking() {
     const [isLoading, setIsLoading] = useState(false);
     const { setPlaylistPlaying, setCurrentIndex } = useGlobalContext();
 
-    console.log({ ranking });
     useEffect(() => {
         (async () => {
             setIsLoading(true);

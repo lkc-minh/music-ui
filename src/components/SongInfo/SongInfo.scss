@@ -6,6 +6,12 @@
         margin-left: 30px;
         margin-top: 40px;
         font-size: 22px;
+
+        @include tablet {
+            margin-bottom: 12px;
+            margin-left: 16px;
+            margin-top: 20px;
+        }
     }
 
     &__container {
@@ -13,12 +19,15 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+        margin: 16px 32px 0px;
 
+        @include tablet {
+            margin: 8px 16px 0px;
+        }
         @include mobile {
             flex-direction: column;
         }
 
-        margin: 16px 32px 0px;
         &-item {
             display: flex;
             background-color: var(--cl-bg-active);

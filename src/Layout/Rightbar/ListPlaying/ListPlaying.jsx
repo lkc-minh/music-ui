@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, memo } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 import { IoMdPause } from "react-icons/io";
@@ -94,4 +94,4 @@ function ListPlaying({ currentSong, isPlaying, setShowPlaylist, songsPlaylist, s
     );
 }
 
-export default ListPlaying;
+export default memo(ListPlaying);

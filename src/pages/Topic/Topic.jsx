@@ -10,7 +10,6 @@ function Topic() {
     const [topic, setTopic] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
-    console.log({ topic });
 
     useEffect(() => {
         (async () => {

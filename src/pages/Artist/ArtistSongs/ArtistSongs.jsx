@@ -2,7 +2,6 @@ import React from "react";
 import SongInfo from "~/components/SongInfo/SongInfo";
 
 function ArtistSongs(songs) {
-    console.log("songs: ", songs);
     return (
         <div className="ArtistSongs">
             <h2>Song</h2>

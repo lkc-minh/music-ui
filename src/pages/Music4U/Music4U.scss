@@ -1,6 +1,6 @@
 @import "../../responsive.scss";
 
-.Playlist {
+.Music4U {
     padding: 24px 32px 0px 32px;
     @include mobile {
         padding: 12px 16px 0px 16px;
@@ -61,7 +61,24 @@
                     font-size: 16px;
                 }
             }
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: fit-content;
+                height: 3.2rem;
+                margin-top: 2.4rem;
+                padding: 1rem 3.7rem;
+                border-radius: 1.6rem;
+                border: 1px solid var(--cl-border-btn);
+                color: var(--cl-btn);
+                background-color: transparent;
 
+                &:hover {
+                    border: 1px solid var(--cl-hover);
+                    color: var(--cl-hover);
+                }
+            }
             .artist {
                 display: flex;
                 align-items: center;
@@ -89,42 +106,7 @@
 
             .description {
                 font-size: 14px;
-                margin-top: 24px;
-            }
-
-            .tags {
-                display: flex;
-                align-items: center;
-                font-size: 14px;
                 margin-top: 12px;
-                flex-wrap: wrap;
-
-                li {
-                    list-style: none;
-                    position: relative;
-                    padding: 6px 12px 5px;
-                    background-color: var(--cl-bg-lighter);
-                    margin-left: 18px;
-                    margin-bottom: 4px;
-                    border-top-left-radius: 4px;
-                    border-bottom-left-radius: 4px;
-                    color: var(--cl-btn);
-                    display: inline-block;
-
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        right: -10px;
-                        bottom: 0;
-                        width: 0;
-                        height: 0;
-                        border-left: 10px solid var(--cl-bg-lighter);
-                        border-top: 15px solid transparent;
-                        border-bottom: 15px solid transparent;
-                        border-top-left-radius: 3px;
-                        border-bottom-left-radius: 3px;
-                    }
-                }
             }
         }
     }
@@ -163,7 +145,7 @@
             font-weight: 700;
         }
 
-        .Playlist__head {
+        .Music4U__head {
             display: flex;
             background-color: var(--cl-bg-active);
             height: 32px;
@@ -195,7 +177,7 @@
             }
         }
 
-        .Playlist__song {
+        .Music4U__song {
             display: flex;
             background-color: var(--cl-bg-active);
             height: 40px;

@@ -20,10 +20,6 @@ function Home() {
     const [top100, setTop100] = useState([]);
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    useEffect(() => {
         const fetchApi = async () => {
             setIsLoading(true);
             try {
@@ -34,7 +30,6 @@ function Home() {
                     setIsLoading(false);
                     return;
                 }
-                // console.log({ data });
 
                 setShowcase(data?.showcase);
                 setTopicEvent(data?.topicEvent);

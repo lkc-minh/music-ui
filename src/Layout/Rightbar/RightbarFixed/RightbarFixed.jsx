@@ -5,7 +5,6 @@ import "./RightbarFixed.scss";
 function RightbarFixed({ currentSong }) {
     const { setShowRightbar } = useGlobalContext();
 
-    console.log({ currentSong });
     return (
         <div className="RightbarFixed" onClick={() => setShowRightbar(true)}>
             <p className="RightbarFixed-title">{currentSong?.title}</p>

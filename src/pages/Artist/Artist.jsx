@@ -13,7 +13,6 @@ function Artist() {
     const [artistInfo, setArtistInfo] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const { id } = useParams();
-    console.log({ artistInfo });
 
     useEffect(() => {
         (async () => {
@@ -30,7 +29,7 @@ function Artist() {
     }, [id]);
 
     if (isLoading) return <Skeleton page="artist" />;
-    if (artistInfo) return <Error />;
+    if (!artistInfo) return <Error />;
     return (
         <div className="Artist">
             {id === "null" ? (

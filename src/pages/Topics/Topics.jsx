@@ -14,7 +14,6 @@ function Topics() {
     const [loadMore, setLoadMore] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log({ topics });
     useEffect(() => {
         (async () => {
             setIsLoading(true);

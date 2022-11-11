@@ -29,23 +29,18 @@ function Rightbar() {
         setCurrentIndex,
     } = useGlobalContext();
 
-    console.log({ currentIndex });
-    console.log({ playlistPlaying });
-    console.log({ currentSong });
-
-    console.log({ showRightbar });
     const rightbarRef = useRef();
     useOnClickOutside(rightbarRef, () => setShowRightbar(false));
 
     useEffect(() => {
         (async () => {
+            if (!playlistPlaying.songs) return;
             try {
                 const res = await NhacCuaTui.getSong(
                     playlistPlaying?.songs?.[currentIndex]?.key ||
                         playlistPlaying?.songs?.[currentIndex]?.songKey
                 );
 
-                console.log("song is playing: ", res);
                 if (res.error) {
                     toast.error(res.error.message);
                     return;

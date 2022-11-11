@@ -3,7 +3,6 @@ import images from "~/assets/images";
 import "./SearchResultDeb.scss";
 
 function SearchResultDeb({ searchResult }) {
-    console.log({ searchResult });
     let playlist;
     if (searchResult.playlist.playlist.length > 5) {
         playlist = searchResult.playlist.playlist.slice(0, 5);

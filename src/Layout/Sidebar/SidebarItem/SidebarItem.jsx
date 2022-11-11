@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 
 import "./SidebarItem.scss";
 
-function SidebarItem({ sidebarItem }) {
+function SidebarItem({ sidebarItem, setShowSidebar }) {
     const [showSubSidebar, setShowSubSidebar] = useState({
         "What Listen Today": true,
     });
@@ -56,6 +56,7 @@ function SidebarItem({ sidebarItem }) {
                                         to={i.url}
                                         className={`SidebarItem__sub-link`}
                                         key={i.title}
+                                        onClick={() => setShowSidebar(false)}
                                         end
                                     >
                                         <div className="circleActive"></div>
@@ -67,7 +68,13 @@ function SidebarItem({ sidebarItem }) {
                     );
 
                 return (
-                    <NavLink to={item.url} className="SidebarItem__container" key={item.title} end>
+                    <NavLink
+                        to={item.url}
+                        onClick={() => setShowSidebar(false)}
+                        className="SidebarItem__container"
+                        key={item.title}
+                        end
+                    >
                         <div className="SidebarItem__container-bar"></div>
                         <div className="SidebarItem__container-item">
                             {item.icon}

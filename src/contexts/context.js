@@ -11,6 +11,7 @@ const AppProvider = ({ children }) => {
     const [currentIndex, setCurrentIndex] = useLocalStorage("currentIndex", 0);
     const [showSidebar, setShowSidebar] = useState(false);
     const [showRightbar, setShowRightbar] = useState(false);
+    const [isOpenSignIn, setIsOpenSignIn] = useState(false);
 
     useEffect(() => {
         document.documentElement.className = theme;
@@ -31,6 +32,8 @@ const AppProvider = ({ children }) => {
                 setShowSidebar,
                 showRightbar,
                 setShowRightbar,
+                isOpenSignIn,
+                setIsOpenSignIn,
             }}
         >
             {children}

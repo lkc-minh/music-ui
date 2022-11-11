@@ -1,8 +1,13 @@
+@import "../../../responsive.scss";
+
 .ArtistRecentSongs {
     &__item {
         display: flex;
         gap: 16px;
         margin-top: 16px;
         padding: 0 32px;
+        @include tablet {
+            padding: 0 16px;
+        }
     }
 }

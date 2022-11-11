@@ -70,7 +70,7 @@ function SongPage() {
                             (e.target.onerror === null)((e.target.src = images.playerDefault))
                         }
                     />
-                    <Tippy content="Play" placement="bottom" arrow={false}>
+                    <Tippy touch={false} content="Play" placement="bottom" arrow={false}>
                         <div className="SongPage__info-left-play" onClick={handlePlaySong}>
                             <AiFillPlayCircle />
                         </div>

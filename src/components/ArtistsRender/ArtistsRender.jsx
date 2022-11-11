@@ -14,6 +14,7 @@ function ArtistsRender({ artists, isImg, imgCenter }) {
                                     ? "/artist/" + artist.shortLink
                                     : "/search?q=" + artist.name
                             }
+                            key={artist.artistId}
                         >
                             <img
                                 src={artist.imageUrl ? artist.imageUrl : images.defaultArtist}
